@@ -1,0 +1,13 @@
+description: >-
+  AI agent to handle an end-to-end customer's technical advisory and/or support
+  incident escalation process.
+target:
+  type: function
+  name: tools/agent_call4
+  parameters:
+    - name: stepResponse
+      value: $capability_context.stepResponse
+capability_context:
+  - name: stepResponse
+    value: $target_result.stepResponse
+response_context: []

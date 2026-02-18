@@ -1,0 +1,20 @@
+description: This skill is used to send e-mails to generic recipients.
+target:
+  type: function
+  name: sendEMail
+response_context:
+  - value: response
+    description: Skill response
+slots:
+  - name: emailBody
+    description: eMail body
+  - name: emailSubject
+    description: eMail subject
+  - name: stakeholderEmail
+    description: eMail To
+  - name: ccEmail
+    description: Email CC
+visibility_condition:
+  objects:
+    - type: ias_attributes
+      attributes: []

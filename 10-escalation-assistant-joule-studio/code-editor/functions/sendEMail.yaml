@@ -1,0 +1,32 @@
+parameters:
+  - name: emailBody
+    optional: false
+  - name: emailSubject
+    optional: false
+  - name: stakeholderEmail
+    optional: false
+  - name: ccEmail
+    optional: true
+action_groups:
+  - actions:
+      - type: api-request
+        method: POST
+        async: true
+        system_alias: SbpaService
+        path: >-
+          internal/irpa/integration-gateway/v1/vendors/joule/skill-integration/v1/execute
+        headers:
+          Content-type: application/json
+        timeout: 15
+        body:
+          environmentId: $dev_edit
+          technicalDeploymentId: 00000000-00000000-00000000-00000000
+          longPollingTimeout: 14
+          artifactType: workflow
+          artifactId: 07d0b26a-1a48-4786-b5f3-66321822cb29
+          inputs: >-
+            <?{"ccEmail": ccEmail, "emailBody": emailBody, "emailSubject":
+            emailSubject, "stakeholderEmail": stakeholderEmail}?>
+        result_variable: _30561306_9aa6_358a_b1ba_d58e841075d4
+result:
+  response: <?'eMail sent successfully'?>

@@ -1,0 +1,10 @@
+.DS_Store
+*.orig
+*.log
+*.env
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+# .vscode
+# .idea

@@ -1,0 +1,35 @@
+parameters:
+  - name: method
+    optional: false
+  - name: path
+    optional: false
+  - name: body
+    optional: true
+  - name: destination
+    optional: false
+action_groups:
+  - actions:
+      - type: api-request
+        method: POST
+        async: true
+        system_alias: SbpaService
+        path: >-
+          internal/irpa/integration-gateway/v1/vendors/joule/skill-integration/v1/execute
+        headers:
+          Content-type: application/json
+        timeout: 15
+        body:
+          environmentId: $dev_edit
+          technicalDeploymentId: 00000000-00000000-00000000-00000000
+          longPollingTimeout: 14
+          artifactType: actiongroup.rest
+          artifactId: d21a2ced-1bdb-3700-b014-85fc42970503
+          configuration:
+            actionIdentifier: post_forwardRequest
+            destination: mocked_GENERIC_API_GATEWAY
+          inputs: >-
+            <?{"reqData": {"body": body, "destination": destination, "method":
+            method, "path": path}}?>
+        result_variable: _5644db58_e047_3c79_b2bc_1bd487c962aa
+result:
+  response: <?_5644db58_e047_3c79_b2bc_1bd487c962aa.body.output.result.response?>

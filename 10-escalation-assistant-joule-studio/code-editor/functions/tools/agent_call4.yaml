@@ -1,0 +1,31 @@
+parameters:
+  - name: stepResponse
+    optional: true
+action_groups:
+  - actions:
+      - type: set-variables
+        variables:
+          - name: agentRequestBody
+            value:
+              message: <? $transient.input.text.raw ?>
+      - type: agent-request
+        name: orchestrationAgent
+        body: <? agentRequestBody ?>
+        result_variable: agentResponse
+  - actions:
+      - type: set-variables
+        variables:
+          - name: finalResponse
+            value: <? agentResponse ?>
+          - name: finalResponseToUser
+            value: <? agentResponse.body.message ?>
+  - actions:
+      - type: message
+        message:
+          type: text
+          markdown: false
+          content: <? finalResponseToUser ?>
+result:
+  stepResponse: <? stepResponse ?>
+  responseToUser: <? finalResponseToUser ?>
+  agentResponse: <? finalResponse  ?>

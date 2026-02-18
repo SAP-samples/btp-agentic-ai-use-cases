@@ -1,0 +1,48 @@
+parameters:
+  - name: action_results
+    optional: false
+action_groups:
+  - actions:
+      - type: set-variables
+        scripting_type: handlebars
+        variables:
+          - name: datePatterns
+            value: >-
+              {"de":{"date":"DD.MM.YYYY","dateTime":"DD.MM.YYYY
+              HH:mm:ss"},"fr":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"es":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"pt":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"ja":{"date":"YYYY/MM/DD","dateTime":"YYYY/MM/DD
+              HH:mm:ss"},"ko":{"date":"YYYY.MM.DD","dateTime":"YYYY.MM.DD
+              HH:mm:ss"},"zh":{"date":"YYYY/MM/DD","dateTime":"YYYY/MM/DD
+              HH:mm:ss"},"vi":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"el":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"pl":{"date":"DD.MM.YYYY","dateTime":"DD.MM.YYYY
+              HH:mm:ss"},"ar":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"},"id":{"date":"DD/MM/YYYY","dateTime":"DD/MM/YYYY
+              HH:mm:ss"}}
+          - name: getDatePattern
+            value: '{{lookup (lookup datePatterns $transient.client.locale) "date"}}'
+          - name: getDateTimePattern
+            value: >-
+              {{lookup (lookup datePatterns $transient.client.locale)
+              "dateTime"}}
+          - name: prepared_mappings
+            value: >-
+              { {{#eachJoin action_results}} "{{name}}": {{#if (isArray
+              source)}} [ {{#eachJoin source}} { {{#eachJoin ../mappings}}
+              "{{replace this.name "." "_"}}": { "formatted": "{{#if
+              this.isDateTime}} {{formatDate (lookup ../this this.name)
+              ../../../getDateTimePattern}} {{else if this.isDate}} {{formatDate
+              (lookup ../this this.name) ../../../getDatePattern}} {{else}}
+              {{lookup ../this this.name}} {{/if}}", "original": "{{lookup
+              ../this this.name}}" } {{/eachJoin}} } {{/eachJoin}} ] {{else}} {
+              {{#eachJoin mappings}} "{{replace this.name "." "_"}}": {
+              "formatted": "{{#if this.isDateTime}} {{formatDate (lookup
+              ../source this.name) ../../getDateTimePattern}} {{else if
+              this.isDate}} {{formatDate (lookup ../source this.name)
+              ../../getDatePattern}} {{else}} {{lookup ../source this.name}}
+              {{/if}}", "original": "{{lookup ../source this.name}}" }
+              {{/eachJoin}} } {{/if}} {{/eachJoin}} }
+result:
+  prepared_mappings: <? prepared_mappings ?>

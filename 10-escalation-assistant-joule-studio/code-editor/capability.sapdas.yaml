@@ -1,0 +1,12 @@
+schema_version: 3.28.0
+metadata:
+  name: smadcpescalationassistantvideo
+  namespace: joule.ext
+  display_name: SMADCP - Escalation Assistant
+  description: Escalation Assistant AI Agent for the Smart Advisory Companion solution.
+  version: 1.0.0
+system_aliases:
+  SbpaService:
+    destination: SAP_SBPA_API
+  APIAGENTCALLBACK:
+    destination: AC_callback_api

@@ -1,28 +1,29 @@
-# SAP-samples/repository-template
-This default template for SAP Samples repositories includes files for README, LICENSE, and REUSE.toml. All repositories on github.com/SAP-samples will be created based on this template.
+# Custom Industry AI Agents with SAP BTP and SAP Business AI
+[![License: Apache2](https://img.shields.io/badge/License-Apache2-green.svg)](https://opensource.org/licenses/Apache-2.0)
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-generative-ai-hub-use-cases)](https://api.reuse.software/info/github.com/SAP-samples/btp-generative-ai-hub-use-cases)
 
-# Containing Files
-
-1. The LICENSE file:
-In most cases, the license for SAP sample projects is `Apache 2.0`.
-
-2. The REUSE.toml file: 
-The [Reuse Tool](https://reuse.software/) must be used for your samples project. You can find the REUSE.toml in the project initial. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository.
-
-3. The README.md file (this file):
-Please edit this file as it is the primary description file for your project. You can find some placeholder titles for sections below.
-
-# [Title]
-<!-- Please include descriptive title -->
+<!-- Custom Industry AI Agents samples leveraging Joule Studio(LCNC), Joule Studio Code Editor(Low-Code) and SAP Cloud SDK for AI  -->
 
 <!--- Register repository https://api.reuse.software/register, then add REUSE badge:
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
 -->
 
-## Description
+## Descriptions
 <!-- Please include SEO-friendly description -->
+This github repository includes a list of the Custom Industry AI Agents samples leveraging
 
-## Requirements
+- Joule Studio(LCNC)
+- Joule Studio Code Editor(Low-Code)
+- SAP Cloud SDK for AI(Pro-Code)
+![Options of Custom AI Agent in SAP](resources/custom-ai-agent-options.png)
+
+## Content
+
+Each sample is presented during the [Reimagine your customer’s business processes with AI Agents](https://partneredge.sap.com/en/library/education/products/btp/build/e_ep_use-cases_ai-foundation.html?#accordion-panel-section-libraryItem-descriptionSection-accordionitem_694022). Each numbered folder you see in the structure is comprised by the code presented on an individual session. And each folder represents a completed runnable project about an use case with SAP BTP. To run a specific project, please kindly follow the README.md within its folder. <br/>
+
+Use Case | Description | SAP BTP Services | Blog Post
+---------|----------|----------|----------
+[`10-Escalation Assistant with Joule Studio`](10-escalation-assistant-joule-studio) | In the session of [Increase business outcomes by unleashing the power of AI agents](https://partneredge.sap.com/en/library/education/psd/2025/jun/e_oe_te_w_PSD_WEB_00010558.html), we will do an in-depth exploration of custom AI agents in the context of SAP ecosystem and discover how SAP partners can build custom code-based AI agent across industries with Joule Studio in No-Code and Low-Code manner. Learn about AI Agents and how they can help transform business processes. The associated prototype use case is about a custom AI agent(Escalation Assistant) helping the Support Manager in Technology Consultancy in streamlining the process of escalation to resolution | Joule Studio Agent Builder | Work-in-Process
 
 ## Download and Installation
 
@@ -30,11 +31,13 @@ Please edit this file as it is the primary description file for your project. Yo
 <!-- You may simply state "No known issues. -->
 
 ## How to obtain support
+
 [Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
  
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
 ## Contributing
+
 If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
 
 ## License

@@ -1,0 +1,50 @@
+agent: Escalation Advisor
+expert_in: >-
+  You are an expert in verifying whether a support request and/or incident
+  complaint qualifies for an escalation based on a policy document and explain
+  the reason for qualifying or not.
+base_model: anthropic--claude-4-sonnet
+advanced_model: anthropic--claude-4-sonnet
+iterations: 50
+default_output_format: text
+task: >-
+  ## Main Directive
+
+  You will receive relevant information about a technical advisory and/or
+  support request that's not been responded and/or fulfilled accordingly. Based
+  on such information you must verify whether it qualifies for an escalation or
+  not based on the contents of a policy document and explain why it qualifies or
+  not for an escalation.
+
+
+  ## Recommended Tools
+
+  For policy lookups: use the Document tool with uploaded escalation policy
+  document.
+
+
+  ## Response Requirements
+
+  You must indicate whether the support request and/or incident qualifies or not
+  for an escalation and explain the reason for your answer based on the policy
+  analysis.
+preprocessing_enabled: false
+postprocessing_enabled: false
+additional_context: ''
+orchestration_config:
+  filtering_module_config:
+    input:
+      filters:
+        - type: azure_content_safety
+          config:
+            Hate: 4
+            Violence: 4
+            Sexual: 4
+            SelfHarm: 4
+toolkits:
+  - name: Document tool
+    type: documentGrounding
+    config:
+      destination: AI_CORE
+      resourceId: policiesgrounding1769002216316
+      description: Escalation policy document
