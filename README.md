@@ -4,10 +4,6 @@
 
 <!-- Custom Industry AI Agents samples leveraging Joule Studio(LCNC), Joule Studio Code Editor(Low-Code) and SAP Cloud SDK for AI  -->
 
-<!--- Register repository https://api.reuse.software/register, then add REUSE badge:
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
--->
-
 ## Descriptions
 <!-- Please include SEO-friendly description -->
 This GitHub repository contains a collection of Custom Industry AI Agent samples presented during the webinar series [Reimagine your customer’s business processes with AI Agents](https://partneredge.sap.com/en/library/education/products/btp/build/e_ep_use-cases_ai-foundation.html?#accordion-panel-section-libraryItem-descriptionSection-accordionitem_694022). 
@@ -17,17 +13,16 @@ To develop a particular project, please follow the instructions provided in the 
 
 Use Case | Description | SAP BTP Services | Blog Post
 ---------|----------|----------|----------
-[`10-Escalation Assistant with Joule Studio`](10-escalation-assistant-joule-studio) | The webinar [Increase business outcomes by unleashing the power of AI agents](https://partneredge.sap.com/en/library/education/psd/2025/jun/e_oe_te_w_PSD_WEB_00010558.html) takes an in-depth look at custom AI agents within the SAP ecosystem and explores how SAP partners can build industry-specific, code-based AI agents using Joule Studio no-code/low-code approach. On this session you will gain an understanding of AI agents and how they can help transform and optimize business processes. The associated prototype use case features a custom AI agent (Escalation Assistant) designed to support a Support Manager iby streamlining the escalation-to-resolution process. | Joule Studio Agent Builder | Work-in-Progress
-
-## Download and Installation
+[`10-Escalation Assistant with Joule Studio`](10-escalation-assistant-joule-studio) | The webinar [Increase business outcomes by unleashing the power of AI agents](https://partneredge.sap.com/en/library/education/psd/2025/jun/e_oe_te_w_PSD_WEB_00010558.html) takes an in-depth look at custom AI agents within the SAP ecosystem and explores how SAP partners can build industry-specific, code-based AI agents using Joule Studio no-code/low-code approach. On this session you will gain an understanding of AI agents and how they can help transform and optimize business processes. The associated prototype use case features a custom AI agent (Escalation Assistant) designed to support a Support Manager by streamlining the escalation-to-resolution process. | Joule Studio Agent Builder | Work-in-Progress
 
 ## Known Issues
-<!-- You may simply state "No known issues. -->
+
+No known issues.
 
 ## How to obtain support
 
 [Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
- 
+
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
 ## Contributing
@@ -35,4 +30,5 @@ For additional support, [ask a question in SAP Community](https://answers.sap.co
 If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
 
 ## License
+
 Copyright (c) 2026 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.
