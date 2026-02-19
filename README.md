@@ -10,16 +10,10 @@
 
 ## Descriptions
 <!-- Please include SEO-friendly description -->
-This github repository includes a list of the Custom Industry AI Agents samples leveraging
-
-- Joule Studio(LCNC)
-- Joule Studio Code Editor(Low-Code)
-- SAP Cloud SDK for AI(Pro-Code)
-![Options of Custom AI Agent in SAP](resources/custom-ai-agent-options.png)
-
-## Content
-
-Each sample is presented during the [Reimagine your customer’s business processes with AI Agents](https://partneredge.sap.com/en/library/education/products/btp/build/e_ep_use-cases_ai-foundation.html?#accordion-panel-section-libraryItem-descriptionSection-accordionitem_694022). Each numbered folder you see in the structure is comprised by the code presented on an individual session. And each folder represents a completed runnable project about an use case with SAP BTP. To run a specific project, please kindly follow the README.md within its folder. <br/>
+This GitHub repository contains a collection of Custom Industry AI Agent samples presented during the webinar series [Reimagine your customer’s business processes with AI Agents](https://partneredge.sap.com/en/library/education/products/btp/build/e_ep_use-cases_ai-foundation.html?#accordion-panel-section-libraryItem-descriptionSection-accordionitem_694022). 
+Each numbered folder in the repository corresponds to the code presented in an individual session. 
+Every folder represents a complete, runnable project focused on a specific use case with SAP BTP.
+To develop a particular project, please follow the instructions provided in the README.md file within that folder. <br/>
 
 Use Case | Description | SAP BTP Services | Blog Post
 ---------|----------|----------|----------
