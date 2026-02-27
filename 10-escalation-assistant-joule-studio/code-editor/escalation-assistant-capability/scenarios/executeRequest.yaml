@@ -14,7 +14,7 @@ slots:
     description: HTTP request body (for POST, PUT and PATCH methods)
   - name: destination
     description: Destination to configure the HTTP request
-visibility_condition:
-  objects:
-    - type: ias_attributes
-      attributes: []
+# visibility_condition:
+#   objects:
+#     - type: ias_attributes
+      # attributes: []

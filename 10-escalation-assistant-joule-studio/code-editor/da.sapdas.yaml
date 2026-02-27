@@ -1,0 +1,5 @@
+schema_version: 1.0.0
+name: escalation_assistant
+capabilities:
+  - type: local
+    folder: ./escalation-assistant-capability

@@ -14,7 +14,7 @@ slots:
     description: eMail To
   - name: ccEmail
     description: Email CC
-visibility_condition:
-  objects:
-    - type: ias_attributes
-      attributes: []
+# visibility_condition:
+#   objects:
+#     - type: ias_attributes
+      # attributes: []
