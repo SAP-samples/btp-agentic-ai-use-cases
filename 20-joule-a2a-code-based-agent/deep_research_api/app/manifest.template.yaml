@@ -1,0 +1,35 @@
+applications:
+  - name: deep-research-agent-api
+    memory: 256M
+    disk_quota: 2G
+
+    buildpacks:
+      - python_buildpack
+
+    env:
+      # ----------------------------------------------------------------
+      # SAP AI Core credentials (required for SAP Generative AI Hub)
+      # ----------------------------------------------------------------
+      AICORE_AUTH_URL: "<your-auth-url>"
+      AICORE_CLIENT_ID: "<your-client-id>"
+      AICORE_CLIENT_SECRET: "<your-client-secret>"
+      AICORE_RESOURCE_GROUP: "<your-resource-group>"
+      AICORE_BASE_URL: "<your-base-url>"
+      MODEL_NAME: "<model-name-in-sap-generative-ai-hub>"  # Optional: specify the model to use from SAP Generative AI Hub, defaults to gpt-4o-mini if not set
+
+      # ----------------------------------------------------------------
+      # Tavily API key (required for web search)
+      # ----------------------------------------------------------------
+      TAVILY_API_KEY: "<your-tavily-api-key>"
+
+      # ----------------------------------------------------------------
+      # Orchestrator limits (optional, defaults will be used if not set)
+      # Joule dialog request has a default timeout of 60s,
+      # so the orchestrator should be configured to ensure that all research units
+      # complete within this time to avoid unexpected termination of the agent's response stream.
+      # Adjust as needed based on the expected complexity of research tasks.
+      # ----------------------------------------------------------------
+      MAX_RESEARCHER_ITERATIONS: 2
+      MAX_CONCURRENT_RESEARCH_UNITS: 3
+
+    command: uvicorn app:app --host 0.0.0.0 --port ${PORT}

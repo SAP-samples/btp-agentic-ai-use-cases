@@ -8,3 +8,6 @@
 # IDEs
 # .vscode
 # .idea
+
+__pycache__
+manifest.yaml
