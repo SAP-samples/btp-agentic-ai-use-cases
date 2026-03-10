@@ -1,0 +1,11 @@
+action_groups:
+  - actions:
+      - type: agent-request   # This action type allows the agent to trigger an agent
+        system_alias: DEEP_RESEARCH_AGENT # The system alias is defined in the capability.sapdas.yaml file and points to the destination of the agent
+        agent_type: remote # remote for code based agents
+        result_variable: "apiResponse" # response of the agent - can be used in subsequent actions by referring to the variable name
+      - type: message
+        message:
+          type: text
+          #content: "The current exchange rate is: 100 EUR = 110 USD"  # using the response from the agent to send a message
+          content: "<? apiResponse.body.artifacts[0].parts[0].text ?>"  # extracting textual response from the agent

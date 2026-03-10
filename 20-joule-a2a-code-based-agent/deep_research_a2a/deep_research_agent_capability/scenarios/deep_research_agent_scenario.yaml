@@ -1,0 +1,4 @@
+description: The Deep Research Agent supports conducting deep research on a given topic.
+target:
+  name: deep_research_agent_function
+  type: function

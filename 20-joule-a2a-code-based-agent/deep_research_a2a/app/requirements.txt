@@ -1,0 +1,28 @@
+# Core A2A SDK
+a2a-sdk>=0.3.0
+
+# Web framework & server
+uvicorn>=0.34.2
+starlette>=0.46.2
+sse-starlette>=2.3.6
+
+# HTTP client
+httpx>=0.28.1
+
+# Deep Agents SDK
+deepagents>=0.2.6
+
+# SAP Generative AI Hub (includes gen_ai_hub.proxy.langchain.init_llm)
+sap-ai-sdk-gen[all]
+
+# LangChain / LangGraph
+langgraph>=0.3.18
+langchain-core>=0.3.0
+
+# Research tools
+tavily-python>=0.5.0
+markdownify>=1.2.0
+
+# Utilities
+python-dotenv>=1.1.0
+pydantic>=2.10.6

@@ -1,0 +1,12 @@
+schema_version:  3.28.0   # be aware of the minimum version for agents
+
+metadata:
+  namespace: joule.ext    # very important to be in the "joule.ext" namespace for capabilities
+  name: deep_research_agent_capability
+  version: 1.0.0
+  display_name: Deep Research Agent Capability
+  description: Capability containing the deep research agent
+
+system_aliases:
+  DEEP_RESEARCH_AGENT:
+    destination: deep-research-agent-a2a # this is referencing the destination name
