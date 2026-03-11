@@ -1,10 +1,9 @@
-# Deep Research Agent REST API
+# Deep Research Agent as REST API
 
-A sample [deep research agent](../deep_research/) built with the **deepagents SDK** and exposed as a
-**FastAPI REST service**. Any application or agent can trigger deep research by calling the API.
+This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the **SAP Generative AI Hub** via the **SAP Cloud SDK for AI**, and exposed as a
+**FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a long-running.
 
-The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM access and
-**Tavily** for web search.
+The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
 
 ## Architecture
 
@@ -34,7 +33,41 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 └──────────────────────────────────────┘
 ```
 
-## API endpoints
+## Technical Details
+
+### Process flow
+
+1. **Client sends a research query** via `POST /research`(synchronous API)  or `POST /research/jobs`(asynchronous API).
+2. **Deep Research Agent plans** the research by creating a todo list.
+3. **Deep Research Agent delegates** one or more parallel research tasks to the
+   `research-agent` sub-agent.
+4. **Sub-agent searches the web** using Tavily, reflects using `think_tool`,
+   and returns structured findings with citations.
+5. **Deep Research Agent synthesises** all findings, consolidates citations, and
+   writes a comprehensive Markdown report.
+6. **Report is returned** in the API response or stored in the job store for polling.
+
+### Environment variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `AICORE_AUTH_URL` | ✅ | SAP AI Core OAuth token endpoint |
+| `AICORE_CLIENT_ID` | ✅ | SAP AI Core client ID |
+| `AICORE_CLIENT_SECRET` | ✅ | SAP AI Core client secret |
+| `AICORE_RESOURCE_GROUP` | ✅ | Resource group (default: `default`) |
+| `AICORE_BASE_URL` | ✅ | SAP AI Core API base URL |
+| `TAVILY_API_KEY` | ✅ | Tavily search API key |
+| `MODEL_NAME` | ✅ | The target LLM in SAP Generative AI Hub (default: `gpt-4o-mini`) |
+| `MAX_RESEARCHER_ITERATIONS` | ❌ | Max round of research (default: `2`) |
+| `MAX_CONCURRENT_RESEARCH_UNITS` | ❌ | Max researches in parallel (default: `3`) |
+| `SUPPLIER_API_URL` | ❌ | Ariba OData supplier search endpoint (default: `https://xyz.hana.ondemand.com/Ariba_SearchSupplier/Suppliers`) |
+| `SUPPLIER_AUTH_URL` | ❌ | OAuth 2.0 token endpoint for the supplier API (default: `https://xyz.authentication.eu10.hana.ondemand.com`) |
+| `SUPPLIER_CLIENT_ID` | ❌ | Client ID for supplier API authentication |
+| `SUPPLIER_CLIENT_SECRET` | ❌ | Client secret for supplier API authentication |
+| `HOST` | ❌ | Server bind host (default: `0.0.0.0`) |
+| `PORT` | ❌ | Server bind port (default: `10000`) |
+
+### API endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
@@ -42,13 +75,13 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 | `POST` | `/research/jobs` | **Asynchronous** — submits a research job, returns a `job_id` immediately (HTTP 202). |
 | `GET` | `/research/jobs/{job_id}` | Poll job status (`running` / `completed` / `failed`) and retrieve the result. |
 
-### Request body (both `POST` endpoints)
+#### Request body (both `POST` endpoints)
 
 ```json
 { "query": "Research the latest advances in AI agent frameworks" }
 ```
 
-### Synchronous response
+#### Synchronous response
 
 ```json
 {
@@ -58,7 +91,7 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 }
 ```
 
-### Async job submission response (HTTP 202)
+#### Async job submission response (HTTP 202)
 
 ```json
 {
@@ -68,7 +101,7 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 }
 ```
 
-### Job status / result response
+#### Job status / result response
 
 ```json
 {
@@ -89,16 +122,16 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 | `app/manifest.yaml` | Cloud Foundry deployment manifest |
 | `app/research_agent/` | Prompt templates and Tavily search tools |
 
-## Prerequisites
+### Prerequisites
 
 - Python 3.11+
 - Install [uv](https://docs.astral.sh/uv/) package manager
 - An SAP AI Core instance with Generative AI Hub. by default, `gpt-4o-mini` model is used.
 - [Tavily](https://tavily.com) API key (free tier available)
 
-## Local development
+### Local development
 
-### 1. Install dependencies
+#### 1. Install dependencies
 
 ```sh
 cd 20-joule-a2a-code-based-agent/deep_research_api
@@ -114,7 +147,7 @@ cd app
 uv pip install -r requirements.txt
 ```
 
-### 2. Configure environment
+#### 2. Configure environment
 
 ```sh
 cp .env.example .env
@@ -122,7 +155,7 @@ cp .env.example .env
 
 Edit .env and fill in your SAP AI Core and Tavily credentials
 
-### 3. Start the server
+#### 3. Start the server
 
 ```sh
 python app.py
@@ -131,7 +164,7 @@ python app.py
 The server starts at `http://localhost:10000`. Interactive API docs are available at
 `http://localhost:10000/docs`.
 
-### 4. Run synchronous research
+#### 4. Run synchronous research
 
 ```sh
 curl -X POST http://localhost:10000/research \
@@ -139,7 +172,7 @@ curl -X POST http://localhost:10000/research \
   -d '{"query": "Research the latest advances in AI agent frameworks"}'
 ```
 
-### 5. Run asynchronous research
+#### 5. Run asynchronous research
 
 ```sh
 # Submit job
@@ -152,15 +185,16 @@ curl -X POST http://localhost:10000/research/jobs \
 curl http://localhost:10000/research/jobs/<job_id>
 ```
 
-### 6. Run the test client
+#### 6. Run the test client
 
 ```sh
 python test_client.py
 ```
 
-## Cloud Foundry deployment
+### Cloud Foundry deployment
 
-### 1. Copy `manifest.template.yaml` as `manifest.yaml`
+#### 1. Copy `manifest.template.yaml` as `manifest.yaml`
+
 ```sh
 cd 20-joule-a2a-code-based-agent/deep_research_api/app
 cp manifest.template.yaml manifest.yaml
@@ -168,38 +202,11 @@ cp manifest.template.yaml manifest.yaml
 
 Fill in all `<placeholder>` values with your actual SAP AI Core credentials, tavily-key etc.
 
-### 2. Deploy
+#### 2. Deploy
 
 ```sh
 cf login
 cf push
 ```
 
-## How it works
-
-1. **Client sends a research query** via `POST /research` or `POST /research/jobs`.
-2. **Orchestrator plans** the research by creating a todo list.
-3. **Orchestrator delegates** one or more parallel research tasks to the
-   `research-agent` sub-agent.
-4. **Sub-agent searches the web** using Tavily, reflects using `think_tool`,
-   and returns structured findings with citations.
-5. **Orchestrator synthesises** all findings, consolidates citations, and
-   writes a comprehensive Markdown report.
-6. **Report is returned** in the API response or stored in the job store for polling.
-
-## Environment variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `AICORE_AUTH_URL` | ✅ | SAP AI Core OAuth token endpoint |
-| `AICORE_CLIENT_ID` | ✅ | SAP AI Core client ID |
-| `AICORE_CLIENT_SECRET` | ✅ | SAP AI Core client secret |
-| `AICORE_RESOURCE_GROUP` | ✅ | Resource group (default: `default`) |
-| `AICORE_BASE_URL` | ✅ | SAP AI Core API base URL |
-| `TAVILY_API_KEY` | ✅ | Tavily search API key |
-| `SUPPLIER_API_URL` | ❌ | Ariba OData supplier search endpoint (default: `https://xyz.hana.ondemand.com/Ariba_SearchSupplier/Suppliers`) |
-| `SUPPLIER_AUTH_URL` | ❌ | OAuth 2.0 token endpoint for the supplier API (default: `https://xyz.authentication.eu10.hana.ondemand.com`) |
-| `SUPPLIER_CLIENT_ID` | ❌ | Client ID for supplier API authentication |
-| `SUPPLIER_CLIENT_SECRET` | ❌ | Client secret for supplier API authentication |
-| `HOST` | ❌ | Server bind host (default: `0.0.0.0`) |
-| `PORT` | ❌ | Server bind port (default: `10000`) |
+Obtain the deployment URL, then you can use it in any http client.
