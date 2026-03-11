@@ -180,7 +180,7 @@ BASE_URL=http://localhost:10000 python test_client.py
 ### 1. Copy `manifest.template.yaml` as `manifest.yaml`
 ```sh
 cd 20-joule-a2a-code-based-agent/deep_research_a2a/app
-cp manifest.template.yaml
+cp manifest.template.yaml manifest.yaml
 ```
 
 Fill in all `<placeholder>` values with your actual SAP AI Core credentials, tavily-key and
@@ -192,9 +192,11 @@ the intended application URL.
 cf login
 cf push
 ```
+
 Obtain the deployment url e.g. https://<your-company-namespace>-deep-research-agent.cfapps.sap.hana.ondemand.com
 
 ### 3. Update AGENT_PUBLIC_URL environment variable with actual deployment URL in step 2
+
 ```sh
 cf set-env <APP_NAME> AGENT_PUBLIC_URL <DEPLOYMENT_URL>
 cf restage

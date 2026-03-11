@@ -147,7 +147,8 @@ curl -X POST http://localhost:10000/research/jobs \
   -H "Content-Type: application/json" \
   -d '{"query": "Research the latest advances in AI agent frameworks"}'
 
-# Poll result (replace <job_id> with the returned job_id)
+# Periodically poll result (replace <job_id> with the returned job_id). 
+# e.g. repeat every 10 second until the job status become completed
 curl http://localhost:10000/research/jobs/<job_id>
 ```
 
@@ -159,15 +160,18 @@ python test_client.py
 
 ## Cloud Foundry deployment
 
-### 1. Update `app/manifest.yaml`
+### 1. Copy `manifest.template.yaml` as `manifest.yaml`
+```sh
+cd 20-joule-a2a-code-based-agent/deep_research_api/app
+cp manifest.template.yaml manifest.yaml
+```
 
-Fill in all `<placeholder>` values with your actual SAP AI Core credentials and
-the intended application URL.
+Fill in all `<placeholder>` values with your actual SAP AI Core credentials, tavily-key etc.
 
 ### 2. Deploy
 
 ```sh
-cd examples/deep_research_api/app
+cf login
 cf push
 ```
 
