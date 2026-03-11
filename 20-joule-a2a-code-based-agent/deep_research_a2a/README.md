@@ -71,6 +71,7 @@ In addition, the sample also refer to the blog post about [Joule A2A: Connect Co
 | `AICORE_CLIENT_SECRET` | ✅ | SAP AI Core client secret |
 | `AICORE_RESOURCE_GROUP` | ✅ | Resource group (default: `default`) |
 | `AICORE_BASE_URL` | ✅ | SAP AI Core API base URL |
+| `MODEL_NAME` | ✅ | The target LLM in SAP Generative AI Hub (default: `gpt-4o-mini`) |
 | `TAVILY_API_KEY` | ✅ | Tavily search API key |
 | `AGENT_PUBLIC_URL` | ✅ | Public URL of this agent (used in AgentCard) |
 | `MAX_RESEARCHER_ITERATIONS` | ❌ | Max round of research (default: `2`) |
