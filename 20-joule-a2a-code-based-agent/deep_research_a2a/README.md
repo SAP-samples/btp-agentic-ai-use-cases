@@ -92,24 +92,25 @@ In addition, the sample also refer to the blog post about [Joule A2A: Connect Co
 ### 1. Install dependencies
 
 ```sh
-cd 20-joule-a2a-code-based-agent/
+cd 20-joule-a2a-code-based-agent/deep_research_a2a
 
 # create a virtual env for 20-joule-a2a-code-based-agent
 uv venv
 
 # activate the virtual env
-source .venv/binactivate
+source .venv/bin/activate
 
 # install the dependencies
-cd deep_research_a2a/app
+cd app
 uv pip install -r requirements.txt
 ```
 
 ### 2. Configure environment
 
 ```sh
-cp ../\.env.example .env
+cp .env.example .env
 ```
+
 Edit .env and fill in your SAP AI Core and Tavily credentials etc.
 
 ### 3. Start the server
