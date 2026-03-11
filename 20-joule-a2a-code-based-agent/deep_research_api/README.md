@@ -92,29 +92,40 @@ The agent uses **SAP Generative AI Hub** through *SAP Cloud SDK for AI* for LLM 
 ## Prerequisites
 
 - Python 3.11+
-- SAP AI Core instance with `gpt-4o-mini` deployed in Generative AI Hub
+- Install [uv](https://docs.astral.sh/uv/) package manager
+- An SAP AI Core instance with Generative AI Hub. by default, `gpt-4o-mini` model is used.
 - [Tavily](https://tavily.com) API key (free tier available)
 
 ## Local development
 
 ### 1. Install dependencies
 
-```bash
-cd examples/deep_research_api/app
-pip install -r requirements.txt
+```sh
+cd 20-joule-a2a-code-based-agent/deep_research_api
+
+# create a virtual env for 20-joule-a2a-code-based-agent
+uv venv
+
+# activate the virtual env
+source .venv/bin/activate
+
+# install the dependencies
+cd app
+uv pip install -r requirements.txt
 ```
 
 ### 2. Configure environment
 
-```bash
-cp ../.env.example .env
-# Edit .env and fill in your SAP AI Core and Tavily credentials
+```sh
+cp .env.example .env
 ```
+
+Edit .env and fill in your SAP AI Core and Tavily credentials
 
 ### 3. Start the server
 
-```bash
-uvicorn app:app --host 0.0.0.0 --port 10000 --reload
+```sh
+python app.py
 ```
 
 The server starts at `http://localhost:10000`. Interactive API docs are available at
@@ -122,7 +133,7 @@ The server starts at `http://localhost:10000`. Interactive API docs are availabl
 
 ### 4. Run synchronous research
 
-```bash
+```sh
 curl -X POST http://localhost:10000/research \
   -H "Content-Type: application/json" \
   -d '{"query": "Research the latest advances in AI agent frameworks"}'
@@ -130,7 +141,7 @@ curl -X POST http://localhost:10000/research \
 
 ### 5. Run asynchronous research
 
-```bash
+```sh
 # Submit job
 curl -X POST http://localhost:10000/research/jobs \
   -H "Content-Type: application/json" \
@@ -142,7 +153,7 @@ curl http://localhost:10000/research/jobs/<job_id>
 
 ### 6. Run the test client
 
-```bash
+```sh
 python test_client.py
 ```
 
@@ -155,7 +166,7 @@ the intended application URL.
 
 ### 2. Deploy
 
-```bash
+```sh
 cd examples/deep_research_api/app
 cf push
 ```
