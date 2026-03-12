@@ -226,24 +226,99 @@ According [the official quota of Action tasks](https://help.sap.com/docs/Joule_S
 
 In conclusion,  the viable approaches of integrating a long-running agent with **SAP Joule** must be through such asynchronous communication. However, it is important to note that the following solutions are only applicable to those long-running  within a **5 minutes** timeframe.
 
-### Option 2 - Pro-Code Agent with Joule Studio Code Editor <-> Asynchronous API Request <-> Agent API
+### Option 1 - Pro-Code Agent with Joule Studio Code Editor <-> Asynchronous API Request <-> Agent API
 
 Please refer to help document about [Asynchronous API Request](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/0c63b8dacc12451cb98b71ddf16b4bf0.html?locale=en-US).
 
 DO READ its Platform requirement and Technical Prerequisites carefully.
+
 - Bi-directional communication (callback support) is currently only supported for **IAS-based integrations**.
-- Non-IAS-based integrations are **not yet compatible** with this asynchronous callback model.
+- **Non-IAS-based** integrations are **not yet compatible** with this asynchronous callback model.
 
-### Option 1 - Content-based Agent with Joule Studio <-> Process <-> Agent Asynchronous API
+### Option 2 - Content-based Agent with Joule Studio <-> Process <-> Agent Asynchronous API
 
+The following steps is ought to be performed in SAP BTP Sub Account where SAP Build Process Automation resides.
 #### 1. Create a destination for the Deep Research Agent's REST APIs
+![deep research api destination](../resources/deep_research_api_destination.png)
+
+| Properties | Values |
+|------|---------|
+| Name | deep-research-api |
+| Type | http |
+| Description | deep-research-agent for Joule integration with REST API |
+| URL | the deployment URL of deep-research-api application on Cloud Foundry |
+| sap.applicationdevelopment.actions.enabled | true |
+| sap.processautomation.enable | true |
 
 #### 2. Create an Action Project for the Deep Research Agent's REST APIs
+
 ![Action Project for Deep Research API](../resources/action_project_deep_research_api.png)
+As the APIs are REST format, therefore you will need to create the action from scratch.
 
-Make sure you have tested the actions. Once it all works as required, then release and publish the Action project
+##### Action 1: Submit Research Job
 
-#### 3. Create a Process to orchestrate the research job submission and polling its result every minutes
+| Properties | Values |
+|------|---------|
+| Name | Submit Research Job |
+| Http Method | POST |
+| Endpoint | /research/jobs |
+| Description | Submit a Research Job, and return its job_id |
+| Input Body | sample json `{ "query": "Research the latest advances in AI agent frameworks" }` |
+| Output Body | the deployment URL of deep-research-api application on Cloud Foundry |
+
+##### Action 2: Poll Research Job Result
+
+| Properties | Values |
+|------|---------|
+| Name | Poll Research Job Result |
+| Http Method | GET |
+| Endpoint | /research/jobs/{job_id} |
+| Description | Poll job status (running / completed / failed) and retrieve the result. |
+| Input Parameter | Key: job_id, Parameter: path, Type: string |
+| Output Body | sample json `{  "job_id": "3f4a1b2c-...", "query": "Research the latest advances in AI agent frameworks","status": "completed", "result": "# Research Report\n...","error": null}` |
+
+##### Action 3: Synchronous Research
+
+| Properties | Values |
+|------|---------|
+| Name | Synchronous Research |
+| Http Method | POST |
+| Endpoint | /research |
+| Description | Synchronous runs research and returns the completed report. Blocks until done (typically several minutes) |
+| Input Parameter | Key: job_id, Parameter: path, Type: string |
+| Output Body | sample json `{  "job_id": "3f4a1b2c-...", "query": "Research the latest advances in AI agent frameworks","status": "completed", "result": "# Research Report\n...","error": null}` |
+
+Make sure you have tested the actions with the destination deep-research-api created in step 1. Once it all works as required, then release and publish the Action project
+
+#### 3. Create a Process to orchestrate the research job submission and polling its result every minute
+
 ![Long-Run Agent Process](../resources/long_run_agent_process_input.png)
 
+| Properties | Values |
+|------|---------|
+| Name | Deep Research Process |
+| Description | A process to invoke remote Deep Research Agent through async REST api |
+| Process Input | Name: User Input, Type: string |
+| Process Output | Name: Research Report, Type: string |
+| The condition  of looping | job.result.status == 'running' |
 
+You can import the [Research Process artifact](./artifacts/Long-Run%20Agent%20Process.mtar) through SAP Build Process Automation Lobby
+
+#### 4. Create a Skill to trigger the process
+
+![Research Skill](../resources/research_skill.png)
+You can import the [Research Skill artifact](./artifacts/Long-Run%20Agent%20Process.mtar) through SAP Build Process Automation Lobby
+
+#### 5. Deploy the skill
+
+The skill must be deployed to the same environment as the Deep Research Process in step 3.
+
+#### 6. Launch and test the skill
+
+Once the joule client is launched, you can enter a research task like
+`Research different approaches to custom AI Agent development with Joule Studio Agent Builder, Joule Studio Code Editor and SAP Cloud SDK for AI`
+![Joule Web Client](../resources/joule_web_client.png)
+
+It will trigger the process, which can be monitored through Control Tower > Monitoring > Proeess and Workflow Instances
+![Process Logs](../resources/process_monitor_logs.png)
+![Process Context](../resources/process_monitor_context.png)
