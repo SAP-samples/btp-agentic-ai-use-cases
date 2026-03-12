@@ -250,12 +250,12 @@ Enter a research request e.g.<br/>
 
 ### 3. Known limitation
 
-A Joule dialog request has a default timeout of **60 seconds**, therefore, you may need to tune the environment variables below in `manifest.yaml` to accommodate the time frame.
+As highlighted in [the official help centre of Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US&state=PRODUCTION&version=SHIP), `With synchronous communication, Joule expects the response from agent server in < 60 seconds.`. you may need to tune the environment variables below in `manifest.yaml` to accommodate the time frame.
 
 ```yaml
       # ----------------------------------------------------------------
       # Orchestrator limits (optional, defaults will be used if not set)
-      # Joule dialog request has a default timeout of 60s,
+      # Joule dialog request has a default timeout of 60s for synchronous communication with code-based agent(BYOA),
       # so the orchestrator should be configured to ensure that all research units
       # complete within this time to avoid unexpected termination of the agent's response stream.
       # Adjust as needed based on the expected complexity of research tasks.
@@ -263,3 +263,5 @@ A Joule dialog request has a default timeout of **60 seconds**, therefore, you m
       MAX_RESEARCHER_ITERATIONS: 2
       MAX_CONCURRENT_RESEARCH_UNITS: 3
 ```
+
+Alternatively, you have a long-running (>60 seconds) code-based agent to be integrated with Joule, please refer to [this  approach](../deep_research_api/README.md) of **asynchronous communication**.
