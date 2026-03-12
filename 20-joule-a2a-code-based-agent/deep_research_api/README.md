@@ -1,7 +1,7 @@
-# Deep Research Agent as REST API
+# Integrate SAP Joule with long-running Deep Research Agent through async REST API
 
 This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the **SAP Generative AI Hub** via the **SAP Cloud SDK for AI**, and exposed as a
-**FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a long-running.
+**FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a long-running  research.
 
 The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
 
@@ -210,3 +210,40 @@ cf push
 ```
 
 Obtain the deployment URL, then you can use it in any http client.
+
+## The challenges of integrating long-running code-based agent(BYOA) with Joule
+
+### 1. Joule's 60 seconds timeout for synchronous communication with BYOA through A2A
+
+As highlighted in [the official help centre of Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US&state=PRODUCTION&version=SHIP), `With synchronous communication, Joule expects the response from agent server in < 60 seconds.`. 
+
+### 2. Action's timeout quota
+
+According [the official quota of Action tasks](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/e29bb9c5fb1841b2b61f59b874ca0edd.html?locale=en-US&state=PRODUCTION&version=SHIP), a synchronous API call to BYOA through Action project may hit connection timeout(1 minutes),  socket timeout(gateway timeout for 3 minutes) etc.
+![action gateway timeout](../resources/action_gateway_timeout_sync_research.png)
+
+## The solutions of integrating long-running code-based agent(BYOA) with Joule
+
+In conclusion,  the viable approaches of integrating a long-running agent with **SAP Joule** must be through such asynchronous communication. However, it is important to note that the following solutions are only applicable to those long-running  within a **5 minutes** timeframe.
+
+### Option 2 - Pro-Code Agent with Joule Studio Code Editor <-> Asynchronous API Request <-> Agent API
+
+Please refer to help document about [Asynchronous API Request](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/0c63b8dacc12451cb98b71ddf16b4bf0.html?locale=en-US).
+
+DO READ its Platform requirement and Technical Prerequisites carefully.
+- Bi-directional communication (callback support) is currently only supported for **IAS-based integrations**.
+- Non-IAS-based integrations are **not yet compatible** with this asynchronous callback model.
+
+### Option 1 - Content-based Agent with Joule Studio <-> Process <-> Agent Asynchronous API
+
+#### 1. Create a destination for the Deep Research Agent's REST APIs
+
+#### 2. Create an Action Project for the Deep Research Agent's REST APIs
+![Action Project for Deep Research API](../resources/action_project_deep_research_api.png)
+
+Make sure you have tested the actions. Once it all works as required, then release and publish the Action project
+
+#### 3. Create a Process to orchestrate the research job submission and polling its result every minutes
+![Long-Run Agent Process](../resources/long_run_agent_process_input.png)
+
+
