@@ -1,0 +1,29 @@
+{
+  "name": "a2a-client-service",
+  "version": "1.0.0",
+  "description": "Stateless A2A client proxy service for SAP BTP — routes messages to remote A2A servers using BTP Destination Service for authentication.",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@a2a-js/sdk": "^0.3.13",
+    "@fastify/sensible": "^6.0.3",
+    "@sap-cloud-sdk/connectivity": "^3.22.0",
+    "fastify": "^5.2.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

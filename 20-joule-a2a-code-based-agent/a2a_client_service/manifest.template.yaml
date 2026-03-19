@@ -1,0 +1,35 @@
+---
+# Cloud Foundry deployment manifest for a2a-client-service.
+#
+# Before deploying:
+#   1. Replace <YOUR_APP_NAME> with your desired CF app name.
+#   2. Replace <YOUR_DOMAIN> with your CF / BTP domain (e.g. cfapps.eu10.hana.ondemand.com).
+#   3. Ensure a BTP Destination Service instance named `a2a-destination-service` exists in your space.
+#      Create one if needed:
+#        cf create-service destination lite a2a-destination-service
+#   4. (Optional) Bind an XSUAA instance if OAuth2JWTBearer destinations are used.
+#
+# Deploy:
+#   npm run build   ← compile TypeScript to ESM (dist/) locally first
+#   cf push
+#
+applications:
+  - name: a2a-client-service
+    memory: 256M
+    disk_quota: 512M
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    health-check-type: http
+    health-check-http-endpoint: /health
+    random-route: false
+
+    env:
+      NODE_ENV: production
+      LOG_LEVEL: info
+      # PORT and HOST are set automatically by CF; do not override here.
+    services:
+      # BTP Destination Service — required for resolving destinations.
+      - a2a-destination-service
+      # Uncomment if XSUAA is needed for OAuth2JWTBearer token exchange:
+      # - xsuaa-service

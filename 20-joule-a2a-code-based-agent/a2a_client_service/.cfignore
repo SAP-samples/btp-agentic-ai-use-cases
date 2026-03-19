@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .cfignore — Cloud Foundry upload exclusions for a2a-client-service
+#
+# Build strategy: compile TypeScript locally BEFORE running `cf push`.
+#
+#   npm run build   # tsc → produces dist/ with correct ESM output
+#   cf push         # uploads dist/ + package.json + package-lock.json
+#
+# The Node.js buildpack then runs `npm ci --production` to install only the
+# runtime dependencies (no devDeps needed — compiled JS is already present).
+#
+# Uploaded to CF (minimal set):
+#   dist/            compiled ESM JavaScript — the only runtime artefact
+#   package.json     runtime dependency manifest
+#   package-lock.json  lockfile for reproducible npm ci
+#   manifest.yaml    CF deployment descriptor
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Dependencies ─────────────────────────────────────────────────────────────
+# Rebuilt by the Node.js buildpack; uploading them wastes quota and bandwidth.
+node_modules/
+
+# ── TypeScript source & tooling ───────────────────────────────────────────────
+# Only the compiled output in dist/ is needed at runtime.
+# IMPORTANT: always run `npm run build` before `cf push` to regenerate dist/.
+# TypeScript with "module": "Node16" + "type": "module" in package.json emits
+# correct ESM; a stale CJS dist/ (built before "type":"module" was added)
+# causes "exports is not defined in ES module scope" at startup.
+src/
+tsconfig.json
+*.tsbuildinfo
+
+# ── Local / development configuration ────────────────────────────────────────
+# NEVER upload local credentials or environment overrides to CF.
+.env
+default-env.json
+.env.example
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── Documentation ─────────────────────────────────────────────────────────────
+README.md
+
+# ── Version control ───────────────────────────────────────────────────────────
+.git/
+.gitignore
+
+# ── Editor & IDE ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS artefacts ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
