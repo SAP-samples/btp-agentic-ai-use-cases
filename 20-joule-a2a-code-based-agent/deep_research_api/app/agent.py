@@ -45,6 +45,7 @@ _TOOL_STATUS: dict[str, str] = {
     "grep": "Searching through content...",
     "edit_file": "Editing research content...",
     "execute": "Executing research step...",
+    "get_supplier_by_product": "Retrieving supplier information...",
 }
 
 
