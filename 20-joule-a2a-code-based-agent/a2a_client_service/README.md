@@ -9,17 +9,17 @@ A stateless **Fastify** REST proxy that routes messages to any remote [A2A](http
 │         API Client / Agent           │
 │  POST /a2a/send  { destinationName,  │
 │                    message, … }      │
-└───────────────┬──────────────────────┘
-                │  HTTP / JSON
-                ▼
+└──────────────────┬───────────────────┘
+                   │  HTTP / JSON
+                   ▼
 ┌──────────────────────────────────────┐
 │       a2a-client-service (Fastify)   │  src/server.ts
 │                                      │
 │  POST /a2a/send                      │
 │  GET  /health                        │
-└──────────┬───────────────────────────┘
-           │
-           ▼
+└──────────────────┬───────────────────┘
+                   │
+                   ▼
 ┌──────────────────────────────────────┐
 │   SAP BTP Destination Service        │  src/destinationAuth.ts
 │   (@sap-cloud-sdk/connectivity)      │
@@ -27,16 +27,34 @@ A stateless **Fastify** REST proxy that routes messages to any remote [A2A](http
 │   BasicAuthentication                │
 │   OAuth2ClientCredentials            │
 │   OAuth2JWTBearer                    │
-└──────────┬───────────────────────────┘
-           │  base URL + auth headers
-           ▼
+└──────────────────┬───────────────────┘
+                   │  Auth
+                   ▼
 ┌──────────────────────────────────────┐
 │   A2A Client (@a2a-js/sdk/client)    │  src/a2aProxy.ts
 │   ClientFactory + authFetch          │
 │                                      │
-│   → remote A2A server                │
+│                                      │
+└──────────────────┬───────────────────┘
+                   │  A2A
+                   ▼
+┌──────────────────────────────────────┐
+│         Remote A2A Server            │
+│                                      │
+│                                      │
+│                                      │
 └──────────────────────────────────────┘
 ```
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/server.ts` | Fastify server — endpoints, JWT extraction, error handling |
+| `src/a2aProxy.ts` | A2A `ClientFactory` with auth-injected `fetch` |
+| `src/destinationAuth.ts` | BTP destination resolution + `buildHeadersForDestination` |
+| `manifest.yaml` | Cloud Foundry deployment manifest |
+| `.env.example` | Local development environment template |
 
 ## API
 
@@ -84,7 +102,8 @@ curl -X POST http://localhost:3000/a2a/send \
   -d '{
     "destinationName": "MY_A2A_SERVER_DEST",
     "message": "What is the weather in Berlin today?",
-    "contextId": "session-abc-123"
+    "contextId": "session-abc-123",
+    "tasktId": "task-abc-123"
   }'
 ```
 
@@ -109,7 +128,7 @@ Authentication is handled automatically by the SAP Cloud SDK based on the destin
 ### 1. Install dependencies
 
 ```bash
-cd examples/a2a_client_service
+cd a2a_client_service
 npm install
 ```
 
@@ -165,6 +184,7 @@ npm run build
 ```
 
 ### 2. Copy and Configure `manifest.yaml`
+
 ```bash
 cp  manifest.template manifest.yaml
 ```
@@ -187,12 +207,102 @@ If your destinations use `OAuth2JWTBearer`, also bind an XSUAA instance (uncomme
 cf push
 ```
 
-## Key Files
+Note down the deployment URL.
 
-| File | Purpose |
-|------|---------|
-| `src/server.ts` | Fastify server — endpoints, JWT extraction, error handling |
-| `src/a2aProxy.ts` | A2A `ClientFactory` with auth-injected `fetch` |
-| `src/destinationAuth.ts` | BTP destination resolution + `buildHeadersForDestination` |
-| `manifest.template.yaml` | Cloud Foundry deployment manifest template |
-| `.env.example` | Local development environment template |
+## Integrating a remote A2A Agent with Joule Studio via a2a-client-service
+
+In this section, we'll integrate a remote A2A agent with Joule Studio through a custom Joule Skill leveraging the a2a-client-service, literally, it should be applicable to any A2A-compliant AI agent.
+
+Let's take [deep-research-agent-a2a](../deep_research_a2a/) agent as the remote A2A agent.
+
+### 1. Create a destination for the remote A2A agent
+
+In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry, which will be used in a custom Joule Skill with Joule Studio
+![destination](../resources/deep_research_a2a_destination.png) for integration with Joule.
+
+#### 2. Create an Action Project for the a2a-client-service's REST APIs
+
+![Action Project for a2a-client API](resources/a2a-client-service-action.png)
+As the APIs are REST format, therefore you will need to create the action from scratch.
+
+##### Action 1: Send Message via A2A
+
+| Properties | Values |
+| ------ | --------- |
+| Name | Send Message via A2A |
+| Http Method | POST |
+| Endpoint | /a2a/send |
+| Description | Proxy a message to a remote A2A server identified by a BTP destination |
+| Input Body | sample json `{ "destinationName": "MY_A2A_SERVER_DEST", "message": "Research Joule Agent Integrate with Code-based Agent with A2A","contextId": "session-abc-123", "tasktId": "task-abc-123"}` |
+| Output Body | A2A response from remote A2A Agent. Test the action and generate the output |
+
+Make sure you have tested the actions with the destination deep-research-agent-a2a created in step 1. Once it all works as required, then release and publish the Action project
+
+#### 2. Create a Skill to trigger the action Send Message A2A
+
+![Research Skill](resources/research-skill-a2a-client.png)
+
+**General**
+
+| Properties | Values |
+| ------ | --------- |
+| Name | Research |
+| Description | A skill to conduct research with a given query |
+| Allow Joule to generate a response| Checked |
+| Allow skill to be started directly by user | Checked |
+
+**Skill Inputs**
+
+| Properties | Values |
+| ------ | --------- |
+| Name | User Input |
+| Description | User input |
+| Type | String |
+| Required | Checked |
+| List | Unchecked |
+
+**Skill Outputs**
+
+| Properties | Values |
+| ------ | --------- |
+| Name | result of Send Message via A2A action |
+
+**Send Message via A2A**
+Create a destination variable as `a2a-client-service-dest`
+![send-message-action](resources/send-message-action.png)
+
+| Properties | Values |
+| ------ | --------- |
+| destinationName | `deep-research-agent-a2a` |
+| message | `User Input` from skill input |
+
+![send-message-action-inputs](resources/send-message-action-inputs.png)
+#### 3. Test the skill
+
+Once the joule client is launched, you can enter a research task like:<br/>
+`Research use cases for SAP RPT-1`<br/>
+`Research joule agent integration with A2A`<br/>
+...<br/>
+
+Simultaneously, open a terminal to stream the logs of your deep_research_a2a application
+
+```sh
+# stream the logs of your deep_research_a2a application
+cf logs <your-deep-research-agent-a2a>
+```
+
+![Testing Research Skill](resources/research-skill-test.png)
+
+#### 4. Deploy the skill
+
+If the test works well, you can release and deploy the skill to a standalone env.
+
+### 3. Known limitation
+
+As highlighted in [the official help centre of about Action quota in Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/e29bb9c5fb1841b2b61f59b874ca0edd.html?locale=en-US)
+
+* Connection timeout: 1 min
+* Socket timeout: 3 mins
+* Total execution time: 4 mins
+
+Alternatively, you can have a long-running (>3 mins) A2A agent to be integrated with Joule through [this approach](../deep_research_api/README.md) of **asynchronous communication**.
