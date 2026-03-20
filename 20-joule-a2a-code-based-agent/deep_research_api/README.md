@@ -264,7 +264,7 @@ As the APIs are REST format, therefore you will need to create the action from s
 | Endpoint | /research/jobs |
 | Description | Submit a Research Job, and return its job_id |
 | Input Body | sample json `{ "query": "Research the latest advances in AI agent frameworks" }` |
-| Output Body | the deployment URL of deep-research-api application on Cloud Foundry |
+| Output Body | sample json `{ "job_id": "3f4a1b2c-...", "query": "Research the latest advances in AI agent frameworks", "status": "running"}` |
 
 ##### Action 2: Poll Research Job Result
 
@@ -274,7 +274,7 @@ As the APIs are REST format, therefore you will need to create the action from s
 | Http Method | GET |
 | Endpoint | /research/jobs/{job_id} |
 | Description | Poll job status (running / completed / failed) and retrieve the result. |
-| Input Parameter | Key: job_id, Parameter: path, Type: string |
+| Input Parameter | Key: job_id, Parameter: **path**, Type: string |
 | Output Body | sample json `{  "job_id": "3f4a1b2c-...", "query": "Research the latest advances in AI agent frameworks","status": "completed", "result": "# Research Report\n...","error": null}` |
 
 ##### Action 3: Synchronous Research
