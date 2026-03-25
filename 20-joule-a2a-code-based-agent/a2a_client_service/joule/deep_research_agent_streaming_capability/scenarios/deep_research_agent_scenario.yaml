@@ -1,0 +1,7 @@
+description: The Deep Research Agent supports conducting deep research on a given topic.
+slots:
+  - name: question
+    description: The research question or topic that the agent should investigate.
+target:
+  name: deep_research_agent_function
+  type: function

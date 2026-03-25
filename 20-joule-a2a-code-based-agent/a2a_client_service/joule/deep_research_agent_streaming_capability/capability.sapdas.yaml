@@ -1,0 +1,12 @@
+schema_version:  3.28.0   # be aware of the minimum version for agents
+
+metadata:
+  namespace: joule.ext    # very important to be in the "joule.ext" namespace for capabilities
+  name: deep_research_agent_streaming_capability
+  version: 1.0.0
+  display_name: Deep Research Agent with Streaming Capability
+  description: Capability containing the deep research agent
+
+system_aliases:
+  A2A_CLIENT_SERVICE:
+    destination: a2a-client-service # this is referencing the destination name

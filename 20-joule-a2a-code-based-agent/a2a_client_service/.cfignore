@@ -30,6 +30,10 @@ src/
 tsconfig.json
 *.tsbuildinfo
 
+# ── Joule capability ───────────────────────────────────────────────
+# Joule capability to be compliled and deploy through joule-cli
+joule/
+
 # ── Local / development configuration ────────────────────────────────────────
 # NEVER upload local credentials or environment overrides to CF.
 .env

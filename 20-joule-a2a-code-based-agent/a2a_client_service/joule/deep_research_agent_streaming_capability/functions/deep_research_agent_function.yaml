@@ -1,0 +1,27 @@
+parameters:
+  - name: question
+action_groups:
+  - condition: question == null
+    actions:
+      - type: set-variables
+        variables:
+          - name: question
+            value: "<? $transient.input.text.raw ?>"
+
+  - actions:
+      - type: streamed-message
+        method: POST
+        system_alias: A2A_CLIENT_SERVICE
+        path: /a2a/stream_normalised
+        headers:
+          Accept: "text/event-stream" #SSE required value
+          Connection: "keep-alive" #SSE required value
+          Cache-Control: "no-cache" #SSE required value
+          Content-Type: "application/json" #required for POST/PUT/PATCH requests with body
+        body: >
+          {
+            "message": "<? question ?>",
+            "destinationName": "deep-research-agent-a2a"
+          }
+        response_chunk_ref: $.message.parts[0].text
+        result_variable: apiResponse #optional
