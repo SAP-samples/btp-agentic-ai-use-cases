@@ -1,7 +1,7 @@
 # A2A Client Service
 
 A stateless **Fastify** REST proxy that routes messages to any remote [A2A](https://google-a2a.github.io/A2A) server on the fly, enabling Joule Agent to integrate external AI agents through a2a in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.
-![deep_research_streaming_agent](./resources/deep_research_streaming_agent.png)
+![deep_research_streaming_agent](resources/deep_research_streaming_agent.png)
 
 ## Why?
 
