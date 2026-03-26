@@ -1,6 +1,7 @@
 # A2A Client Service
 
 A stateless **Fastify** REST proxy that routes messages to any remote [A2A](https://google-a2a.github.io/A2A) server on the fly, enabling Joule Agent to integrate external AI agents through a2a in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.
+
 ![deep_research_streaming_agent](resources/deep_research_streaming_agent.png)
 
 ## Why?
@@ -69,7 +70,7 @@ Therefore, I have built this A2A Client Service to bridge these gaps for enablin
 | `manifest.yaml` | Cloud Foundry deployment manifest |
 | `.env.example` | Local development environment template |
 
-## API
+## API Endpoints
 
 ### `GET /health`
 
@@ -81,7 +82,7 @@ Liveness probe. Returns `200 OK` — used by CF health checks.
 
 ### `POST /a2a/send`
 
-Proxy a message to a remote A2A server identified by a BTP destination. Returns the complete response after the agent finishes processing (blocking).
+Proxy a message to a remote A2A server identified by a BTP destination in synchronous communication. Returns the complete response after the agent finishes processing (blocking).
 
 **Request body**
 
@@ -114,15 +115,16 @@ curl -X POST http://localhost:3000/a2a/send \
   -H "Authorization: Bearer <your-jwt>" \
   -d '{
     "destinationName": "MY_A2A_SERVER_DEST",
-    "message": "What is the weather in Berlin today?",
+    "message": "Research use cases for SAP RPT-1",
     "contextId": "session-abc-123",
-    "taskId": "task-abc-123"
+    "taskId": "task-abc-123",
+    "messageId": "message-abc-123",
   }'
 ```
 
 ### `POST /a2a/stream`
 
-Stream real-time updates from a remote A2A server as Server-Sent Events (SSE). Ideal for long-running tasks where you want to receive progress updates as they occur.
+Proxy to stream real-time updates from a remote A2A server as Server-Sent Events (SSE). Ideal for long-running tasks where you want to receive progress updates as they occur.
 
 **Request body**
 
@@ -220,9 +222,8 @@ curl -X POST http://localhost:3000/a2a/stream_normalised \
 ```
 
 **Use cases:**
-- Simplified client implementation (single message format to handle)
+- Simplify and enable integration with Joule through Streamed Message Action
 - Markdown rendering (newlines in status updates ensure proper formatting)
-- Consistent data structure for AI/LLM consumption
 
 ## Supported Authentication Types
 
@@ -233,6 +234,7 @@ Authentication is handled automatically by the SAP Cloud SDK based on the destin
 | `BasicAuthentication` | `Authorization: Basic base64(user:password)` |
 | `OAuth2ClientCredentials` | Fetches a client-credentials token from the token service URL |
 | `OAuth2JWTBearer` | Exchanges the caller's JWT for an outbound access token |
+| `...` | ... |
 
 ## Local Development
 
@@ -306,7 +308,7 @@ npm run build
 cp  manifest.template manifest.yaml
 ```
 
-Edit `manifest.yaml` and replace:
+Edit `manifest.yaml` and replace below:
 - `<YOUR_APP_NAME>` — your CF application name
 - `<YOUR_DOMAIN>` — your CF / BTP domain (e.g. `cfapps.eu10.hana.ondemand.com`)
 
@@ -328,18 +330,22 @@ Note down the deployment URL.
 
 ## Integrating a remote A2A Agent with Joule Agent via a2a-client-service
 
-### Option 1: Integrating a remote A2A Agent with Content-based Agent(Joule Studio Agent Builder)
+### Option 1: Integrating Content-based Agent(Joule Studio Agent Builder) with a remote A2A Agent  
 
 In this section, we'll integrate a remote A2A agent with Joule Studio through a custom Joule Skill calling the a2a-client-service via action project, literally, it should be applicable to any A2A-compliant AI agent.
 
 Let's take [deep-research-agent-a2a](../deep_research_a2a/) agent as the remote A2A agent.
 
-#### 1. Create a destination for the remote A2A agent
+#### 1. Create a destination for a2a-client-service
 
-In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry, which will be used in a custom Joule Skill with Joule Studio
+In your SAP BTP Sub Account where Joule instance locates, create a destination named `a2a-client-service` by importing from [file](destinations/a2a-client-service.json) and updating the URL as the deployment url of a2a-client-service in [cf deployment step](#3-deploy), which will be used in the action project to trigger remote A2A agent via REST api.
+
+#### 2. Create a destination for the remote A2A agent deep-research-agent-a2a
+
+In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry by importing [file](destinations/deep-research-agent-a2a.json) via SAP BTP cockpit and updating the URL as the deployment url of deep-research-agent-a2a which will be used in a custom Joule Skill with Joule Studio
 ![destination](../resources/deep_research_a2a_destination.png) for integration with Joule.
 
-#### 2. Create an Action Project for the a2a-client-service's REST APIs
+#### 3. Create an Action Project for the a2a-client-service's REST APIs
 
 ![Action Project for a2a-client API](resources/a2a-client-service-action.png)
 As the APIs are REST format, therefore you will need to create the action from scratch.
@@ -355,9 +361,9 @@ As the APIs are REST format, therefore you will need to create the action from s
 | Input Body | sample json `{ "destinationName": "MY_A2A_SERVER_DEST", "message": "Research Joule Agent Integrate with Code-based Agent with A2A","contextId": "session-abc-123", "tasktId": "task-abc-123"}` |
 | Output Body | A2A response from remote A2A Agent. Test the action and generate the output |
 
-Make sure you have tested the actions with the destination deep-research-agent-a2a created in step 1. Once it all works as required, then release and publish the Action project
+Make sure you have tested the actions with the destination deep-research-agent-a2a created in step 1. Once it all works as required, then release and publish the Action project.
 
-#### 2. Create a Skill to trigger the action Send Message A2A
+#### 4. Create a Skill to trigger the action Send Message A2A
 
 ![Research Skill](resources/research-skill-a2a-client.png)
 
@@ -396,6 +402,7 @@ Create a destination variable as `a2a-client-service-dest`
 | message | `User Input` from skill input |
 
 ![send-message-action-inputs](resources/send-message-action-inputs.png)
+
 #### 3. Test the skill
 
 Once the joule client is launched, you can enter a research task like:<br/>

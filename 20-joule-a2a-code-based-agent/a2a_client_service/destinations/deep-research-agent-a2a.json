@@ -1,0 +1,11 @@
+{
+  "exportTime": "2026-03-18 10:21:41.992243718",
+  "destination": {
+    "Name": "deep-research-agent-a2a",
+    "Type": "HTTP",
+    "Description": "deep-research-agent for Joule integration with A2A",
+    "URL": "<The deployment URL of your deep-research-agent-a2a>",
+    "ProxyType": "Internet",
+    "Authentication": "NoAuthentication"
+  }
+}
