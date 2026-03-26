@@ -1,0 +1,13 @@
+{
+  "exportTime": "2026-03-26 09:20:30.107156323",
+  "destination": {
+    "Name": "a2a-client-service",
+    "Type": "HTTP",
+    "Description": "An a2a client proxy service connecting to any remote a2a agent with a2a protocol for Joule integration",
+    "URL": "<The deployment URL of your a2a-client-service>",
+    "ProxyType": "Internet",
+    "Authentication": "NoAuthentication",
+    "sap.applicationdevelopment.actions.enabled": "true",
+    "sap.processautomation.enable": "true"
+  }
+}
