@@ -1,19 +1,23 @@
 # A2A Client Service
 
-A stateless **Fastify** REST proxy that routes messages to any remote [A2A](https://google-a2a.github.io/A2A) server on the fly, enabling Joule Agent to integrate external AI agents through a2a in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.
+This stateless RESTful A2A Client Service(**Proxy**) enables non-A2A-compatible AI Agents connects to any remote [A2A](https://google-a2a.github.io/A2A)(Agent-to-Agent) AI Agent on the fly through RESTful APIs. It routes messages between non-A2A and A2A AI Agents as illustrated below.  
+
+`Non-A2A AI Agent <=REST=> A2A Client Service (Proxy) <=A2A=> A2A-compliant AI Agent`  
+
+Particularly, it allows Joule Agent to integrate and communicate with external A2A AI agents in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.
 
 ![deep_research_streaming_agent](resources/deep_research_streaming_agent.png)
 
 ## Why?
 
-- A2A is already supported by Pro-Code Joule Capability with [Joule Studio Code Editor](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-development?locale=en-US) via [Agent Request Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US), however, streaming is not supported in Agent Request Action.
-- [Streamed Message Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/70e471d4234b41e6b9b2b049fb0b514a.html?locale=en-US#loio70e471d4234b41e6b9b2b049fb0b514a__subsectiontitle_hmp_jys_pgc) doesn't support A2A streaming.
-- A2A integration isn't available in Joule Studio Agent Builder.
+- A2A is already supported by Pro-Code Joule Capability with [Joule Studio Code Editor](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-development?locale=en-US) via [Agent Request Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US). However, streaming mode is not supported in Agent Request Action.
+- [Streamed Message Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/70e471d4234b41e6b9b2b049fb0b514a.html?locale=en-US#loio70e471d4234b41e6b9b2b049fb0b514a__subsectiontitle_hmp_jys_pgc) support streaming, but not A2A streaming.
+- A2A integration is not available in Content-based Agent built with Joule Studio Agent Builder as of March 2026.
 
-Therefore, I have built this A2A Client Service to bridge these gaps for enabling
+Therefore, I have built this A2A Client Service to bridge these gaps.  
 
 - Pro-Code Joule Agent integration with remote A2A Agent in **streaming mode**
-- Low-Code No-Code(LCNC) Joule Agent integration with remote A2A Agent through REST API and Action.
+- Low-Code/No-Code(LCNC) Joule Agent integration with remote A2A Agent through Action and REST APIs.
 
 ## Architecture
 
