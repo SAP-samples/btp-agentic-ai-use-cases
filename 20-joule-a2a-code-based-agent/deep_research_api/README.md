@@ -1,7 +1,7 @@
-# Integrate SAP Joule with long-running Deep Research Agent through async REST API
+# Joule Integration with long-running Code-based Agent (Deep Research) through async REST API
 
 This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the **SAP Generative AI Hub** via the **SAP Cloud SDK for AI**, and exposed as a
-**FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a long-running  research.
+**FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a **long-running**(> 1 min) research.
 
 The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
 
@@ -215,7 +215,7 @@ Obtain the deployment URL, then you can use it in any http client.
 
 ### 1. Joule's 60 seconds timeout for synchronous communication with BYOA through A2A
 
-As highlighted in [the official help centre of Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US&state=PRODUCTION&version=SHIP), `With synchronous communication, Joule expects the response from agent server in < 60 seconds.`. 
+As highlighted in [the official help centre of Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US&state=PRODUCTION&version=SHIP), `With synchronous communication, Joule expects the response from agent server in < 60 seconds.`.
 
 ### 2. Action's timeout quota
 
@@ -237,8 +237,10 @@ DO READ its Platform requirement and Technical Prerequisites carefully.
 
 ### Option 2 - Content-based Agent with Joule Studio <-> Process <-> Agent Asynchronous API
 
-The following steps is ought to be performed in SAP BTP Sub Account where SAP Build Process Automation resides.
+The following steps is ought to be performed in SAP BTP Sub Account where SAP Build Process Automation resides.  
+
 #### 1. Create a destination for the Deep Research Agent's REST APIs
+
 ![deep research api destination](../resources/deep_research_api_destination.png)
 
 | Properties | Values |
