@@ -1,10 +1,10 @@
-# Code-based Deep Research Agent Joule Integration through A2A
+# Joule Integration with Code-based Agent(Deep Research) through A2A
 
-This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the **SAP Generative AI Hub** via the **SAP Cloud SDK for AI** and integrates with [A2A](https://github.com/google-deepmind/a2a) using a custom Joule capability built with Joule Studio Code Editor.
+This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the [**SAP Generative AI Hub**](https://help.sap.com/docs/ai-launchpad/sap-ai-launchpad/generative-ai-hub?locale=en-US) via the [**SAP Cloud SDK for AI**](https://sap.github.io/ai-sdk/) and integrates with [A2A](https://github.com/google-deepmind/a2a) using a custom Joule capability built with Joule Studio Code Editor.
 
 The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
 
-In addition, the sample also refer to the blog post about [Joule A2A: Connect Code Based Agents into Joule](https://community.sap.com/t5/technology-blog-posts-by-sap/joule-a2a-connect-code-based-agents-into-joule/ba-p/14329279) and its associated [Github Repo](https://github.com/fyx99/joule-pro-code-a2a) by [felixbartler](https://community.sap.com/t5/user/viewprofilepage/user-id/4997). It are recommended to go through the blog post for more details.
+In addition, the sample also refers to the blog post about [Joule A2A: Connect Code Based Agents into Joule](https://community.sap.com/t5/technology-blog-posts-by-sap/joule-a2a-connect-code-based-agents-into-joule/ba-p/14329279) and its associated [Github Repo](https://github.com/fyx99/joule-pro-code-a2a) by [felixbartler](https://community.sap.com/t5/user/viewprofilepage/user-id/4997). It are recommended to go through the blog post for more details.
 
 ## Architecture
 
@@ -264,4 +264,4 @@ As highlighted in [the official help centre of Joule Studio here](https://help.s
       MAX_CONCURRENT_RESEARCH_UNITS: 3
 ```
 
-Alternatively, you have a long-running (>60 seconds) code-based agent to be integrated with Joule, please refer to [this  approach](../deep_research_api/README.md) of **asynchronous communication**.
+Alternatively, you have a long-running (>60 seconds) code-based agent to be integrated with Joule, please refer to [deep_research_api](../deep_research_api) of **asynchronous communication**.
