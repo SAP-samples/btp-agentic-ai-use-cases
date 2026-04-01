@@ -79,7 +79,7 @@ As a result, mcpexa destination will be created as below
 
 ### Option 1 - Joule Studio Agent Builder
 
-We are working on a simplified version of Escalation Assistant with minimal dependence, which allows you to import its MTAR file. Please stay tuned. Nevertheless, you can have a look at the configuration of AI agents such as expertise, instructions etc. in [Joule Studio Agent Builder](agent-builder).
+We are working on a simplified version of Escalation Assistant with minimal dependencies, which allows you to import its MTAR file. Please stay tuned. Nevertheless, you can have a look at the configuration of AI agents such as expertise, instructions etc. in [Joule Studio Agent Builder](agent-builder).
 
 ### Option 2 - Joule Studio Code Editor
 
