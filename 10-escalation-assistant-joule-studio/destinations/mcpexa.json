@@ -1,0 +1,12 @@
+{
+    "exportTime": "2026-04-01 10:18:12.382060197",
+    "destination": {
+        "Name": "mcpexa",
+        "Type": "HTTP",
+        "Description": "Exa MCP Server",
+        "URL": "https://mcp.exa.ai",
+        "ProxyType": "Internet",
+        "Authentication": "NoAuthentication",
+        "sap-joule-studio-mcp-server": "true"
+    }
+}
