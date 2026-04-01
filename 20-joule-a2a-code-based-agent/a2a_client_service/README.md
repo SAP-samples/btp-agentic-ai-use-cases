@@ -4,9 +4,9 @@ This stateless RESTful A2A Client Service(**Proxy**) enables non-A2A-compatible 
 
 `Non-A2A AI Agent <=REST=> A2A Client Service (Proxy) <=A2A=> A2A-compliant AI Agent`  
 
-Particularly, it allows Joule Agent built with **Joule Studio Agent Builder** to integrate and communicate with external A2A AI agents in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.  
+Particularly, it allows **Joule Agents**(regardless built with Joule Studio Agent Builder or Joule Studio Code Editor) to integrate and communicate with remote A2A AI agents in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.  
 
-Direct A2A integration is already supported in Joule agent built with **Joule Studio Code Editor**, therefore this A2A Client Service(proxy) is not required, please check the sample of [deep_research_a2a](../deep_research_a2a/) for more details.
+Direct A2A integration is already supported in Joule agent built with **Joule Studio Code Editor**. However, streaming mode is not supported in such a direct A2A request, please check the sample of [deep_research_a2a](../deep_research_a2a/) for more details.
 
 ![deep_research_streaming_agent](resources/deep_research_streaming_agent.png)
 
