@@ -6,13 +6,13 @@ This stateless RESTful A2A Client Service(**Proxy**) enables non-A2A-compatible 
 
 Particularly, it allows **Joule Agents**(regardless built with Joule Studio Agent Builder or Joule Studio Code Editor) to integrate and communicate with remote A2A AI agents in **streaming mode** with enterprise-grade security. The target A2A Agent server URL and authentication credentials are resolved at request time from a named **SAP BTP Destination Service** entry, so no credentials are ever hard-coded or revealed in the service.  
 
-Direct A2A integration is already supported in Joule agent built with **Joule Studio Code Editor**. However, streaming mode is not supported in such a direct A2A request, please check the sample of [deep_research_a2a](../deep_research_a2a/) for more details.
+**Demo Recording**: [https://youtu.be/Gx7GM8ZxnM4](https://youtu.be/Gx7GM8ZxnM4)
 
 ![deep_research_streaming_agent](resources/deep_research_streaming_agent.png)
 
 ## Why?
 
-- A2A is already supported by Pro-Code Joule Capability with [Joule Studio Code Editor](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-development?locale=en-US) via [Agent Request Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US). However, streaming mode is not supported in Agent Request Action.
+- Direct A2A integration is already supported by Pro-Code Joule Capability with [Joule Studio Code Editor](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-development?locale=en-US) via [Agent Request Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/2f9701e60fd24e948c2c74fe9e55ce23.html?locale=en-US). However, streaming mode is not supported in Agent Request Action. For Joule's direct A2A integration, please check the sample of [deep_research_a2a](../deep_research_a2a/) for more details.
 - [Streamed Message Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/70e471d4234b41e6b9b2b049fb0b514a.html?locale=en-US#loio70e471d4234b41e6b9b2b049fb0b514a__subsectiontitle_hmp_jys_pgc) support streaming, but not A2A streaming.
 - A2A integration is not available in Content-based Agent built with Joule Studio Agent Builder as of March 2026.
 
@@ -23,6 +23,9 @@ Therefore, I have built this A2A Client Service to bridge these gaps.
 
 ## Architecture
 
+![Solution Architecture](./resources/solution_architecture.png)
+
+### The process flow and components of a2a-client-service
 ```
 ┌──────────────────────────────────────┐
 │         API Client / Agent           │
@@ -65,7 +68,7 @@ Therefore, I have built this A2A Client Service to bridge these gaps.
 └──────────────────────────────────────┘
 ```
 
-## Key Files
+### Key Files
 
 | File | Purpose |
 |------|---------|
@@ -334,7 +337,34 @@ cf push
 
 Note down the deployment URL.
 
-## Integrating a remote A2A Agent with Joule Agent via a2a-client-service
+## Integrating Joule Agent with a remote A2A Agent via a2a-client-service
+
+In this section, we'll integrate a remote A2A Agent via a2a-client-service with
+
+- Option 1: Content-based Joule Agent built with Joule Studio Agent Builder
+- Option 2: Pro-Code Joule Agent built with Joule Studio Code Editor
+
+Regardless of options, please follow the steps in Prerequisite to create the destinations for your a2a-client-service and remote a2a agent.
+
+### Prerequisite
+
+#### 1. Deploy a2a-client-service to cloud foundry of your SAP BTP Sub-account with [instructions](#cloud-foundry-deployment)  
+
+#### 2. Create a destination for a2a-client-service
+
+In your SAP BTP Sub Account where Joule instance locates, create a destination named `a2a-client-service` by importing from [this destination json file](destinations/a2a-client-service.json) and updating the URL as the deployment url of a2a-client-service in [cf deployment step](#3-deploy), which will be used in the action project to trigger remote A2A agent via REST api.  
+
+As a result, the a2a-client-service destination is created as below:
+![a2a-client-service destination](../resources/deep_research_a2a_destination.png)  
+
+#### 3. Deploy deep-research-a2a or any a2a AI Agent to cloud foundry of your SAP BTP Sub-account with [instructions](../deep_research_a2a/README.md/#cloud-foundry-deployment)  
+
+#### 4. Create a destination for the remote A2A agent deep-research-agent-a2a
+
+In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry by importing [this destination json file](destinations/deep-research-agent-a2a.json) via SAP BTP cockpit and updating the URL as the deployment url of deep-research-agent-a2a which will be used in a custom Joule Skill with Joule Studio for integration with Joule.  
+
+As a result, the deep-research-agent-a2a destination is created as below:
+![deep-research-agent-a2a destination](../resources/deep_research_a2a_destination.png)  
 
 ### Option 1: Integrating Content-based Agent(Joule Studio Agent Builder) with a remote A2A Agent  
 
@@ -342,16 +372,7 @@ In this section, we'll integrate a remote A2A agent with Joule Studio through a 
 
 Let's take [deep-research-agent-a2a](../deep_research_a2a/) agent as the remote A2A agent.
 
-#### 1. Create a destination for a2a-client-service
-
-In your SAP BTP Sub Account where Joule instance locates, create a destination named `a2a-client-service` by importing from [file](destinations/a2a-client-service.json) and updating the URL as the deployment url of a2a-client-service in [cf deployment step](#3-deploy), which will be used in the action project to trigger remote A2A agent via REST api.
-
-#### 2. Create a destination for the remote A2A agent deep-research-agent-a2a
-
-In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry by importing [file](destinations/deep-research-agent-a2a.json) via SAP BTP cockpit and updating the URL as the deployment url of deep-research-agent-a2a which will be used in a custom Joule Skill with Joule Studio
-![destination](../resources/deep_research_a2a_destination.png) for integration with Joule.
-
-#### 3. Create an Action Project for the a2a-client-service's REST APIs
+#### 5. Create an Action Project for the a2a-client-service's REST APIs
 
 ![Action Project for a2a-client API](resources/a2a-client-service-action.png)
 As the APIs are REST format, therefore you will need to create the action from scratch.
@@ -369,7 +390,7 @@ As the APIs are REST format, therefore you will need to create the action from s
 
 Make sure you have tested the actions with the destination deep-research-agent-a2a created in step 1. Once it all works as required, then release and publish the Action project.
 
-#### 4. Create a Skill to trigger the action Send Message A2A
+#### 6. Create a Skill to trigger the action Send Message A2A
 
 ![Research Skill](resources/research-skill-a2a-client.png)
 
@@ -409,7 +430,7 @@ Create a destination variable as `a2a-client-service-dest`
 
 ![send-message-action-inputs](resources/send-message-action-inputs.png)
 
-#### 3. Test the skill
+#### 7. Test the skill
 
 Once the joule client is launched, you can enter a research task like:<br/>
 `Research use cases for SAP RPT-1`<br/>
@@ -425,11 +446,11 @@ cf logs <your-deep-research-agent-a2a>
 
 ![Testing Research Skill](resources/research-skill-test.png)
 
-#### 4. Deploy the skill
+#### 8. Deploy the skill
 
 If the test works well, you can release and deploy the skill to a standalone env.
 
-#### 5. Known limitation
+#### 9. Known limitation
 
 As highlighted in [the official help centre of about Action quota in Joule Studio here](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/e29bb9c5fb1841b2b61f59b874ca0edd.html?locale=en-US)
 
@@ -439,15 +460,15 @@ As highlighted in [the official help centre of about Action quota in Joule Studi
 
 Alternatively, you can have a long-running (>3 mins) A2A agent to be integrated with Joule through [this approach](../deep_research_api/README.md) of **asynchronous communication**.
 
-### Option 2: Integrating a remote A2A Agent with Pro-Code Agent(Joule Studio Code Editor)
+### Option 2: Integrating a remote A2A Agent with Pro-Code Agent(Joule Studio Code Editor) in Streaming mode
 
 In this section, we'll integrate a remote A2A agent with Pro-Code Joule Capability through the [streaming API](#post-a2astream) of a2a-client-service via [Streamed Message Action](https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/70e471d4234b41e6b9b2b049fb0b514a.html?locale=en-US#loio70e471d4234b41e6b9b2b049fb0b514a__subsectiontitle_hmp_jys_pgc).
 
 Similarly, we'll still take [deep-research-agent-a2a](../deep_research_a2a/) agent as the remote A2A agent.
 
-#### 1. Create a destination for a2a-client-service
+#### 5. Update the destination of a2a-client-service in joule capability
 
-In your SAP BTP Sub Account where Joule instance locates, create a destination named `a2a-client-service` by importing from [file](destinations/a2a-client-service.json) and update the URL as the deployment url of a2a-client-service in [cf deployment step](#3-deploy), which will be used in the custom [joule capability](joule/deep_research_agent_streaming_capability/capability.sapdas.yaml) as a system alias **A2A_CLIENT_SERVICE**.
+In case you have a different destination name to your a2a-client-service, then please update it in custom [joule capability](joule/deep_research_agent_streaming_capability/capability.sapdas.yaml) as a system alias for integration with the remote a2a agent.**A2A_CLIENT_SERVICE**.
 
 ```yaml
 system_aliases:
@@ -455,16 +476,9 @@ system_aliases:
     destination: a2a-client-service # this is referencing the destination name
 ```
 
-![a2a-client-service destination](./resources/a2a-client-service-destination.png) for integration with the remote a2a agent.
+#### 6. Update the destination of remote a2a agent in agent function
 
-#### 2. Create a destination for the remote A2A agent
-
-In your SAP BTP Sub Account where a2a-client-service is deployed, create a destination named `deep-research-agent-a2a` for the deep research agent deployed in Cloud Foundry, which will be used in a custom Joule Skill with Joule Studio
-![destination](../resources/deep_research_a2a_destination.png) for integration with Joule.
-
-#### 3. Update the destinations in for joule capability
-
-In case you have a different destination name to your remote a2a agent, just update the destinationName referring to the destination of the target remote a2a agent in [deep_research_agent_function.yaml](./joule/deep_research_agent_streaming_capability/functions/deep_research_agent_function.yaml)<br>
+In case you have a different destination name to your remote a2a agent, just update the destinationName referring to the destination of the target remote a2a agent in [agent_function.yaml](./joule/deep_research_agent_streaming_capability/functions/agent_function.yaml)<br>
 `"destinationName": "deep-research-agent-a2a"`
 
 ```yaml
@@ -497,7 +511,7 @@ action_groups:
         result_variable: apiResponse #optional
 ```
 
-#### 5. Compile and deploy the Joule capability [deep_research_agent_streaming_capability](./joule/)
+#### 7. Compile and deploy the Joule capability [deep_research_agent_streaming_capability](./joule/)
 
 ```sh
 cd 20-joule-a2a-code-based-agent/a2a-client-service/joule
@@ -505,7 +519,7 @@ joule login
 joule deploy -c  -n "deep_research_streaming_agent"
 ```
 
-#### 6. Launch the Joule and test with a research topic with remote a2a agent in streaming mode
+#### 8. Launch the Joule and test with a research topic with remote a2a agent in streaming mode
 
 ```sh
 # launch the Joule in web browser
