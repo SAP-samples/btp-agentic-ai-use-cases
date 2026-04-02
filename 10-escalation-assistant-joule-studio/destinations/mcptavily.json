@@ -1,0 +1,13 @@
+{
+    "exportTime": "2026-04-01 10:17:48.910553997",
+    "destination": {
+        "Name": "mcptavily",
+        "Type": "HTTP",
+        "Description": "Tavily MCP Server",
+        "URL": "https://mcp.tavily.com",
+        "ProxyType": "Internet",
+        "Authentication": "NoAuthentication",
+        "sap-joule-studio-mcp-server": "true",
+        "URL.queries.tavilyApiKey": "<Replace with your own tavily API key. e.g. tvly-xxx->"
+    }
+}

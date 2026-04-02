@@ -35,10 +35,52 @@ AI Agent | Description | Role | Used by
 
 ## Replicate to Your own Joule Studio
 
-### Agent Builder
+### Prerequisites
 
-We are working on a simplified version of Escalation Assistant with minimal dependence, which allows you to import its MTAR file. Please stay tuned. Nevertheless, you can have a look at the configuration of AI agents such as expertise, instructions etc. in [Joule Studio Agent Builder](agent-builder).
+In sub agent [Web Searcher](agent-builder/WEB_SEARCHER.md), there are two MCP servers used for web search
 
-### Code Editor
+- tavily
+- exa
+
+Please create the destination with the **exact names** for these MCP servers as illustrated below.  
+
+- mcptavily
+- mcpexa
+
+Important Note: If SAP Build Process Automation and Joule Instance are located in two different SAP BTP Subaccounts, the same destination must be imported or created in both Subaccounts. Otherwise, the follow error may occur when deploy the agent.  
+
+```
+Failed to create agent using mass deploy content due to exception {0} (error code: Tenant Administration Worker - 6011, id: xxx) (correlation_id: xxx) (code: Tenant Administration - 6011)
+error: deploy failed (code: DEPLOY_FAILED)
+```
+
+#### Configure Tavily MCP
+
+- Register and request an api key with free plan on [tavily](https://app.tavily.com/home)
+- Replace the tavily API Key in [mcptavily destination](./destinations/mcptavily.json) with your own tavily API key.  
+`"URL.queries.tavilyApiKey": "<Replace with your own tavily API key. e.g. tvly-xxx->"`
+- Import the [mcptavily destination](./destinations/mcptavily.json) in your BTP Sub Account(s).  
+  - SAP Build Process Automation(Joule Studio design time)
+  - Joule Instance(Joule runtime). 
+
+As a result, mcptavily destination will be created as below
+![mcptavily](./resources/mcptavily-destination.png)
+
+#### Configure Exa MCP
+
+Exa MCP has a free plan without API key. However, an API key is required beyond free plan, please follow [its document](https://exa.ai/docs/reference/exa-mcp#api-key)to request an API key if necessary. In this example, we'll just Exa's free plan without API key.
+
+- Import the [mcpexa destination](./destinations/mcpexa.json) in your BTP Sub Account(s).  
+  - SAP Build Process Automation(Joule Studio design time)
+  - Joule Instance(Joule runtime). 
+
+As a result, mcpexa destination will be created as below
+![mcpexa](./resources/mcpexa-destination.png)
+
+### Option 1 - Joule Studio Agent Builder
+
+We are working on a simplified version of Escalation Assistant with minimal dependencies, which allows you to import its MTAR file. Please stay tuned. Nevertheless, you can have a look at the configuration of AI agents such as expertise, instructions etc. in [Joule Studio Agent Builder](agent-builder).
+
+### Option 2 - Joule Studio Code Editor
 
 We have also exported a version of [Joule Studio code editor](code-editor), which you can edit with the [code editor plug in](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/pro-code-development-tools-for-joule?version=CLOUD&locale=en-US).
