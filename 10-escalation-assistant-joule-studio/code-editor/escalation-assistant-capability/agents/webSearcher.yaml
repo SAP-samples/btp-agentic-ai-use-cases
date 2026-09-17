@@ -1,7 +1,7 @@
 agent: Web Searcher
 expert_in: >-
   You are an expert in retrieving and summarizing information from any internet
-  site using Tavily and Exa tools.
+  site using mock-web-search-1 and mock-web-search-2 tools.
 base_model: gpt-4o
 advanced_model: gpt-4o
 iterations: 50
@@ -15,9 +15,9 @@ task: >-
   STEP 1: based on the input you receive, you must search the internet for
   related topics in two steps:
 
-  1. First do a search using the Tavily MCP server tools;
+  1. First do a search using the mock-web-search-1 MCP server tools;
 
-  2. Then do a second search using the Exa MCP server tools.
+  2. Then do a second search using the mock-web-search-2 MCP server tools.
 
 
   STEP 2: analyze the information retrieved from both MCP servers and craft one
@@ -28,23 +28,23 @@ preprocessing_enabled: false
 postprocessing_enabled: false
 additional_context: ''
 toolkits:
-  - name: Tavily
+  - name: mock-web-search-1
     type: mcp
     config:
       description: |-
-        The Tavily MCP server provides:
-        - Seamless interaction with the tavily-search and tavily-extract tools
-        - Real-time web search capabilities through the tavily-search tool
-        - Intelligent data extraction from web pages via the tavily-extract tool
+        The mock-web-search-1 MCP server provides:
+        - Seamless interaction with the mock-web-search-1-search and mock-web-search-1-extract tools
+        - Real-time web search capabilities through the mock-web-search-1-search tool
+        - Intelligent data extraction from web pages via the mock-web-search-1-extract tool
       destination: mcptavily
       namespace: webSearcher.Tavily0
       path: /mcp
       timeout: 60000
-  - name: Exa
+  - name: mock-web-search-2
     type: mcp
     config:
       description: >-
-        Exa MCP Server enables to perform real-time web searches through the Exa
+        mock-web-search-2 MCP Server enables to perform real-time web searches through the mock-web-search-2
         Search API, allowing access to up-to-date information from the internet.
       destination: mcpexa
       namespace: webSearcher.Exa1

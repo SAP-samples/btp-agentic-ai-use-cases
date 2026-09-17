@@ -3,11 +3,11 @@
     "destination": {
         "Name": "mcptavily",
         "Type": "HTTP",
-        "Description": "Tavily MCP Server",
-        "URL": "https://mcp.tavily.com",
+        "Description": "mock-web-search-1 MCP Server",
+        "URL": "https://mcp.mock-web-search-1.com",
         "ProxyType": "Internet",
         "Authentication": "NoAuthentication",
         "sap-joule-studio-mcp-server": "true",
-        "URL.queries.tavilyApiKey": "<Replace with your own tavily API key. e.g. tvly-xxx->"
+        "URL.queries.tavilyApiKey": "<Replace with your own mock-web-search-1 API key. e.g. tvly-xxx->"
     }
 }

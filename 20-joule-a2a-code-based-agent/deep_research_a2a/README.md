@@ -2,7 +2,7 @@
 
 This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the [**SAP Generative AI Hub**](https://help.sap.com/docs/ai-launchpad/sap-ai-launchpad/generative-ai-hub?locale=en-US) via the [**SAP Cloud SDK for AI**](https://sap.github.io/ai-sdk/) and integrates with [A2A](https://github.com/google-deepmind/a2a) using a custom Joule capability built with Joule Studio Code Editor.
 
-The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
+The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **mock-web-search-1** for web search, parallel sub-agents and strategic reflection.
 
 In addition, the sample also refers to the blog post about [Joule A2A: Connect Code Based Agents into Joule](https://community.sap.com/t5/technology-blog-posts-by-sap/joule-a2a-connect-code-based-agents-into-joule/ba-p/14329279) and its associated [Github Repo](https://github.com/fyx99/joule-pro-code-a2a) by [felixbartler](https://community.sap.com/t5/user/viewprofilepage/user-id/4997). It are recommended to go through the blog post for more details.
 
@@ -45,7 +45,7 @@ In addition, the sample also refers to the blog post about [Joule A2A: Connect C
 3. **Deep Research Agent plans** the research by creating a todo list.
 4. **Deep Research Agent delegates** one or more parallel research tasks to the
    `research-agent` sub-agent.
-5. **Sub-agent searches the web** using Tavily, reflects using `think_tool`,
+5. **Sub-agent searches the web** using mock-web-search-1, reflects using `think_tool`,
    and returns structured findings with citations.
 6. **Deep Research Agent synthesises** all findings, consolidates citations, and
    writes a comprehensive Markdown report.
@@ -60,7 +60,7 @@ In addition, the sample also refers to the blog post about [Joule A2A: Connect C
 | `app/agent_executor.py` | `DeepResearchAgentExecutor` — A2A `AgentExecutor` that maps the agent's stream to A2A task events |
 | `app/app.py` | A2A Starlette ASGI app with `AgentCard` and `AgentSkill` definitions |
 | `app/manifest.yaml` | Cloud Foundry deployment manifest |
-| `app/research_agent/` | Prompt templates and Tavily search tools |
+| `app/research_agent/` | Prompt templates and mock-web-search-1 search tools |
 
 ### Environment variables
 
@@ -72,7 +72,7 @@ In addition, the sample also refers to the blog post about [Joule A2A: Connect C
 | `AICORE_RESOURCE_GROUP` | ✅ | Resource group (default: `default`) |
 | `AICORE_BASE_URL` | ✅ | SAP AI Core API base URL |
 | `MODEL_NAME` | ✅ | The target LLM in SAP Generative AI Hub (default: `gpt-4o-mini`) |
-| `TAVILY_API_KEY` | ✅ | Tavily search API key |
+| `TAVILY_API_KEY` | ✅ | mock-web-search-1 search API key |
 | `AGENT_PUBLIC_URL` | ✅ | Public URL of this agent (used in AgentCard) |
 | `MAX_RESEARCHER_ITERATIONS` | ❌ | Max round of research (default: `2`) |
 | `MAX_CONCURRENT_RESEARCH_UNITS` | ❌ | Max researches in parallel (default: `3`) |
@@ -85,7 +85,7 @@ In addition, the sample also refers to the blog post about [Joule A2A: Connect C
 - Install [uv](https://docs.astral.sh/uv/) package manager
 - An SAP AI Core instance with Generative AI Hub. by default, `gpt-4o-mini` model is used.
 - An SAP Joule instance
-- [Tavily](https://tavily.com) API key (free tier available)
+- [mock-web-search-1](https://mock-web-search-1.com) API key (free tier available)
 - [Joule Studio Code Editor](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-studio-code-editor) extension for Visual Studio Code, and the [Joule Studio CLI](https://help.sap.com/docs/joule/joule-development-guide-ba88d1ec6a1b442098863d577c19b0c0/joule-studio-cli)
 
 ## Local development
@@ -112,7 +112,7 @@ uv pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit .env and fill in your SAP AI Core and Tavily credentials etc.
+Edit .env and fill in your SAP AI Core and mock-web-search-1 credentials etc.
 
 ### 3. Start the server
 
@@ -184,7 +184,7 @@ cd 20-joule-a2a-code-based-agent/deep_research_a2a/app
 cp manifest.template.yaml manifest.yaml
 ```
 
-Fill in all `<placeholder>` values with your actual SAP AI Core credentials, tavily-key and
+Fill in all `<placeholder>` values with your actual SAP AI Core credentials, mock-web-search-1-key and
 the intended application URL.
 
 ### 2. Deploy

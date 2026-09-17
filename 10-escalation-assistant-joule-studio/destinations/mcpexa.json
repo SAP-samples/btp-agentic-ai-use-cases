@@ -3,8 +3,8 @@
     "destination": {
         "Name": "mcpexa",
         "Type": "HTTP",
-        "Description": "Exa MCP Server",
-        "URL": "https://mcp.exa.ai",
+        "Description": "mock-web-search-2 MCP Server",
+        "URL": "https://mcp.mock-web-search-2.ai",
         "ProxyType": "Internet",
         "Authentication": "NoAuthentication",
         "sap-joule-studio-mcp-server": "true"

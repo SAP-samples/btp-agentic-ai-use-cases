@@ -3,7 +3,7 @@
 This sample code-based agent is a fork of the [deep research agent](https://github.com/langchain-ai/deepagents/tree/main/examples/deep_research) developed by langchain using the **langgraph deepagents SDK**. It has been adapted with the **SAP Generative AI Hub** via the **SAP Cloud SDK for AI**, and exposed as a
 **FastAPI REST API service** in both synchronous and asynchronous manner. Any application or agent can trigger deep research by calling the API. Especially, the asynchronous API will be helpful when the deep research agent may conduct a **long-running**(> 1 min) research.
 
-The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **Tavily** for web search, parallel sub-agents and strategic reflection.
+The deep research agent plans and decomposes research topics from user requests, iteratively conducting multi-step research using **mock-web-search-1** for web search, parallel sub-agents and strategic reflection.
 
 ## Architecture
 
@@ -41,7 +41,7 @@ The deep research agent plans and decomposes research topics from user requests,
 2. **Deep Research Agent plans** the research by creating a todo list.
 3. **Deep Research Agent delegates** one or more parallel research tasks to the
    `research-agent` sub-agent.
-4. **Sub-agent searches the web** using Tavily, reflects using `think_tool`,
+4. **Sub-agent searches the web** using mock-web-search-1, reflects using `think_tool`,
    and returns structured findings with citations.
 5. **Deep Research Agent synthesises** all findings, consolidates citations, and
    writes a comprehensive Markdown report.
@@ -56,7 +56,7 @@ The deep research agent plans and decomposes research topics from user requests,
 | `AICORE_CLIENT_SECRET` | ✅ | SAP AI Core client secret |
 | `AICORE_RESOURCE_GROUP` | ✅ | Resource group (default: `default`) |
 | `AICORE_BASE_URL` | ✅ | SAP AI Core API base URL |
-| `TAVILY_API_KEY` | ✅ | Tavily search API key |
+| `TAVILY_API_KEY` | ✅ | mock-web-search-1 search API key |
 | `MODEL_NAME` | ✅ | The target LLM in SAP Generative AI Hub (default: `gpt-4o-mini`) |
 | `MAX_RESEARCHER_ITERATIONS` | ❌ | Max round of research (default: `2`) |
 | `MAX_CONCURRENT_RESEARCH_UNITS` | ❌ | Max researches in parallel (default: `3`) |
@@ -120,14 +120,14 @@ The deep research agent plans and decomposes research topics from user requests,
 | `app/agent.py` | `DeepResearchAgent` — builds the LangGraph multi-agent pipeline and exposes `stream()` and `run()` methods |
 | `app/app.py` | FastAPI application with sync and async research endpoints |
 | `app/manifest.yaml` | Cloud Foundry deployment manifest |
-| `app/research_agent/` | Prompt templates and Tavily search tools |
+| `app/research_agent/` | Prompt templates and mock-web-search-1 search tools |
 
 ### Prerequisites
 
 - Python 3.11+
 - Install [uv](https://docs.astral.sh/uv/) package manager
 - An SAP AI Core instance with Generative AI Hub. by default, `gpt-4o-mini` model is used.
-- [Tavily](https://tavily.com) API key (free tier available)
+- [mock-web-search-1](https://mock-web-search-1.com) API key (free tier available)
 
 ### Local development
 
@@ -153,7 +153,7 @@ uv pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit .env and fill in your SAP AI Core and Tavily credentials
+Edit .env and fill in your SAP AI Core and mock-web-search-1 credentials
 
 #### 3. Start the server
 
@@ -200,7 +200,7 @@ cd 20-joule-a2a-code-based-agent/deep_research_api/app
 cp manifest.template.yaml manifest.yaml
 ```
 
-Fill in all `<placeholder>` values with your actual SAP AI Core credentials, tavily-key etc.
+Fill in all `<placeholder>` values with your actual SAP AI Core credentials, mock-web-search-1-key etc.
 
 #### 2. Deploy
 
