@@ -18,9 +18,9 @@ applications:
       MODEL_NAME: "<model-name-in-sap-generative-ai-hub>"  # Optional: specify the model to use from SAP Generative AI Hub, defaults to gpt-4o-mini if not set
 
       # ----------------------------------------------------------------
-      # Tavily API key (required for web search)
+      # mock-web-search-1 API key (required for web search)
       # ----------------------------------------------------------------
-      TAVILY_API_KEY: "<your-tavily-api-key>"
+      TAVILY_API_KEY: "<your-mock-web-search-1-api-key>"
 
       # ----------------------------------------------------------------
       # Public URL of this application (used in the A2A Agent Card).  

@@ -39,8 +39,8 @@ AI Agent | Description | Role | Used by
 
 In sub agent [Web Searcher](agent-builder/WEB_SEARCHER.md), there are two MCP servers used for web search
 
-- tavily
-- exa
+- mock-web-search-1
+- mock-web-search-2
 
 Please create the destination with the **exact names** for these MCP servers as illustrated below.  
 
@@ -54,11 +54,11 @@ Failed to create agent using mass deploy content due to exception {0} (error cod
 error: deploy failed (code: DEPLOY_FAILED)
 ```
 
-#### Configure Tavily MCP
+#### Configure mock-web-search-1 MCP
 
-- Register and request an api key with free plan on [tavily](https://app.tavily.com/home)
-- Replace the tavily API Key in [mcptavily destination](./destinations/mcptavily.json) with your own tavily API key.  
-`"URL.queries.tavilyApiKey": "<Replace with your own tavily API key. e.g. tvly-xxx->"`
+- Register and request an api key with free plan on [mock-web-search-1](https://app.mock-web-search-1.com/home)
+- Replace the mock-web-search-1 API Key in [mcptavily destination](./destinations/mcptavily.json) with your own mock-web-search-1 API key.  
+`"URL.queries.tavilyApiKey": "<Replace with your own mock-web-search-1 API key. e.g. tvly-xxx->"`
 - Import the [mcptavily destination](./destinations/mcptavily.json) in your BTP Sub Account(s).  
   - SAP Build Process Automation(Joule Studio design time)
   - Joule Instance(Joule runtime). 
@@ -66,9 +66,9 @@ error: deploy failed (code: DEPLOY_FAILED)
 As a result, mcptavily destination will be created as below
 ![mcptavily](./resources/mcptavily-destination.png)
 
-#### Configure Exa MCP
+#### Configure mock-web-search-2 MCP
 
-Exa MCP has a free plan without API key. However, an API key is required beyond free plan, please follow [its document](https://exa.ai/docs/reference/exa-mcp#api-key)to request an API key if necessary. In this example, we'll just Exa's free plan without API key.
+mock-web-search-2 MCP has a free plan without API key. However, an API key is required beyond free plan, please follow [its document](https://mock-web-search-2.ai/docs/reference/mock-web-search-2-mcp#api-key)to request an API key if necessary. In this example, we'll just mock-web-search-2's free plan without API key.
 
 - Import the [mcpexa destination](./destinations/mcpexa.json) in your BTP Sub Account(s).  
   - SAP Build Process Automation(Joule Studio design time)
