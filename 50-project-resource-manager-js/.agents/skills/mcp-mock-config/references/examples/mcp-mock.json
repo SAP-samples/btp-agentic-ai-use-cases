@@ -1,0 +1,102 @@
+{
+  "servers": {
+    "s4-supplier-invoice": {
+      "mcp_server_name": "com.sap.s4/API_SUPPLIERINVOICE_PROCESS_SRV",
+      "description": "MCP server for reading supplier invoice data from SAP S/4HANA Cloud, including approval status, amounts, and dates.",
+      "tools": {
+        "list_supplier_invoices": {
+          "description": "Retrieve a list of supplier invoices with optional OData query filters. Use $filter to query by approval status (e.g., SupplierInvoiceApprovalStatus eq 'Pending'), amount, or date.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": {
+                "type": "string",
+                "description": "Maximum number of invoices to return (e.g., 100)"
+              },
+              "$filter": {
+                "type": "string",
+                "description": "OData filter expression to narrow results"
+              },
+              "$select": {
+                "type": "string",
+                "description": "Comma-separated list of fields to return"
+              },
+              "$orderby": {
+                "type": "string",
+                "description": "Sort order expression"
+              }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "SupplierInvoice": "5100000001",
+                "FiscalYear": "2026",
+                "CompanyCode": "1000",
+                "DocumentDate": "/Date(1744675200000)/",
+                "PostingDate": "/Date(1744675200000)/",
+                "CreationDate": "/Date(1744588800000)/",
+                "InvoicingParty": "VENDOR-1001",
+                "DocumentCurrency": "USD",
+                "InvoiceGrossAmount": "75000.00",
+                "SupplierInvoiceApprovalStatus": "Pending"
+              },
+              {
+                "SupplierInvoice": "5100000002",
+                "FiscalYear": "2026",
+                "CompanyCode": "1000",
+                "DocumentDate": "/Date(1744588800000)/",
+                "PostingDate": "/Date(1744588800000)/",
+                "CreationDate": "/Date(1744502400000)/",
+                "InvoicingParty": "VENDOR-1002",
+                "DocumentCurrency": "EUR",
+                "InvoiceGrossAmount": "12500.50",
+                "SupplierInvoiceApprovalStatus": "Pending"
+              }
+            ]
+          }
+        },
+        "get_supplier_invoice_by_key": {
+          "description": "Retrieve a single supplier invoice by its composite key (SupplierInvoice number and FiscalYear).",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "SupplierInvoice": {
+                "type": "string",
+                "description": "The supplier invoice document number"
+              },
+              "FiscalYear": {
+                "type": "string",
+                "description": "The fiscal year of the invoice"
+              }
+            },
+            "required": ["SupplierInvoice", "FiscalYear"]
+          },
+          "mock_response": {
+            "SupplierInvoice": "5100000001",
+            "FiscalYear": "2026",
+            "CompanyCode": "1000",
+            "DocumentDate": "/Date(1744675200000)/",
+            "PostingDate": "/Date(1744675200000)/",
+            "CreationDate": "/Date(1744588800000)/",
+            "InvoicingParty": "VENDOR-1001",
+            "DocumentCurrency": "USD",
+            "InvoiceGrossAmount": "75000.00",
+            "SupplierInvoiceApprovalStatus": "Pending"
+          }
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_for_agent": "invoice-monitor",
+    "mock_mode": true,
+    "deterministic": true,
+    "total_servers": 1,
+    "total_tools": 2,
+    "generated_from": ["translation.json", "api-spec.json"],
+    "generation_date": "2026-04-15"
+  }
+}

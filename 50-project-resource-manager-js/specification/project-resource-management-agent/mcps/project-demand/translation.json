@@ -1,0 +1,2606 @@
+{
+  "mcpTranslationVersion": "0.7",
+  "target": {
+    "ordId": "sap.s4:apiResource:API_PROJECTDEMAND_0001:v1",
+    "type": "edmx"
+  },
+  "serverInfo": {
+    "name": "sap.mcp/cds_api_projectdemand",
+    "title": "cds_api_projectdemand",
+    "version": "1.0.0",
+    "description": "MCP server for the cds_api_projectdemand service."
+  },
+  "tools": [
+    {
+      "name": "get_metadata_cds_api_projectdemand",
+      "title": "get_metadata_cds_api_projectdemand",
+      "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n",
+      "odataType": {
+        "metadataRequest": {},
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "batch_for_cds_api_projectdemand",
+      "title": "batch_for_cds_api_projectdemand",
+      "description": "Execute multiple OData operations in a single batch request using the $batch endpoint. This allows you to combine multiple tool calls into one HTTP request, improving efficiency when performing multiple operations.",
+      "odataType": {
+        "batchRequest": {},
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_a_projectdemand_for_cds_api_projectdemand",
+      "title": "list_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Retrieve a list of entities from the A_ProjectDemand collection in the cds_api_projectdemand service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_a_projectdemand_for_cds_api_projectdemand",
+      "title": "create_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Create a new instance of the A_ProjectDemand EntitySet in the cds_api_projectdemand service. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjectDemand",
+              "newParameterName": "projectdemand"
+            },
+            {
+              "name": "ProjectDemandName",
+              "newParameterName": "projectdemandname"
+            },
+            {
+              "name": "ProjectDemandDescription",
+              "newParameterName": "projectdemanddescription"
+            },
+            {
+              "name": "ProjectDemandCategory",
+              "newParameterName": "projectdemandcategory"
+            },
+            {
+              "name": "ProjectDemandType",
+              "newParameterName": "projectdemandtype"
+            },
+            {
+              "name": "ReferencedObjectUUID",
+              "newParameterName": "referencedobjectuuid"
+            },
+            {
+              "name": "ProjectDemandStatus",
+              "newParameterName": "projectdemandstatus"
+            },
+            {
+              "name": "ProjectDemandStartDate",
+              "newParameterName": "projectdemandstartdate"
+            },
+            {
+              "name": "ProjectDemandEndDate",
+              "newParameterName": "projectdemandenddate"
+            },
+            {
+              "name": "ProjDmndRequestedQuantity",
+              "newParameterName": "projdmndrequestedquantity"
+            },
+            {
+              "name": "ProjDmndRequestedQuantityUnit",
+              "newParameterName": "projdmndrequestedquantityunit"
+            },
+            {
+              "name": "CreatedByUser",
+              "newParameterName": "createdbyuser"
+            },
+            {
+              "name": "CreationDateTime",
+              "newParameterName": "creationdatetime"
+            },
+            {
+              "name": "LastChangedByUser",
+              "newParameterName": "lastchangedbyuser"
+            },
+            {
+              "name": "LastChangeDateTime",
+              "newParameterName": "lastchangedatetime"
+            },
+            {
+              "name": "to_Work",
+              "newParameterName": "to_work"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_a_projectdemand_for_cds_api_projectdemand",
+      "title": "update_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Update an entity in A_ProjectDemand EntitySet in the cds_api_projectdemand service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjectDemand",
+              "newParameterName": "projectdemand"
+            },
+            {
+              "name": "ProjectDemandName",
+              "newParameterName": "projectdemandname"
+            },
+            {
+              "name": "ProjectDemandDescription",
+              "newParameterName": "projectdemanddescription"
+            },
+            {
+              "name": "ProjectDemandCategory",
+              "newParameterName": "projectdemandcategory"
+            },
+            {
+              "name": "ProjectDemandType",
+              "newParameterName": "projectdemandtype"
+            },
+            {
+              "name": "ReferencedObjectUUID",
+              "newParameterName": "referencedobjectuuid"
+            },
+            {
+              "name": "ProjectDemandStatus",
+              "newParameterName": "projectdemandstatus"
+            },
+            {
+              "name": "ProjectDemandStartDate",
+              "newParameterName": "projectdemandstartdate"
+            },
+            {
+              "name": "ProjectDemandEndDate",
+              "newParameterName": "projectdemandenddate"
+            },
+            {
+              "name": "ProjDmndRequestedQuantity",
+              "newParameterName": "projdmndrequestedquantity"
+            },
+            {
+              "name": "ProjDmndRequestedQuantityUnit",
+              "newParameterName": "projdmndrequestedquantityunit"
+            },
+            {
+              "name": "CreatedByUser",
+              "newParameterName": "createdbyuser"
+            },
+            {
+              "name": "CreationDateTime",
+              "newParameterName": "creationdatetime"
+            },
+            {
+              "name": "LastChangedByUser",
+              "newParameterName": "lastchangedbyuser"
+            },
+            {
+              "name": "LastChangeDateTime",
+              "newParameterName": "lastchangedatetime"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_a_projectdemand_for_cds_api_projectdemand",
+      "title": "delete_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Delete an entity from A_ProjectDemand EntitySet in the cds_api_projectdemand service.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_a_projectdemand_for_cds_api_projectdemand",
+      "title": "get_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Retrieve a single entity by its key from the A_ProjectDemand collection in the cds_api_projectdemand service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_a_projectdemand_for_cds_api_projectdemand",
+      "title": "count_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Get the total count of entities in the A_ProjectDemand collection in the cds_api_projectdemand service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "list_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Retrieve a list of entities from the A_ProjectDemandResource collection in the cds_api_projectdemand service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "create_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Create a new instance of the A_ProjectDemandResource EntitySet in the cds_api_projectdemand service. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "CostCenter",
+              "newParameterName": "costcenter"
+            },
+            {
+              "name": "ActivityType",
+              "newParameterName": "activitytype"
+            },
+            {
+              "name": "ProjDmndAssgmtStatus",
+              "newParameterName": "projdmndassgmtstatus"
+            },
+            {
+              "name": "ProjDmndRequestedDeliveryOrg",
+              "newParameterName": "projdmndrequesteddeliveryorg"
+            },
+            {
+              "name": "to_ResourceRequest",
+              "newParameterName": "to_resourcerequest"
+            },
+            {
+              "name": "to_ResourceAssignment",
+              "newParameterName": "to_resourceassignment"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "update_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Update an entity in A_ProjectDemandResource EntitySet in the cds_api_projectdemand service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "CostCenter",
+              "newParameterName": "costcenter"
+            },
+            {
+              "name": "ActivityType",
+              "newParameterName": "activitytype"
+            },
+            {
+              "name": "ProjDmndAssgmtStatus",
+              "newParameterName": "projdmndassgmtstatus"
+            },
+            {
+              "name": "ProjDmndRequestedDeliveryOrg",
+              "newParameterName": "projdmndrequesteddeliveryorg"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "delete_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Delete an entity from A_ProjectDemandResource EntitySet in the cds_api_projectdemand service.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "get_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Retrieve a single entity by its key from the A_ProjectDemandResource collection in the cds_api_projectdemand service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "count_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Get the total count of entities in the A_ProjectDemandResource collection in the cds_api_projectdemand service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "list_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Retrieve a list of entities from the A_ProjectDemandResourceRequest collection in the cds_api_projectdemand service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "create_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Create a new instance of the A_ProjectDemandResourceRequest EntitySet in the cds_api_projectdemand service. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "ProjDmndResourceRequestUUID",
+              "newParameterName": "projdmndresourcerequestuuid"
+            },
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjectDemandRequestedResource",
+              "newParameterName": "projectdemandrequestedresource"
+            },
+            {
+              "name": "ProjDmndStfngInstructionText",
+              "newParameterName": "projdmndstfnginstructiontext"
+            },
+            {
+              "name": "ProjDmndRsceReqStartDate",
+              "newParameterName": "projdmndrscereqstartdate"
+            },
+            {
+              "name": "ProjDmndRsceReqEndDate",
+              "newParameterName": "projdmndrscereqenddate"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "update_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Update an entity in A_ProjectDemandResourceRequest EntitySet in the cds_api_projectdemand service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "ProjDmndResourceRequestUUID",
+              "newParameterName": "projdmndresourcerequestuuid"
+            },
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjectDemandRequestedResource",
+              "newParameterName": "projectdemandrequestedresource"
+            },
+            {
+              "name": "ProjDmndStfngInstructionText",
+              "newParameterName": "projdmndstfnginstructiontext"
+            },
+            {
+              "name": "ProjDmndRsceReqStartDate",
+              "newParameterName": "projdmndrscereqstartdate"
+            },
+            {
+              "name": "ProjDmndRsceReqEndDate",
+              "newParameterName": "projdmndrscereqenddate"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "delete_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Delete an entity from A_ProjectDemandResourceRequest EntitySet in the cds_api_projectdemand service.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "ProjDmndResourceRequestUUID",
+              "newParameterName": "projdmndresourcerequestuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "get_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Retrieve a single entity by its key from the A_ProjectDemandResourceRequest collection in the cds_api_projectdemand service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "ProjDmndResourceRequestUUID",
+              "newParameterName": "projdmndresourcerequestuuid"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_a_projectdemandresourcerequest_for_cds_api_projectdemand",
+      "title": "count_A_ProjectDemandResourceRequest_for_cds_api_projectdemand",
+      "description": "Get the total count of entities in the A_ProjectDemandResourceRequest collection in the cds_api_projectdemand service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResourceRequest",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "list_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Retrieve a list of entities from the A_ProjDmndResourceAssignment collection in the cds_api_projectdemand service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "create_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Create a new instance of the A_ProjDmndResourceAssignment EntitySet in the cds_api_projectdemand service. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "ProjDmndRsceAssgmtUUID",
+              "newParameterName": "projdmndrsceassgmtuuid"
+            },
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjDmndRsceAssgmt",
+              "newParameterName": "projdmndrsceassgmt"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtQuantity",
+              "newParameterName": "projdmndrsceassgmtquantity"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtQuantityUnit",
+              "newParameterName": "projdmndrsceassgmtquantityunit"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtStartDate",
+              "newParameterName": "projdmndrsceassgmtstartdate"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtEndDate",
+              "newParameterName": "projdmndrsceassgmtenddate"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "update_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Update an entity in A_ProjDmndResourceAssignment EntitySet in the cds_api_projectdemand service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "ProjDmndRsceAssgmtUUID",
+              "newParameterName": "projdmndrsceassgmtuuid"
+            },
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            },
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            },
+            {
+              "name": "ProjDmndRsceAssgmt",
+              "newParameterName": "projdmndrsceassgmt"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtQuantity",
+              "newParameterName": "projdmndrsceassgmtquantity"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtQuantityUnit",
+              "newParameterName": "projdmndrsceassgmtquantityunit"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtStartDate",
+              "newParameterName": "projdmndrsceassgmtstartdate"
+            },
+            {
+              "name": "ProjDmndRsceAssgmtEndDate",
+              "newParameterName": "projdmndrsceassgmtenddate"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "delete_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Delete an entity from A_ProjDmndResourceAssignment EntitySet in the cds_api_projectdemand service.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "ProjDmndRsceAssgmtUUID",
+              "newParameterName": "projdmndrsceassgmtuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "get_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Retrieve a single entity by its key from the A_ProjDmndResourceAssignment collection in the cds_api_projectdemand service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "ProjDmndRsceAssgmtUUID",
+              "newParameterName": "projdmndrsceassgmtuuid"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_a_projdmndresourceassignment_for_cds_api_projectdemand",
+      "title": "count_A_ProjDmndResourceAssignment_for_cds_api_projectdemand",
+      "description": "Get the total count of entities in the A_ProjDmndResourceAssignment collection in the cds_api_projectdemand service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjDmndResourceAssignment",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_to_work_in_a_projectdemand_for_cds_api_projectdemand",
+      "title": "list_to_Work_in_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Navigate from A_ProjectDemand to related A_ProjectDemandResource_Type entities via the 'to_Work' navigation property. Supports OData query options for filtering, sorting, paging, expanding, counting, and selecting specific properties. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "navigationProperty": {
+            "name": "to_Work",
+            "crudOperation": "read",
+            "parameters": [
+              {
+                "name": "filter"
+              },
+              {
+                "name": "select"
+              },
+              {
+                "name": "orderby"
+              },
+              {
+                "name": "top"
+              },
+              {
+                "name": "skip"
+              },
+              {
+                "name": "expand"
+              },
+              {
+                "name": "inlinecount"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_to_work_in_a_projectdemand_for_cds_api_projectdemand",
+      "title": "create_to_Work_in_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Create a new A_ProjectDemandResource_Type entity via the 'to_Work' navigation property of A_ProjectDemand. Provide the parent key and the properties of the new entity. If the structure is unknown, call get_metadata_cds_api_projectdemand tool first.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "navigationProperty": {
+            "name": "to_Work",
+            "crudOperation": "create",
+            "parameters": [
+              {
+                "name": "ProjectDemandWorkUUID",
+                "newParameterName": "projectdemandworkuuid"
+              },
+              {
+                "name": "ProjectDemandUUID",
+                "newParameterName": "projectdemanduuid_2"
+              },
+              {
+                "name": "CostCenter",
+                "newParameterName": "costcenter"
+              },
+              {
+                "name": "ActivityType",
+                "newParameterName": "activitytype"
+              },
+              {
+                "name": "ProjDmndAssgmtStatus",
+                "newParameterName": "projdmndassgmtstatus"
+              },
+              {
+                "name": "ProjDmndRequestedDeliveryOrg",
+                "newParameterName": "projdmndrequesteddeliveryorg"
+              },
+              {
+                "name": "to_ResourceRequest",
+                "newParameterName": "to_resourcerequest"
+              },
+              {
+                "name": "to_ResourceAssignment",
+                "newParameterName": "to_resourceassignment"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_to_work_in_a_projectdemand_for_cds_api_projectdemand",
+      "title": "count_to_Work_in_A_ProjectDemand_for_cds_api_projectdemand",
+      "description": "Count A_ProjectDemandResource_Type entities accessible via the 'to_Work' navigation property of A_ProjectDemand in the cds_api_projectdemand service. Returns the total number of matching entities.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemand",
+          "navigationProperty": {
+            "name": "to_Work",
+            "crudOperation": "count",
+            "parameters": [
+              {
+                "name": "filter"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandUUID",
+              "newParameterName": "projectdemanduuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_to_resourcerequest_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "list_to_ResourceRequest_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Navigate from A_ProjectDemandResource to related A_ProjectDemandResourceRequest_Type entities via the 'to_ResourceRequest' navigation property. Supports OData query options for filtering, sorting, paging, expanding, counting, and selecting specific properties. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceRequest",
+            "crudOperation": "read",
+            "parameters": [
+              {
+                "name": "filter"
+              },
+              {
+                "name": "select"
+              },
+              {
+                "name": "orderby"
+              },
+              {
+                "name": "top"
+              },
+              {
+                "name": "skip"
+              },
+              {
+                "name": "expand"
+              },
+              {
+                "name": "inlinecount"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_to_resourcerequest_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "create_to_ResourceRequest_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Create a new A_ProjectDemandResourceRequest_Type entity via the 'to_ResourceRequest' navigation property of A_ProjectDemandResource. Provide the parent key and the properties of the new entity. If the structure is unknown, call get_metadata_cds_api_projectdemand tool first.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceRequest",
+            "crudOperation": "create",
+            "parameters": [
+              {
+                "name": "ProjDmndResourceRequestUUID",
+                "newParameterName": "projdmndresourcerequestuuid"
+              },
+              {
+                "name": "ProjectDemandWorkUUID",
+                "newParameterName": "projectdemandworkuuid_2"
+              },
+              {
+                "name": "ProjectDemandUUID",
+                "newParameterName": "projectdemanduuid"
+              },
+              {
+                "name": "ProjectDemandRequestedResource",
+                "newParameterName": "projectdemandrequestedresource"
+              },
+              {
+                "name": "ProjDmndStfngInstructionText",
+                "newParameterName": "projdmndstfnginstructiontext"
+              },
+              {
+                "name": "ProjDmndRsceReqStartDate",
+                "newParameterName": "projdmndrscereqstartdate"
+              },
+              {
+                "name": "ProjDmndRsceReqEndDate",
+                "newParameterName": "projdmndrscereqenddate"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_to_resourcerequest_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "count_to_ResourceRequest_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Count A_ProjectDemandResourceRequest_Type entities accessible via the 'to_ResourceRequest' navigation property of A_ProjectDemandResource in the cds_api_projectdemand service. Returns the total number of matching entities.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceRequest",
+            "crudOperation": "count",
+            "parameters": [
+              {
+                "name": "filter"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_to_resourceassignment_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "list_to_ResourceAssignment_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Navigate from A_ProjectDemandResource to related A_ProjDmndResourceAssignment_Type entities via the 'to_ResourceAssignment' navigation property. Supports OData query options for filtering, sorting, paging, expanding, counting, and selecting specific properties. If the structure of the entity is not known, call get_metadata_cds_api_projectdemand tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceAssignment",
+            "crudOperation": "read",
+            "parameters": [
+              {
+                "name": "filter"
+              },
+              {
+                "name": "select"
+              },
+              {
+                "name": "orderby"
+              },
+              {
+                "name": "top"
+              },
+              {
+                "name": "skip"
+              },
+              {
+                "name": "expand"
+              },
+              {
+                "name": "inlinecount"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_to_resourceassignment_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "create_to_ResourceAssignment_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Create a new A_ProjDmndResourceAssignment_Type entity via the 'to_ResourceAssignment' navigation property of A_ProjectDemandResource. Provide the parent key and the properties of the new entity. If the structure is unknown, call get_metadata_cds_api_projectdemand tool first.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceAssignment",
+            "crudOperation": "create",
+            "parameters": [
+              {
+                "name": "ProjDmndRsceAssgmtUUID",
+                "newParameterName": "projdmndrsceassgmtuuid"
+              },
+              {
+                "name": "ProjectDemandWorkUUID",
+                "newParameterName": "projectdemandworkuuid_2"
+              },
+              {
+                "name": "ProjectDemandUUID",
+                "newParameterName": "projectdemanduuid"
+              },
+              {
+                "name": "ProjDmndRsceAssgmt",
+                "newParameterName": "projdmndrsceassgmt"
+              },
+              {
+                "name": "ProjDmndRsceAssgmtQuantity",
+                "newParameterName": "projdmndrsceassgmtquantity"
+              },
+              {
+                "name": "ProjDmndRsceAssgmtQuantityUnit",
+                "newParameterName": "projdmndrsceassgmtquantityunit"
+              },
+              {
+                "name": "ProjDmndRsceAssgmtStartDate",
+                "newParameterName": "projdmndrsceassgmtstartdate"
+              },
+              {
+                "name": "ProjDmndRsceAssgmtEndDate",
+                "newParameterName": "projdmndrsceassgmtenddate"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_to_resourceassignment_in_a_projectdemandresource_for_cds_api_projectdemand",
+      "title": "count_to_ResourceAssignment_in_A_ProjectDemandResource_for_cds_api_projectdemand",
+      "description": "Count A_ProjDmndResourceAssignment_Type entities accessible via the 'to_ResourceAssignment' navigation property of A_ProjectDemandResource in the cds_api_projectdemand service. Returns the total number of matching entities.",
+      "odataType": {
+        "entitySet": {
+          "name": "A_ProjectDemandResource",
+          "navigationProperty": {
+            "name": "to_ResourceAssignment",
+            "crudOperation": "count",
+            "parameters": [
+              {
+                "name": "filter"
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "name": "ProjectDemandWorkUUID",
+              "newParameterName": "projectdemandworkuuid"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    }
+  ]
+}

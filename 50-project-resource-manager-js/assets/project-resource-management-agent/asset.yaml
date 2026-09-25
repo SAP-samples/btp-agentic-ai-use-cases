@@ -1,0 +1,59 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: agent
+
+metadata:
+  name: project-resource-management-agent
+  version: "1.0.0"
+
+provides:
+  apis:
+    - name: project-resource-management-agent
+      kind: a2a
+      ordId: customer.build:apiResource:project-resource-mgmt-55d21.project-resource-management-agent:v1
+
+requires:
+  - name: sap-s4-project-demand-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-project-demand-mcp-server:v1
+  - name: sap-s4-resource-assignment-source-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-resource-assignment-source-mcp-server:v1
+  - name: sap-s4-workforce-daily-availability-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-workforce-daily-availability-mcp-server:v1
+  - name: sap-sf-skills-management-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-skills-management-mcp-server:v1
+  - name: sap-sf-employee-profile-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-employee-profile-mcp-server:v1
+  - name: sap-sf-employment-information-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-employment-information-mcp-server:v1
+  - name: sap-sf-time-off-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-time-off-mcp-server:v1
+
+container:
+  buildPath: .
+  port: 5000
+
+probes:
+  startup:
+    path: /.well-known/agent.json
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 18
+  liveness:
+    path: /.well-known/agent.json
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    path: /.well-known/agent.json
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3

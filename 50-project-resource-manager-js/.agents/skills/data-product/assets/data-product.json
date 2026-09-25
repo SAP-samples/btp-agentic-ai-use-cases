@@ -1,0 +1,319 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "data-product Asset",
+  "description": "Schema for data-product asset with inheritance from: data-product → base-service → base. Handles both consumption (requires) and production (provides) of data.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifying name for the asset",
+          "pattern": "^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels for the application",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Runtime type (nodejs, java, python, etc.)"
+        },
+        "language": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "overrides": {
+      "type": "object",
+      "description": "Application-level configuration overrides",
+      "additionalProperties": true
+    },
+    "custom": {
+      "type": "object",
+      "description": "Opaque custom configuration for platform-specific properties.\n\nThis section is NOT validated by the type system and allows\nany structure. Use for:\n- Platform-specific deployment config (Vercel, CAP, Cloud Foundry)\n- Tool-specific extensions\n- Experimental features\n- Gradual migration paths\n\nCommon namespaces:\n- custom.vercel.*    - Vercel deployment config\n- custom.cap.*       - CAP framework config\n- custom.cf.*        - Cloud Foundry config\n- custom.k8s.*       - Kubernetes config\n- custom.tooling.*   - Custom tooling\n",
+      "additionalProperties": true
+    },
+    "apiVersion": {
+      "type": "string",
+      "const": "asset.sap/v1",
+      "description": "API version"
+    },
+    "kind": {
+      "type": "string",
+      "const": "Asset",
+      "description": "Asset kind must be 'Asset' (capital A)"
+    },
+    "type": {
+      "type": "string",
+      "const": "data-product"
+    },
+    "ordId": {
+      "type": "string",
+      "description": "Open Resource Discovery identifier",
+      "pattern": "^[a-zA-Z0-9._-]+:[a-zA-Z0-9._-]+:[a-zA-Z0-9._-]+:v[0-9]+$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Data product version (for production)",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "requires": {
+      "type": "array",
+      "description": "Dependencies - what this data product needs to consume",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "ordId": {
+                "type": "string"
+              },
+              "minimumVersion": {
+                "type": "string"
+              },
+              "mandatory": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "provides": {
+      "type": "object",
+      "description": "What this data product provides to consumers",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": ["interop", "odata-v4", "graphql", "parquet", "csv", "json"]
+            },
+            "schema": {
+              "type": "string"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "endpoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "protocol": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "consumption": {
+      "type": "object",
+      "description": "Consumption-specific configuration",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["replication", "streaming", "api", "batch"]
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "capModel": {
+          "type": "string",
+          "description": "CAP model name for consumption"
+        }
+      }
+    },
+    "production": {
+      "type": "object",
+      "description": "Production-specific configuration",
+      "properties": {
+        "definitionFile": {
+          "type": "string",
+          "description": "Path to .interop definition file"
+        },
+        "managedBy": {
+          "type": "object",
+          "properties": {
+            "capService": {
+              "type": "string"
+            },
+            "rapService": {
+              "type": "string"
+            }
+          }
+        },
+        "refreshSchedule": {
+          "type": "string"
+        }
+      }
+    },
+    "dataProduct": {
+      "type": "object",
+      "description": "Data product configuration defaults",
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": ["interop", "odata-v4", "graphql", "parquet", "csv", "json"],
+          "default": "interop"
+        },
+        "versioning": {
+          "type": "string",
+          "enum": ["semantic", "date-based", "incremental"],
+          "default": "semantic"
+        },
+        "changelog": {
+          "type": "string",
+          "enum": ["enabled", "disabled"],
+          "default": "enabled"
+        },
+        "validation": {
+          "type": "string",
+          "enum": ["strict", "relaxed", "disabled"]
+        },
+        "sampleData": {
+          "type": "string",
+          "enum": ["enabled", "disabled"]
+        },
+        "monitoring": {
+          "type": "string",
+          "enum": ["enabled", "disabled", "advanced"]
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "description": "Data governance configuration",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["public", "internal", "confidential", "restricted"],
+          "default": "internal"
+        },
+        "retention": {
+          "type": "string",
+          "default": "5 years"
+        },
+        "gdprRelevant": {
+          "type": "boolean"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auditLogging": {
+          "type": "string",
+          "enum": ["enabled", "disabled"]
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "description": "Data quality configuration",
+      "properties": {
+        "validation": {
+          "type": "string",
+          "enum": ["enabled", "disabled"],
+          "default": "enabled"
+        },
+        "monitoring": {
+          "type": "string",
+          "enum": ["enabled", "disabled"],
+          "default": "enabled"
+        }
+      }
+    },
+    "sourceRoot": {
+      "type": "string",
+      "description": "Source code root directory (Optional, defaults to \".\" if omitted)",
+      "default": "."
+    }
+  },
+  "required": ["kind", "type", "metadata"],
+  "x-configurations": {
+    "development": {
+      "description": "Development environment configuration",
+      "defaults": {
+        "metadata.labels.environment": "development",
+        "dataProduct.validation": "relaxed",
+        "dataProduct.sampleData": "enabled"
+      }
+    },
+    "staging": {
+      "description": "Staging environment configuration",
+      "defaults": {
+        "metadata.labels.environment": "staging",
+        "dataProduct.validation": "strict",
+        "dataProduct.sampleData": "disabled"
+      }
+    },
+    "production": {
+      "description": "Production environment configuration",
+      "defaults": {
+        "metadata.labels.environment": "production",
+        "dataProduct.validation": "strict",
+        "dataProduct.monitoring": "advanced",
+        "governance.auditLogging": "enabled"
+      }
+    }
+  },
+  "x-compatible-with": [
+    "composite",
+    "cap-application",
+    "intelligent-application",
+    "business-application"
+  ],
+  "_metadata": {
+    "generatedFrom": "data-product",
+    "inheritanceChain": ["data-product", "base-service", "base"],
+    "assetKind": "data-product",
+    "generatedAt": "2026-04-24T00:00:00.000Z"
+  },
+  "x-implicit-defaults": {
+    "sourceRoot": {
+      "default": ".",
+      "description": "Source root defaults to current directory if omitted",
+      "introduced": "v3.0.0"
+    }
+  },
+  "x-spec-version": "v3.0.0",
+  "x-generated": "2026-04-24T00:00:00.000Z"
+}

@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mcp-server Asset",
+  "description": "Schema for mcp-server asset definition. An MCP server maps API operations to MCP tools via a translation file and declares API dependencies through requires/provides.",
+  "type": "object",
+  "required": ["kind", "type", "metadata", "requires", "provides"],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "asset.sap/v1",
+      "description": "API version"
+    },
+    "kind": {
+      "type": "string",
+      "const": "Asset",
+      "description": "Asset kind must be 'Asset'"
+    },
+    "type": {
+      "type": "string",
+      "const": "mcp-server",
+      "description": "Asset type must be 'mcp-server'"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifying name for the asset. Follow naming convention: {domain}-{purpose}-mcp-server (e.g., s4-dispute-mcp-server).",
+          "pattern": "^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$"
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version of this asset",
+          "default": "1.0.0"
+        },
+        "translation": {
+          "type": "string",
+          "description": "Relative path to the translation file (MCP-to-API protocol mappings).",
+          "default": "mcp-translation/translation.json"
+        },
+        "apiSpec": {
+          "type": "string",
+          "description": "Relative path or identifier for the API specification consumed by this MCP server."
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "Dependencies required by this MCP server. At least one API dependency must be declared.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Local dependency name or binding key."
+          },
+          "kind": {
+            "type": "string",
+            "description": "Dependency kind. Use 'api' for explicit API dependencies."
+          },
+          "type": {
+            "type": "string",
+            "description": "Optional API type or dependency subtype (e.g., odata-v4, rest)."
+          },
+          "ordId": {
+            "type": "string",
+            "description": "ORD identifier for the dependency. Required for kind=api."
+          },
+          "service": {
+            "type": "string",
+            "description": "Optional service identifier."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional dependency version constraint."
+          }
+        },
+        "additionalProperties": true,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "api"
+                }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "required": ["ordId"]
+            }
+          }
+        ]
+      },
+      "contains": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "const": "api"
+          }
+        },
+        "required": ["kind"]
+      }
+    },
+    "provides": {
+      "type": "object",
+      "description": "What this MCP server exposes.",
+      "required": ["apis"],
+      "properties": {
+        "apis": {
+          "type": "array",
+          "description": "APIs exposed by this MCP server.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "kind", "ordId"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "API name.",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
+                "maxLength": 64
+              },
+              "kind": {
+                "type": "string",
+                "description": "API kind. Use 'mcp-server' for APIs provided by this MCP server.",
+                "const": "mcp-server"
+              },
+              "ordId": {
+                "type": "string",
+                "description": "Open Resource Discovery (ORD) resource identifier.",
+                "pattern": "^[a-zA-Z0-9._-]+:[a-zA-Z]+:[a-zA-Z0-9._-]+:v[0-9]+$"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

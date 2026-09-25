@@ -1,0 +1,16 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: project-resource-mgmt-55d21
+  version: "1.0.0"
+
+assets:
+  - ref: ./assets/project-resource-management-agent/asset.yaml
+  - ref: ./assets/sap-s4-project-demand-mcp-server/asset.yaml
+  - ref: ./assets/sap-s4-resource-assignment-source-mcp-server/asset.yaml
+  - ref: ./assets/sap-s4-workforce-daily-availability-mcp-server/asset.yaml
+  - ref: ./assets/sap-sf-skills-management-mcp-server/asset.yaml
+  - ref: ./assets/sap-sf-employee-profile-mcp-server/asset.yaml
+  - ref: ./assets/sap-sf-employment-information-mcp-server/asset.yaml
+  - ref: ./assets/sap-sf-time-off-mcp-server/asset.yaml

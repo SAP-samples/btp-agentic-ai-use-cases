@@ -1,0 +1,17 @@
+[run]
+omit =
+    */extension_telemetry/*
+    app/agent_executor.py
+    app/load_skill_resources.py
+    app/main.py
+    app/mcp_tools.py
+    app/util.py
+
+[report]
+omit =
+    */extension_telemetry/*
+    app/agent_executor.py
+    app/load_skill_resources.py
+    app/main.py
+    app/mcp_tools.py
+    app/util.py

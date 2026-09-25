@@ -1,0 +1,20 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: mcp-server
+
+metadata:
+  name: sap-s4-workforce-daily-availability-mcp-server
+  version: "1.0.0"
+  translation: mcp-translation/translation.json
+  apiSpec: mcp-translation/api-spec.edmx
+
+provides:
+  apis:
+    - name: sap-s4-workforce-daily-availability-mcp-server
+      kind: mcp-server
+      ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-workforce-daily-availability-mcp-server:v1
+
+requires:
+  - name: API_MANAGE_WF_AVAILABILITY
+    kind: api
+    ordId: sap.s4:apiResource:API_MANAGE_WF_AVAILABILITY:v1

@@ -1,0 +1,8 @@
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.0.0
+pytest-json-report>=1.5.0
+pytest-timeout>=2.4.0
+ruff
+pylint
+pyright

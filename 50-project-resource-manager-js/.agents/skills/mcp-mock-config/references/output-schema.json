@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mcp-mock.schema.json",
+  "title": "MCP Mock Configuration",
+  "description": "Schema for mcp-mock.json - single file with all MCP servers and tools as hashmaps",
+  "type": "object",
+  "required": ["servers", "metadata"],
+  "properties": {
+    "servers": {
+      "type": "object",
+      "description": "Hashmap of MCP servers keyed by server slug for O(1) lookup",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/server"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    }
+  },
+
+  "$defs": {
+    "server": {
+      "type": "object",
+      "description": "Single MCP server with its tools",
+      "required": ["mcp_server_name", "tools"],
+      "properties": {
+        "mcp_server_name": {
+          "type": "string",
+          "description": "Full MCP server name (from translation.json serverInfo.name)",
+          "examples": ["com.sap.s4/API_SUPPLIERINVOICE_PROCESS_SRV", "n8n-workflow-mcp"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Server description"
+        },
+        "tools": {
+          "type": "object",
+          "description": "Hashmap of tools keyed by tool name for O(1) lookup",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/tool"
+          }
+        }
+      }
+    },
+
+    "tool": {
+      "type": "object",
+      "description": "Single tool definition with mock response",
+      "required": ["description", "mock_response"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Tool description"
+        },
+        "input_schema": {
+          "type": "object",
+          "description": "JSON Schema for tool input parameters",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "object"
+            },
+            "properties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["string", "number", "integer", "boolean", "array", "object"]
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "mock_response": {
+          "description": "Mock response data returned by the tool"
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "description": "File metadata",
+      "required": ["version", "mock_mode", "total_servers", "total_tools"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "examples": ["1.0.0"]
+        },
+        "created_for_agent": {
+          "type": "string",
+          "description": "Name of the agent this config was generated for"
+        },
+        "mock_mode": {
+          "type": "boolean",
+          "const": true
+        },
+        "deterministic": {
+          "type": "boolean",
+          "default": true
+        },
+        "total_servers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total number of MCP servers"
+        },
+        "total_tools": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total number of tools across all servers"
+        },
+        "generated_from": {
+          "type": "array",
+          "items": { "type": "string" },
+          "examples": [["translation.json", "api-spec.json"]]
+        },
+        "generation_date": {
+          "type": "string",
+          "format": "date",
+          "examples": ["2026-04-15"]
+        }
+      }
+    }
+  },
+
+  "examples": [
+    {
+      "servers": {
+        "s4-supplier-invoice": {
+          "mcp_server_name": "com.sap.s4/API_SUPPLIERINVOICE_PROCESS_SRV",
+          "description": "MCP server for reading supplier invoice data",
+          "tools": {
+            "list_supplier_invoices": {
+              "description": "Retrieve a list of supplier invoices",
+              "input_schema": {
+                "type": "object",
+                "properties": {
+                  "$top": { "type": "string", "description": "Maximum number" },
+                  "$filter": { "type": "string", "description": "OData filter" }
+                },
+                "required": []
+              },
+              "mock_response": {
+                "results": [{ "SupplierInvoice": "5100000001" }]
+              }
+            },
+            "get_supplier_invoice_by_key": {
+              "description": "Get single invoice by key",
+              "input_schema": {
+                "type": "object",
+                "properties": {
+                  "SupplierInvoice": { "type": "string" },
+                  "FiscalYear": { "type": "string" }
+                },
+                "required": ["SupplierInvoice", "FiscalYear"]
+              },
+              "mock_response": {
+                "SupplierInvoice": "5100000001",
+                "FiscalYear": "2026"
+              }
+            }
+          }
+        }
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "created_for_agent": "invoice-monitor",
+        "mock_mode": true,
+        "deterministic": true,
+        "total_servers": 1,
+        "total_tools": 2,
+        "generated_from": ["translation.json", "api-spec.json"],
+        "generation_date": "2026-04-15"
+      }
+    }
+  ]
+}

@@ -1,0 +1,713 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "n8n-workflow Asset",
+  "description": "Schema for n8n-workflow asset with inheritance from: n8n-workflow -> base-service -> base",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["name", "type", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the workflow asset"
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version of this asset",
+          "default": "1.0.0"
+        },
+        "type": {
+          "type": "string",
+          "const": "n8nworkflow",
+          "description": "Asset type; must be n8nworkflow"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels for the application",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "asset-kind": "service",
+            "managed-by": "yaml-composer"
+          }
+        }
+      }
+    },
+    "projectVersion": {
+      "type": "string",
+      "description": "n8n project version, forwarded verbatim to the n8n API on upload. The managed n8n team owns the format; the deployer treats it as an opaque string."
+    },
+    "sourceRoot": {
+      "type": "string",
+      "description": "Relative path to the workflow definitionFile. Defaults to '.' i.e. the root of the current workflow."
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Runtime type (nodejs, java, python, etc.)",
+          "default": "n8n"
+        },
+        "language": {
+          "type": "string",
+          "default": "nodejs"
+        },
+        "version": {
+          "type": "string",
+          "default": "latest"
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "Dependencies on other assets and platform services",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Shorthand: equivalent to {name: <value>, service: <value>, kind: platform-service}"
+          },
+          {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Local binding key / dependency name"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "platform-service",
+                  "component",
+                  "asset",
+                  "n8n-workflow",
+                  "mcp-server",
+                  "agent",
+                  "agent-extension",
+                  "domain-model-extension",
+                  "ord",
+                  "n8n-project"
+                ],
+                "description": "Dependency kind"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version constraint"
+              },
+              "service": {
+                "type": "string",
+                "description": "BTP service technical name"
+              },
+              "plan": {
+                "type": "string",
+                "description": "Service plan"
+              },
+              "parameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Service instance creation parameters"
+              },
+              "lazy": {
+                "type": "boolean",
+                "default": true,
+                "description": "If true (default), service instance is only created when bound to a component/container"
+              },
+              "bindingSecretKey": {
+                "type": "string",
+                "description": "Key inside the binding secret to expose"
+              },
+              "bindingParameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Parameters passed to service binding creation"
+              },
+              "creationTimeout": {
+                "type": "string",
+                "default": "10m",
+                "description": "Timeout for service instance creation (Go duration)"
+              },
+              "asset": {
+                "type": "string",
+                "description": "Target asset name"
+              },
+              "ordId": {
+                "type": "string",
+                "description": "ORD ID for platform discoverability"
+              },
+              "workflowId": {
+                "type": "string",
+                "description": "Workflow ID for n8n-workflow dependencies"
+              },
+              "extensible": {
+                "type": "boolean",
+                "default": false,
+                "description": "If true, the required agent exposes extension points. Used with kind: agent."
+              }
+            }
+          }
+        ]
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "Multiple components within a single asset.\n\nUse for:\n- Monorepo patterns (Nx, Turborepo, Lerna)\n- Multi-container applications\n- Microservices architectures\n- Micro-frontends\n\nComponents have symmetric provides/requires:\n- provides: What the component exposes (endpoints, routes, APIs)\n- requires: What the component depends on (other components, services, assets)\n",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Component identifier"
+          },
+          "type": {
+            "type": "string",
+            "description": "Component type - determines which component-level defaults apply",
+            "enum": ["srv", "hdi-deployer"],
+            "default": "srv"
+          },
+          "buildPath": {
+            "type": "string",
+            "default": ".",
+            "description": "Relative path to component source"
+          },
+          "port": {
+            "type": "integer",
+            "description": "Component-specific port"
+          },
+          "provides": {
+            "type": "object",
+            "description": "What this component provides/exposes",
+            "properties": {
+              "endpoints": {
+                "type": "array",
+                "description": "HTTP endpoints exposed by this component",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "Endpoint path (e.g., /api/v1, /auth)"
+                    },
+                    "port": {
+                      "type": "integer",
+                      "description": "Port for this endpoint (overrides component port)"
+                    },
+                    "protocol": {
+                      "type": "string",
+                      "enum": ["http", "https", "grpc"],
+                      "default": "http"
+                    }
+                  }
+                }
+              },
+              "routes": {
+                "type": "array",
+                "description": "Routes provided by this component",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "protocols": {
+                "type": "array",
+                "description": "Communication protocols supported",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ui": {
+                "type": "object",
+                "description": "UI-specific provides",
+                "properties": {
+                  "framework": {
+                    "type": "string"
+                  },
+                  "routes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "requires": {
+            "type": "array",
+            "description": "Component dependencies (intra-asset, inter-asset, or platform services)",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "Shorthand: equivalent to {name: <value>, service: <value>, kind: platform-service}"
+                },
+                {
+                  "type": "object",
+                  "required": ["name"],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Local binding key / dependency name"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "platform-service",
+                        "component",
+                        "asset",
+                        "n8n-workflow",
+                        "mcp-server",
+                        "agent",
+                        "agent-extension",
+                        "domain-model-extension",
+                        "ord",
+                        "n8n-project"
+                      ],
+                      "description": "Dependency kind"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "Version constraint"
+                    },
+                    "service": {
+                      "type": "string",
+                      "description": "BTP service technical name. Used with kind: platform-service."
+                    },
+                    "plan": {
+                      "type": "string",
+                      "description": "Service plan. Used with kind: platform-service."
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Service instance creation parameters. Used with kind: platform-service."
+                    },
+                    "lazy": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "If true (default), service instance is only created when bound to a component/container."
+                    },
+                    "bindingSecretKey": {
+                      "type": "string",
+                      "description": "Key inside the binding secret to expose. Used with kind: platform-service."
+                    },
+                    "bindingParameters": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Parameters passed to service binding creation. Used with kind: platform-service."
+                    },
+                    "creationTimeout": {
+                      "type": "string",
+                      "default": "10m",
+                      "description": "Timeout for service instance creation (Go duration). Used with kind: platform-service."
+                    },
+                    "asset": {
+                      "type": "string",
+                      "description": "Target asset name. Optional when on a contained item (defaults to containing asset)."
+                    },
+                    "ordId": {
+                      "type": "string",
+                      "description": "ORD ID for platform discoverability."
+                    },
+                    "workflowId": {
+                      "type": "string",
+                      "description": "Workflow ID for n8n-workflow dependencies."
+                    },
+                    "extensible": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "If true, the required agent exposes extension points. Used with kind: agent."
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "env": {
+            "type": "object",
+            "description": "Component-specific environment variables"
+          },
+          "resources": {
+            "type": "object",
+            "description": "Component-specific resource allocation",
+            "properties": {
+              "requests": {
+                "type": "object",
+                "properties": {
+                  "cpu": {
+                    "type": "string"
+                  },
+                  "memory": {
+                    "type": "string"
+                  }
+                }
+              },
+              "limits": {
+                "type": "object",
+                "properties": {
+                  "cpu": {
+                    "type": "string"
+                  },
+                  "memory": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "custom": {
+            "type": "object",
+            "description": "Component-specific opaque config",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "overrides": {
+      "type": "object",
+      "description": "Application-level configuration overrides",
+      "additionalProperties": true
+    },
+    "custom": {
+      "type": "object",
+      "description": "Opaque custom configuration for platform-specific properties.\n\nThis section is NOT validated by the type system and allows\nany structure. Use for:\n- Platform-specific deployment config (Vercel, CAP, Cloud Foundry)\n- Tool-specific extensions\n- Experimental features\n- Gradual migration paths\n\nCommon namespaces:\n- custom.vercel.*    - Vercel deployment config\n- custom.cap.*       - CAP framework config\n- custom.cf.*        - Cloud Foundry config\n- custom.k8s.*       - Kubernetes config\n- custom.tooling.*   - Custom tooling\n",
+      "additionalProperties": true,
+      "default": {}
+    },
+    "kind": {
+      "type": "string",
+      "const": "Asset",
+      "description": "Must be \"Asset\" for asset definitions"
+    },
+    "service": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8080
+        },
+        "protocol": {
+          "type": "string",
+          "enum": ["http", "https", "grpc", "tcp"],
+          "default": "http"
+        }
+      }
+    },
+    "container": {
+      "type": "object",
+      "description": "Container configuration for single-container assets",
+      "properties": {
+        "buildPath": {
+          "type": "string",
+          "description": "Path to build application image",
+          "default": "."
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for container binding",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 5678
+        },
+        "env": {
+          "type": "object",
+          "description": "Environment variables as key-value pairs",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "N8N_LOG_LEVEL": "info",
+            "EXECUTIONS_MODE": "regular"
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "Docker registry image path"
+        }
+      }
+    },
+    "provides": {
+      "type": "object",
+      "properties": {
+        "runtime": {
+          "type": "string",
+          "description": "Runtime identifier (n8n)"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported protocols"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Workflow capabilities"
+        },
+        "apis": {
+          "type": "array",
+          "description": "API entries exposed by this workflow. Each webhook node produces two entries: one with kind: rest and one with kind: mcp-server.",
+          "items": {
+            "type": "object",
+            "required": ["name", "kind", "ordId"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "snake_case identifier for this API entry (e.g. leave_request_submitted)"
+              },
+              "path": {
+                "type": "string",
+                "description": "Webhook path. Present only on kind: rest entries."
+              },
+              "kind": {
+                "type": "string",
+                "enum": ["rest", "mcp-server"],
+                "description": "rest = HTTP webhook endpoint; mcp-server = MCP translation entry"
+              },
+              "description": {
+                "type": "string",
+                "description": "One-sentence description of what this endpoint does"
+              },
+              "ordId": {
+                "type": "string",
+                "description": "ORD ID. Format: sap.n8nwfrt:apiResource:<solution-name>_<workflow-name>.<camelCaseApiName>:v1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "description": "Resource requests and limits",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU request (e.g., '100m', '1')",
+              "default": "50m"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory request (e.g., '256Mi', '1Gi')",
+              "default": "256Mi"
+            }
+          }
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU limit",
+              "default": "500m"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory limit",
+              "default": "1Gi"
+            }
+          }
+        }
+      }
+    },
+    "probes": {
+      "type": "object",
+      "description": "Health check probes",
+      "properties": {
+        "startup": {
+          "type": "object",
+          "description": "Startup probe configuration",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "HTTP path for probe"
+            },
+            "initialDelaySeconds": {
+              "type": "integer",
+              "description": "Delay before first probe"
+            },
+            "periodSeconds": {
+              "type": "integer",
+              "description": "How often to perform probe"
+            },
+            "timeoutSeconds": {
+              "type": "integer",
+              "description": "Probe timeout"
+            },
+            "successThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive successes"
+            },
+            "failureThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive failures"
+            }
+          }
+        },
+        "liveness": {
+          "type": "object",
+          "description": "Liveness probe configuration",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "HTTP path for probe",
+              "default": "/health/liveness"
+            },
+            "initialDelaySeconds": {
+              "type": "integer",
+              "description": "Delay before first probe",
+              "default": 30
+            },
+            "periodSeconds": {
+              "type": "integer",
+              "description": "How often to perform probe",
+              "default": 10
+            },
+            "timeoutSeconds": {
+              "type": "integer",
+              "description": "Probe timeout",
+              "default": 5
+            },
+            "successThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive successes"
+            },
+            "failureThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive failures",
+              "default": 3
+            }
+          }
+        },
+        "readiness": {
+          "type": "object",
+          "description": "Readiness probe configuration",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "HTTP path for probe",
+              "default": "/health/readiness"
+            },
+            "initialDelaySeconds": {
+              "type": "integer",
+              "description": "Delay before first probe",
+              "default": 10
+            },
+            "periodSeconds": {
+              "type": "integer",
+              "description": "How often to perform probe",
+              "default": 5
+            },
+            "timeoutSeconds": {
+              "type": "integer",
+              "description": "Probe timeout",
+              "default": 3
+            },
+            "successThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive successes"
+            },
+            "failureThreshold": {
+              "type": "integer",
+              "description": "Minimum consecutive failures",
+              "default": 3
+            }
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": ["n8n-workflow", "n8nworkflow"],
+      "description": "Deprecated top-level type field retained only for backward compatibility. Prefer metadata.type."
+    },
+    "workflow": {
+      "type": "object",
+      "description": "Top-level workflow configuration block (not nested under provides)",
+      "required": ["definitionFile", "name", "ordId"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Workflow display name"
+        },
+        "definitionFile": {
+          "type": "string",
+          "description": "Path to n8n workflow JSON file",
+          "default": "workflow.json"
+        },
+        "ordId": {
+          "type": "string",
+          "description": "Legacy ORD ID for backward compatibility (fixed value: sap.btpn8n:apiResource:ManagedN8nMcpServer:v1)"
+        },
+        "dataFile": {
+          "type": "string",
+          "description": "Path to JSON data file used by workflow",
+          "default": "data.json"
+        },
+        "executionMode": {
+          "type": "string",
+          "enum": ["main", "queue"],
+          "default": "main"
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Execution timeout in seconds",
+          "default": 120
+        },
+        "retryOnFailure": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxRetries": {
+          "type": "integer",
+          "default": 3
+        }
+      }
+    }
+  },
+  "required": ["kind", "metadata", "workflow"],
+  "_metadata": {
+    "generatedFrom": "n8n-workflow",
+    "inheritanceChain": ["n8n-workflow", "base-service", "base"],
+    "assetKind": "workflow",
+    "generatedAt": "2026-04-30T01:50:26.386Z"
+  },
+  "x-inheritance": [
+    {
+      "name": "n8n-workflow",
+      "version": "1.0.0"
+    },
+    {
+      "name": "base-service",
+      "version": "2.1.0"
+    },
+    {
+      "name": "base",
+      "version": "3.0.0"
+    }
+  ],
+  "x-generated": "2026-04-30T01:50:26.387Z",
+  "x-spec-version": "v3.0.0",
+  "x-implicit-defaults": {
+    "sourceRoot": {
+      "default": ".",
+      "description": "Source root defaults to current directory if omitted",
+      "introduced": "v3.0.0"
+    }
+  }
+}

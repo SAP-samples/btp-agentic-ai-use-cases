@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "joule-studio": {
+      "type": "local",
+      "command": [
+        "jl",
+        "mcp",
+        "start"
+      ],
+      "enabled": true
+    }
+  },
+  "permission": {
+    "bash": "ask",
+    "edit": "ask",
+    "write": "ask"
+  }
+}

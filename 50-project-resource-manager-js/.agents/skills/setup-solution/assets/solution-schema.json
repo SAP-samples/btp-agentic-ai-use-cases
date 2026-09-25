@@ -1,0 +1,457 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "composite Solution",
+  "description": "Schema for composite solution with inheritance from: composite → base",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Solution name (DNS-compatible)",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+          "maxLength": 63
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels for the application",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "version"]
+      },
+      "runtime": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Runtime type",
+            "default": "generic"
+          }
+        }
+      },
+      "required": ["name", "version"]
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Runtime type"
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "Solution-wide dependencies inherited by all assets",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Shorthand: equivalent to {name: <value>, service: <value>, kind: platform-service}"
+          },
+          {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Local binding key / dependency name"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "platform-service",
+                  "component",
+                  "asset",
+                  "n8n-workflow",
+                  "mcp-server",
+                  "agent",
+                  "agent-extension",
+                  "domain-model-extension",
+                  "ord"
+                ],
+                "description": "Dependency kind"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version constraint"
+              },
+              "service": {
+                "type": "string",
+                "description": "BTP service technical name (e.g. hana, xsuaa, aicore). Used with kind: platform-service."
+              },
+              "plan": {
+                "type": "string",
+                "description": "Service plan (e.g. hdi-shared, application). Used with kind: platform-service."
+              },
+              "parameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Service instance creation parameters. Used with kind: platform-service."
+              },
+              "lazy": {
+                "type": "boolean",
+                "default": true,
+                "description": "If true (default), service instance is only created when bound to a component/container."
+              },
+              "bindingSecretKey": {
+                "type": "string",
+                "description": "Key inside the binding secret to expose. Used with kind: platform-service."
+              },
+              "bindingParameters": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Parameters passed to service binding creation. Used with kind: platform-service."
+              },
+              "creationTimeout": {
+                "type": "string",
+                "default": "10m",
+                "description": "Timeout for service instance creation (Go duration, e.g. 10m, 1h). Used with kind: platform-service."
+              },
+              "asset": {
+                "type": "string",
+                "description": "Target asset name. Optional when on a contained item (defaults to containing asset)."
+              },
+              "ordId": {
+                "type": "string",
+                "description": "ORD ID for platform discoverability. Used with kind: agent-extension, domain-model-extension."
+              },
+              "workflowId": {
+                "type": "string",
+                "description": "Workflow ID for n8n-workflow dependencies. Used with kind: agent-extension."
+              },
+              "extensible": {
+                "type": "boolean",
+                "default": false,
+                "description": "If true, the required agent exposes extension points. Used with kind: agent."
+              }
+            }
+          }
+        ]
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "Multiple components within a single asset.\n\nUse for:\n- Monorepo patterns (Nx, Turborepo, Lerna)\n- Multi-container applications\n- Microservices architectures\n- Micro-frontends\n\nComponents have symmetric provides/requires:\n- provides: What the component exposes (endpoints, routes, APIs)\n- requires: What the component depends on (other components, services, assets)\n",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Component identifier"
+          },
+          "type": {
+            "type": "string",
+            "description": "Component type — determines which component-level defaults apply",
+            "enum": ["srv", "hdi-deployer"],
+            "default": "srv"
+          },
+          "buildPath": {
+            "type": "string",
+            "default": ".",
+            "description": "Relative path to component source"
+          },
+          "port": {
+            "type": "integer",
+            "description": "Component-specific port"
+          },
+          "provides": {
+            "type": "object",
+            "description": "What this component provides/exposes",
+            "properties": {
+              "endpoints": {
+                "type": "array",
+                "description": "HTTP endpoints exposed by this component",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "Endpoint path (e.g., /api/v1, /auth)"
+                    },
+                    "port": {
+                      "type": "integer",
+                      "description": "Port for this endpoint (overrides component port)"
+                    },
+                    "protocol": {
+                      "type": "string",
+                      "enum": ["http", "https", "grpc"],
+                      "default": "http"
+                    }
+                  }
+                }
+              },
+              "routes": {
+                "type": "array",
+                "description": "Routes provided by this component",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "protocols": {
+                "type": "array",
+                "description": "Communication protocols supported",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ui": {
+                "type": "object",
+                "description": "UI-specific provides",
+                "properties": {
+                  "framework": {
+                    "type": "string"
+                  },
+                  "routes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "requires": {
+            "type": "array",
+            "description": "Component dependencies (intra-asset, inter-asset, or platform services)",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "Shorthand: equivalent to {name: <value>, service: <value>, kind: platform-service}"
+                },
+                {
+                  "type": "object",
+                  "required": ["name"],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Local binding key / dependency name"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "platform-service",
+                        "component",
+                        "asset",
+                        "n8n-workflow",
+                        "mcp-server",
+                        "agent",
+                        "agent-extension",
+                        "domain-model-extension",
+                        "ord"
+                      ],
+                      "description": "Dependency kind"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "Version constraint"
+                    },
+                    "service": {
+                      "type": "string",
+                      "description": "BTP service technical name. Used with kind: platform-service."
+                    },
+                    "plan": {
+                      "type": "string",
+                      "description": "Service plan. Used with kind: platform-service."
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Service instance creation parameters. Used with kind: platform-service."
+                    },
+                    "lazy": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "If true (default), service instance is only created when bound to a component/container."
+                    },
+                    "bindingSecretKey": {
+                      "type": "string",
+                      "description": "Key inside the binding secret to expose. Used with kind: platform-service."
+                    },
+                    "bindingParameters": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "Parameters passed to service binding creation. Used with kind: platform-service."
+                    },
+                    "creationTimeout": {
+                      "type": "string",
+                      "default": "10m",
+                      "description": "Timeout for service instance creation (Go duration). Used with kind: platform-service."
+                    },
+                    "asset": {
+                      "type": "string",
+                      "description": "Target asset name. Optional when on a contained item (defaults to containing asset)."
+                    },
+                    "ordId": {
+                      "type": "string",
+                      "description": "ORD ID for platform discoverability."
+                    },
+                    "workflowId": {
+                      "type": "string",
+                      "description": "Workflow ID for n8n-workflow dependencies."
+                    },
+                    "extensible": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "If true, the required agent exposes extension points. Used with kind: agent."
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "env": {
+            "type": "object",
+            "description": "Component-specific environment variables"
+          },
+          "resources": {
+            "type": "object",
+            "description": "Component-specific resource allocation",
+            "properties": {
+              "requests": {
+                "type": "object",
+                "properties": {
+                  "cpu": {
+                    "type": "string"
+                  },
+                  "memory": {
+                    "type": "string"
+                  }
+                }
+              },
+              "limits": {
+                "type": "object",
+                "properties": {
+                  "cpu": {
+                    "type": "string"
+                  },
+                  "memory": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "custom": {
+            "type": "object",
+            "description": "Component-specific opaque config",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "overrides": {
+      "type": "object",
+      "description": "Solution-level configuration overrides",
+      "additionalProperties": true
+    },
+    "custom": {
+      "type": "object",
+      "description": "Opaque custom configuration for platform-specific properties.\n\nThis section is NOT validated by the type system and allows\nany structure. Use for:\n- Platform-specific deployment config (Vercel, CAP, Cloud Foundry)\n- Tool-specific extensions\n- Experimental features\n- Gradual migration paths\n\nCommon namespaces:\n- custom.vercel.*    - Vercel deployment config\n- custom.cap.*       - CAP framework config\n- custom.cf.*        - Cloud Foundry config\n- custom.k8s.*       - Kubernetes config\n- custom.tooling.*   - Custom tooling\n",
+      "additionalProperties": true
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Array of assets composing this solution",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": ["ref"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "description": "Path or Git URI to asset.yaml"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version constraint for referenced asset"
+              },
+              "alias": {
+                "type": "string",
+                "description": "Optional alias for the asset"
+              },
+              "spec": {
+                "type": "object",
+                "description": "Inline overrides (deep merged with ref)"
+              }
+            }
+          },
+          {
+            "required": ["name", "type"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                "description": "Unique asset name",
+                "maxLength": 63
+              },
+              "type": {
+                "type": "string",
+                "description": "Asset type identifier (kind comes from type definition)"
+              },
+              "sourceRoot": {
+                "type": "string",
+                "description": "Source code root directory"
+              },
+              "requires": {
+                "type": "array",
+                "description": "Asset-specific dependencies"
+              },
+              "provides": {
+                "type": "object",
+                "description": "What this asset provides"
+              }
+            }
+          },
+          {
+            "required": ["name", "kind"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+                "description": "Unique asset name",
+                "maxLength": 63
+              },
+              "kind": {
+                "type": "string",
+                "enum": ["service", "ui", "process", "data-product", "sap-build"],
+                "description": "Asset category (explicit for inline assets)"
+              },
+              "type": {
+                "type": "string",
+                "description": "Asset type identifier"
+              },
+              "sourceRoot": {
+                "type": "string",
+                "description": "Source code root directory"
+              },
+              "requires": {
+                "type": "array",
+                "description": "Asset-specific dependencies (merged with solution requires)"
+              },
+              "provides": {
+                "type": "object",
+                "description": "What this asset provides"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": ["assets"],
+  "_metadata": {
+    "generatedFrom": "composite",
+    "inheritanceChain": ["composite", "base"],
+    "appliedTraits": [],
+    "generatedAt": "2026-04-30T01:50:02.282Z"
+  }
+}

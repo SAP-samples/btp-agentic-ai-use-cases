@@ -1,0 +1,72 @@
+{
+  "mcpTranslationVersion": "0.6",
+  "target": {
+    "ordId": "sap.sf:apiResource:ECTimeOff:v1",
+    "type": "edmx"
+  },
+  "serverInfo": {
+    "name": "customer.build/sap-sf-time-off-mcp-server",
+    "title": "SAP SuccessFactors Time Off MCP Server",
+    "version": "1.0.0",
+    "description": "MCP server for SAP SuccessFactors EC Time Off API."
+  },
+  "tools": [
+    {
+      "name": "get_metadata_sfodata",
+      "title": "get_metadata_sfodata",
+      "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n",
+      "odataType": {
+        "metadataRequest": {},
+        "responseHeaders": [{"name":"age"},{"name":"cache-control"},{"name":"expires"},{"name":"last-modified"},{"name":"x-request-id"},{"name":"x-correlation-id"},{"name":"content-type"},{"name":"content-encoding"},{"name":"content-language"},{"name":"content-length"},{"name":"dataserviceversion"},{"name":"etag"},{"name":"sap-message"}]
+      }
+    },
+    {
+      "name": "batch_for_sfodata",
+      "title": "batch_for_sfodata",
+      "description": "Execute multiple OData operations in a single batch request using the $batch endpoint.",
+      "odataType": {
+        "batchRequest": {},
+        "responseHeaders": [{"name":"age"},{"name":"cache-control"},{"name":"expires"},{"name":"last-modified"},{"name":"x-request-id"},{"name":"x-correlation-id"},{"name":"content-type"},{"name":"content-encoding"},{"name":"content-language"},{"name":"content-length"},{"name":"dataserviceversion"},{"name":"sap-message"}]
+      }
+    },
+    {
+      "name": "list_employeetime_for_sfodata",
+      "title": "list_EmployeeTime_for_sfodata",
+      "description": "Retrieve employee time-off/leave records from SuccessFactors. Filter by userId and date range to check for approved leave conflicts with project timelines.",
+      "odataType": {
+        "entitySet": {
+          "name": "EmployeeTime",
+          "crudOperation": "read",
+          "parameters": [{"name":"filter"},{"name":"select"},{"name":"orderby"},{"name":"top"},{"name":"skip"},{"name":"expand"},{"name":"inlinecount"}]
+        },
+        "responseHeaders": [{"name":"age"},{"name":"cache-control"},{"name":"expires"},{"name":"last-modified"},{"name":"x-request-id"},{"name":"x-correlation-id"},{"name":"content-type"},{"name":"content-encoding"},{"name":"content-language"},{"name":"content-length"},{"name":"dataserviceversion"},{"name":"etag"},{"name":"sap-message"}]
+      }
+    },
+    {
+      "name": "get_employeetime_for_sfodata",
+      "title": "get_EmployeeTime_for_sfodata",
+      "description": "Retrieve a single EmployeeTime record by its external code.",
+      "odataType": {
+        "entitySet": {
+          "name": "EmployeeTime",
+          "crudOperation": "readByKey",
+          "parameters": [{"name":"externalCode","newParameterName":"externalcode"},{"name":"select"},{"name":"expand"}]
+        },
+        "responseHeaders": [{"name":"age"},{"name":"cache-control"},{"name":"expires"},{"name":"last-modified"},{"name":"x-request-id"},{"name":"x-correlation-id"},{"name":"content-type"},{"name":"content-encoding"},{"name":"content-language"},{"name":"content-length"},{"name":"dataserviceversion"},{"name":"etag"},{"name":"sap-message"}]
+      }
+    },
+    {
+      "name": "count_employeetime_for_sfodata",
+      "title": "count_EmployeeTime_for_sfodata",
+      "description": "Get the total count of EmployeeTime records matching a filter.",
+      "odataType": {
+        "entitySet": {
+          "name": "EmployeeTime",
+          "crudOperation": "count",
+          "parameters": [{"name":"filter"}]
+        },
+        "responseHeaders": [{"name":"age"},{"name":"cache-control"},{"name":"expires"},{"name":"last-modified"},{"name":"x-request-id"},{"name":"x-correlation-id"},{"name":"content-type"},{"name":"content-encoding"},{"name":"content-language"},{"name":"content-length"},{"name":"dataserviceversion"},{"name":"sap-message"}]
+      }
+    }
+  ]
+}

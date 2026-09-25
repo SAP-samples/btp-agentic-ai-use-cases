@@ -1,0 +1,2530 @@
+{
+  "mcpTranslationVersion": "0.7",
+  "target": {
+    "ordId": "sap.sf:apiResource:ECSkillsManagement:v1",
+    "type": "edmx"
+  },
+  "serverInfo": {
+    "name": "sap.mcp/sfodata",
+    "title": "sfodata",
+    "version": "1.0.0",
+    "description": "MCP server for the sfodata service."
+  },
+  "tools": [
+    {
+      "name": "get_metadata_sfodata",
+      "title": "get_metadata_sfodata",
+      "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n",
+      "odataType": {
+        "metadataRequest": {},
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "batch_for_sfodata",
+      "title": "batch_for_sfodata",
+      "description": "Execute multiple OData operations in a single batch request using the $batch endpoint. This allows you to combine multiple tool calls into one HTTP request, improving efficiency when performing multiple operations.",
+      "odataType": {
+        "batchRequest": {},
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_skillentity_for_sfodata",
+      "title": "list_SkillEntity_for_sfodata",
+      "description": "Retrieve a list of entities from the SkillEntity collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_skillentity_for_sfodata",
+      "title": "create_SkillEntity_for_sfodata",
+      "description": "Create a new instance of the SkillEntity EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "name_defaultValue",
+              "newParameterName": "name_defaultvalue"
+            },
+            {
+              "name": "definition_en_US",
+              "newParameterName": "definition_en_us"
+            },
+            {
+              "name": "category_en_US",
+              "newParameterName": "category_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            },
+            {
+              "name": "lastModifiedDateTime",
+              "newParameterName": "lastmodifieddatetime"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_skillentity_for_sfodata",
+      "title": "update_SkillEntity_for_sfodata",
+      "description": "Update an entity in SkillEntity EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "name_defaultValue",
+              "newParameterName": "name_defaultvalue"
+            },
+            {
+              "name": "definition_en_US",
+              "newParameterName": "definition_en_us"
+            },
+            {
+              "name": "category_en_US",
+              "newParameterName": "category_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            },
+            {
+              "name": "lastModifiedDateTime",
+              "newParameterName": "lastmodifieddatetime"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_skillentity_for_sfodata",
+      "title": "delete_SkillEntity_for_sfodata",
+      "description": "Delete an entity from SkillEntity EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_skillentity_for_sfodata",
+      "title": "get_SkillEntity_for_sfodata",
+      "description": "Retrieve a single entity by its key from the SkillEntity collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_skillentity_for_sfodata",
+      "title": "count_SkillEntity_for_sfodata",
+      "description": "Get the total count of entities in the SkillEntity collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillEntity",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_skillprofile_for_sfodata",
+      "title": "list_SkillProfile_for_sfodata",
+      "description": "Retrieve a list of entities from the SkillProfile collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_skillprofile_for_sfodata",
+      "title": "create_SkillProfile_for_sfodata",
+      "description": "Create a new instance of the SkillProfile EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            },
+            {
+              "name": "lastModifiedDateTime",
+              "newParameterName": "lastmodifieddatetime"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_skillprofile_for_sfodata",
+      "title": "update_SkillProfile_for_sfodata",
+      "description": "Update an entity in SkillProfile EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            },
+            {
+              "name": "lastModifiedDateTime",
+              "newParameterName": "lastmodifieddatetime"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_skillprofile_for_sfodata",
+      "title": "delete_SkillProfile_for_sfodata",
+      "description": "Delete an entity from SkillProfile EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_skillprofile_for_sfodata",
+      "title": "get_SkillProfile_for_sfodata",
+      "description": "Retrieve a single entity by its key from the SkillProfile collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_skillprofile_for_sfodata",
+      "title": "count_SkillProfile_for_sfodata",
+      "description": "Get the total count of entities in the SkillProfile collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SkillProfile",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_ratedskillmapping_for_sfodata",
+      "title": "list_RatedSkillMapping_for_sfodata",
+      "description": "Retrieve a list of entities from the RatedSkillMapping collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_ratedskillmapping_for_sfodata",
+      "title": "create_RatedSkillMapping_for_sfodata",
+      "description": "Create a new instance of the RatedSkillMapping EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "skill",
+              "newParameterName": "skill"
+            },
+            {
+              "name": "expectedLevel_en_US",
+              "newParameterName": "expectedlevel_en_us"
+            },
+            {
+              "name": "selfRatedLevel_en_US",
+              "newParameterName": "selfratedlevel_en_us"
+            },
+            {
+              "name": "managerRatedLevel_en_US",
+              "newParameterName": "managerratedlevel_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_ratedskillmapping_for_sfodata",
+      "title": "update_RatedSkillMapping_for_sfodata",
+      "description": "Update an entity in RatedSkillMapping EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "skill",
+              "newParameterName": "skill"
+            },
+            {
+              "name": "expectedLevel_en_US",
+              "newParameterName": "expectedlevel_en_us"
+            },
+            {
+              "name": "selfRatedLevel_en_US",
+              "newParameterName": "selfratedlevel_en_us"
+            },
+            {
+              "name": "managerRatedLevel_en_US",
+              "newParameterName": "managerratedlevel_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_ratedskillmapping_for_sfodata",
+      "title": "delete_RatedSkillMapping_for_sfodata",
+      "description": "Delete an entity from RatedSkillMapping EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_ratedskillmapping_for_sfodata",
+      "title": "get_RatedSkillMapping_for_sfodata",
+      "description": "Retrieve a single entity by its key from the RatedSkillMapping collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_ratedskillmapping_for_sfodata",
+      "title": "count_RatedSkillMapping_for_sfodata",
+      "description": "Get the total count of entities in the RatedSkillMapping collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "RatedSkillMapping",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_selfreportskillmapping_for_sfodata",
+      "title": "list_SelfReportSkillMapping_for_sfodata",
+      "description": "Retrieve a list of entities from the SelfReportSkillMapping collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_selfreportskillmapping_for_sfodata",
+      "title": "create_SelfReportSkillMapping_for_sfodata",
+      "description": "Create a new instance of the SelfReportSkillMapping EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "skill",
+              "newParameterName": "skill"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_selfreportskillmapping_for_sfodata",
+      "title": "update_SelfReportSkillMapping_for_sfodata",
+      "description": "Update an entity in SelfReportSkillMapping EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "skill",
+              "newParameterName": "skill"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_selfreportskillmapping_for_sfodata",
+      "title": "delete_SelfReportSkillMapping_for_sfodata",
+      "description": "Delete an entity from SelfReportSkillMapping EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_selfreportskillmapping_for_sfodata",
+      "title": "get_SelfReportSkillMapping_for_sfodata",
+      "description": "Retrieve a single entity by its key from the SelfReportSkillMapping collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "SkillProfile_externalCode",
+              "newParameterName": "skillprofile_externalcode"
+            },
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_selfreportskillmapping_for_sfodata",
+      "title": "count_SelfReportSkillMapping_for_sfodata",
+      "description": "Get the total count of entities in the SelfReportSkillMapping collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "SelfReportSkillMapping",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_jobprofile_for_sfodata",
+      "title": "list_JobProfile_for_sfodata",
+      "description": "Retrieve a list of entities from the JobProfile collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_jobprofile_for_sfodata",
+      "title": "create_JobProfile_for_sfodata",
+      "description": "Create a new instance of the JobProfile EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "role",
+              "newParameterName": "role"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_jobprofile_for_sfodata",
+      "title": "update_JobProfile_for_sfodata",
+      "description": "Update an entity in JobProfile EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "role",
+              "newParameterName": "role"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_jobprofile_for_sfodata",
+      "title": "delete_JobProfile_for_sfodata",
+      "description": "Delete an entity from JobProfile EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_jobprofile_for_sfodata",
+      "title": "get_JobProfile_for_sfodata",
+      "description": "Retrieve a single entity by its key from the JobProfile collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_jobprofile_for_sfodata",
+      "title": "count_JobProfile_for_sfodata",
+      "description": "Get the total count of entities in the JobProfile collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "JobProfile",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_competencyentity_for_sfodata",
+      "title": "list_CompetencyEntity_for_sfodata",
+      "description": "Retrieve a list of entities from the CompetencyEntity collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "read",
+          "parameters": [
+            {
+              "name": "filter"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "orderby"
+            },
+            {
+              "name": "top"
+            },
+            {
+              "name": "skip"
+            },
+            {
+              "name": "expand"
+            },
+            {
+              "name": "inlinecount"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_competencyentity_for_sfodata",
+      "title": "create_CompetencyEntity_for_sfodata",
+      "description": "Create a new instance of the CompetencyEntity EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "create",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "description_en_US",
+              "newParameterName": "description_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "location"
+          },
+          {
+            "name": "content-id"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "update_competencyentity_for_sfodata",
+      "title": "update_CompetencyEntity_for_sfodata",
+      "description": "Update an entity in CompetencyEntity EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "update",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "name_en_US",
+              "newParameterName": "name_en_us"
+            },
+            {
+              "name": "description_en_US",
+              "newParameterName": "description_en_us"
+            },
+            {
+              "name": "status",
+              "newParameterName": "status"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_competencyentity_for_sfodata",
+      "title": "delete_CompetencyEntity_for_sfodata",
+      "description": "Delete an entity from CompetencyEntity EntitySet in the sfodata service.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "delete",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_competencyentity_for_sfodata",
+      "title": "get_CompetencyEntity_for_sfodata",
+      "description": "Retrieve a single entity by its key from the CompetencyEntity collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "readByKey",
+          "parameters": [
+            {
+              "name": "externalCode",
+              "newParameterName": "externalcode"
+            },
+            {
+              "name": "select"
+            },
+            {
+              "name": "expand"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "etag"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    },
+    {
+      "name": "count_competencyentity_for_sfodata",
+      "title": "count_CompetencyEntity_for_sfodata",
+      "description": "Get the total count of entities in the CompetencyEntity collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata.",
+      "odataType": {
+        "entitySet": {
+          "name": "CompetencyEntity",
+          "crudOperation": "count",
+          "parameters": [
+            {
+              "name": "filter"
+            }
+          ]
+        },
+        "responseHeaders": [
+          {
+            "name": "age"
+          },
+          {
+            "name": "cache-control"
+          },
+          {
+            "name": "expires"
+          },
+          {
+            "name": "last-modified"
+          },
+          {
+            "name": "x-request-id"
+          },
+          {
+            "name": "x-correlation-id"
+          },
+          {
+            "name": "content-type"
+          },
+          {
+            "name": "content-encoding"
+          },
+          {
+            "name": "content-language"
+          },
+          {
+            "name": "content-length"
+          },
+          {
+            "name": "dataserviceversion"
+          },
+          {
+            "name": "sap-message"
+          }
+        ]
+      }
+    }
+  ]
+}

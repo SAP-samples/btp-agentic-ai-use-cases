@@ -1,0 +1,20 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: mcp-server
+
+metadata:
+  name: sap-sf-employee-profile-mcp-server
+  version: "1.0.0"
+  translation: mcp-translation/translation.json
+  apiSpec: mcp-translation/api-spec.edmx
+
+provides:
+  apis:
+    - name: sap-sf-employee-profile-mcp-server
+      kind: mcp-server
+      ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-employee-profile-mcp-server:v1
+
+requires:
+  - name: ECEmployeeProfile
+    kind: api
+    ordId: sap.sf:apiResource:ECEmployeeProfile:v1

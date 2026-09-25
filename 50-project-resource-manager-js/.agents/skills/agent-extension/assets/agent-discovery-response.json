@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Discovery Response",
+  "description": "Schema for the agent discovery API response",
+  "type": "object",
+  "required": ["agents", "pageInfo"],
+  "properties": {
+    "agents": {
+      "type": "array",
+      "description": "List of discovered agents",
+      "items": {
+        "type": "object",
+        "required": ["ordId", "version", "title", "description", "systemInstance"],
+        "properties": {
+          "ordId": {
+            "type": "string",
+            "description": "ORD ID of the agent",
+            "pattern": "^sap\\.ai:agent:.+:v\\d+$"
+          },
+          "version": {
+            "type": "string",
+            "description": "Semantic version of the agent",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "title": {
+            "type": "string",
+            "description": "Display title of the agent"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the agent's capabilities"
+          },
+          "systemInstance": {
+            "type": "object",
+            "description": "System instance information for the agent",
+            "properties": {
+              "id": {
+                "type": ["string", "null"],
+                "description": "System instance identifier"
+              },
+              "globalTenantId": {
+                "type": ["string", "null"],
+                "description": "Global tenant identifier"
+              }
+            }
+          },
+          "extensions": {
+            "type": "array",
+            "description": "Extension capabilities supported by this agent",
+            "items": {
+              "type": "object",
+              "required": ["description", "params", "required", "uri"],
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Description of the extension capability"
+                },
+                "params": {
+                  "type": "object",
+                  "required": ["capabilityId", "displayName", "instructionSupported", "tools"],
+                  "properties": {
+                    "capabilityId": {
+                      "type": "string",
+                      "description": "Identifier of the capability"
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "description": "Display name of the capability"
+                    },
+                    "instructionSupported": {
+                      "type": "boolean",
+                      "description": "Whether custom instructions are supported"
+                    },
+                    "tools": {
+                      "type": "object",
+                      "description": "Tool configuration for the extension",
+                      "properties": {
+                        "additions": {
+                          "type": "object",
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean",
+                              "description": "Whether adding tools is enabled"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "supportedHooks": {
+                      "type": "array",
+                      "description": "List of supported hook types for this capability",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": {
+                  "type": "boolean",
+                  "description": "Whether this extension is required"
+                },
+                "uri": {
+                  "type": "string",
+                  "description": "URI identifying the extension capability",
+                  "pattern": "^urn:sap:extension-capability:"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Pagination information",
+      "required": ["hasNextPage"],
+      "properties": {
+        "hasNextPage": {
+          "type": "boolean",
+          "description": "Whether more pages of results are available"
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Opaque cursor for fetching the next page of results"
+        }
+      }
+    }
+  }
+}

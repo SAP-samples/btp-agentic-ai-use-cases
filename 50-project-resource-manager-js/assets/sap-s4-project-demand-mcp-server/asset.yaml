@@ -1,0 +1,20 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: mcp-server
+
+metadata:
+  name: sap-s4-project-demand-mcp-server
+  version: "1.0.0"
+  translation: mcp-translation/translation.json
+  apiSpec: mcp-translation/api-spec.edmx
+
+provides:
+  apis:
+    - name: sap-s4-project-demand-mcp-server
+      kind: mcp-server
+      ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-project-demand-mcp-server:v1
+
+requires:
+  - name: API_PROJECTDEMAND_0001
+    kind: api
+    ordId: sap.s4:apiResource:API_PROJECTDEMAND_0001:v1

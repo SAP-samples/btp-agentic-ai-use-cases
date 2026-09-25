@@ -1,0 +1,888 @@
+{
+  "servers": {
+    "sap-s4-project-demand": {
+      "mcp_server_name": "sap.mcp/cds_api_projectdemand",
+      "description": "MCP server for the SAP S/4HANA Cloud Project Demand API — provides access to active projects, open resource requirements, and resource assignment data.",
+      "tools": {
+        "get_metadata_cds_api_projectdemand": {
+          "description": "Get metadata of the OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>cds_api_projectdemand $metadata</xml>" }
+        },
+        "list_a_projectdemand_for_cds_api_projectdemand": {
+          "description": "Retrieve a list of entities from the A_ProjectDemand collection.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter expression" },
+              "select": { "type": "string", "description": "Fields to return" },
+              "top": { "type": "string", "description": "Max number of records" },
+              "skip": { "type": "string", "description": "Records to skip" },
+              "orderby": { "type": "string", "description": "Sort order" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "ProjectDemandUUID": "a1b2c3d4-0001-0001-0001-000000000001",
+                  "ProjectDemand": "PROJ-DEMAND-001",
+                  "ProjectDemandName": "Cloud Migration Phase 1",
+                  "ProjectDemandStatus": "03",
+                  "ProjectDemandStartDate": "/Date(1735689600000)/",
+                  "ProjectDemandEndDate": "/Date(1751328000000)/",
+                  "ProjDmndRequestedQuantity": "200.000",
+                  "ProjDmndRequestedQuantityUnit": "H",
+                  "CreatedByUser": "JSMITH",
+                  "LastChangeDateTime": "/Date(1744588800000)/"
+                },
+                {
+                  "ProjectDemandUUID": "a1b2c3d4-0002-0002-0002-000000000002",
+                  "ProjectDemand": "PROJ-DEMAND-002",
+                  "ProjectDemandName": "ERP Analytics Implementation",
+                  "ProjectDemandStatus": "03",
+                  "ProjectDemandStartDate": "/Date(1738368000000)/",
+                  "ProjectDemandEndDate": "/Date(1748736000000)/",
+                  "ProjDmndRequestedQuantity": "160.000",
+                  "ProjDmndRequestedQuantityUnit": "H",
+                  "CreatedByUser": "MWILLIAMS",
+                  "LastChangeDateTime": "/Date(1744502400000)/"
+                }
+              ]
+            }
+          }
+        },
+        "get_a_projectdemand_for_cds_api_projectdemand": {
+          "description": "Retrieve a single project demand entity by its key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "projectdemanduuid": { "type": "string", "description": "Project Demand UUID (GUID)" },
+              "select": { "type": "string" },
+              "expand": { "type": "string" }
+            },
+            "required": ["projectdemanduuid"]
+          },
+          "mock_response": {
+            "d": {
+              "ProjectDemandUUID": "a1b2c3d4-0001-0001-0001-000000000001",
+              "ProjectDemand": "PROJ-DEMAND-001",
+              "ProjectDemandName": "Cloud Migration Phase 1",
+              "ProjectDemandDescription": "Senior SAP Basis Consultant needed for cloud migration activities",
+              "ProjectDemandStatus": "03",
+              "ProjectDemandStartDate": "/Date(1735689600000)/",
+              "ProjectDemandEndDate": "/Date(1751328000000)/",
+              "ProjDmndRequestedQuantity": "200.000",
+              "ProjDmndRequestedQuantityUnit": "H"
+            }
+          }
+        },
+        "list_a_projectdemandresource_for_cds_api_projectdemand": {
+          "description": "Retrieve a list of resource demands from the A_ProjectDemandResource collection.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter expression" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "expand": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "ProjectDemandWorkUUID": "b1c2d3e4-0001-0001-0001-100000000001",
+                  "ProjectDemandUUID": "a1b2c3d4-0001-0001-0001-000000000001",
+                  "ActivityType": "1420",
+                  "ProjDmndAssgmtStatus": "1",
+                  "ProjDmndRequestedDeliveryOrg": "10000"
+                },
+                {
+                  "ProjectDemandWorkUUID": "b1c2d3e4-0002-0002-0002-200000000002",
+                  "ProjectDemandUUID": "a1b2c3d4-0002-0002-0002-000000000002",
+                  "ActivityType": "1430",
+                  "ProjDmndAssgmtStatus": "1",
+                  "ProjDmndRequestedDeliveryOrg": "10000"
+                }
+              ]
+            }
+          }
+        },
+        "list_a_projectdemandresourcerequest_for_cds_api_projectdemand": {
+          "description": "Retrieve resource requests (staffing requirements) for project demands.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "expand": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "ProjDmndResourceRequestUUID": "c1d2e3f4-0001-0001-0001-300000000001",
+                  "ProjectDemandWorkUUID": "b1c2d3e4-0001-0001-0001-100000000001",
+                  "ProjectDemandUUID": "a1b2c3d4-0001-0001-0001-000000000001",
+                  "ProjectDemandRequestedResource": "",
+                  "ProjDmndStfngInstructionText": "Need certified SAP Basis consultant with cloud experience",
+                  "ProjDmndRsceReqStartDate": "/Date(1735689600000)/",
+                  "ProjDmndRsceReqEndDate": "/Date(1751328000000)/"
+                }
+              ]
+            }
+          }
+        },
+        "create_a_projdmndresourceassignment_for_cds_api_projectdemand": {
+          "description": "Create a new resource assignment for a project demand.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "projectdemandworkuuid": { "type": "string", "description": "Resource Demand UUID" },
+              "projectdemanduuid": { "type": "string", "description": "Project Demand UUID" },
+              "projdmndrsceassgmt": { "type": "string", "description": "Employee personnel number" },
+              "projdmndrsceassgmtquantity": { "type": "string", "description": "Assigned quantity" },
+              "projdmndrsceassgmtquantityunit": { "type": "string", "description": "Unit of measure (e.g. H)" },
+              "projdmndrsceassgmtstartdate": { "type": "string", "description": "Assignment start date" },
+              "projdmndrsceassgmtenddate": { "type": "string", "description": "Assignment end date" }
+            },
+            "required": ["projectdemandworkuuid", "projectdemanduuid", "projdmndrsceassgmt"]
+          },
+          "mock_response": {
+            "d": {
+              "ProjDmndRsceAssgmtUUID": "d1e2f3a4-0001-0001-0001-400000000001",
+              "ProjectDemandWorkUUID": "b1c2d3e4-0001-0001-0001-100000000001",
+              "ProjectDemandUUID": "a1b2c3d4-0001-0001-0001-000000000001",
+              "ProjDmndRsceAssgmt": "10000101",
+              "ProjDmndRsceAssgmtQuantity": "200.000",
+              "ProjDmndRsceAssgmtQuantityUnit": "H",
+              "ProjDmndRsceAssgmtStartDate": "/Date(1735689600000)/",
+              "ProjDmndRsceAssgmtEndDate": "/Date(1751328000000)/",
+              "CreationDateTime": "/Date(1744588800000)/"
+            }
+          }
+        },
+        "list_a_projdmndresourceassignment_for_cds_api_projectdemand": {
+          "description": "Retrieve existing resource assignments.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": []
+            }
+          }
+        },
+        "batch_for_cds_api_projectdemand": {
+          "description": "Execute multiple OData operations in a single batch request.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "d": { "results": [] } }
+        }
+      }
+    },
+    "sap-s4-resource-assignment-source": {
+      "mcp_server_name": "sap.mcp/sap_self",
+      "description": "MCP server for the SAP S/4HANA Cloud Resource Assignment Source API — provides source-of-supply data for project demand assignments.",
+      "tools": {
+        "get_metadata_sap_self": {
+          "description": "Get metadata of the OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>sap_self $metadata</xml>" }
+        },
+        "list_projectdemandsourceofsupply_for_sap_self": {
+          "description": "Retrieve a list of project demand source of supply entities.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "count": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "value": [
+              {
+                "ProjectDemandSourceOfSupply": "1",
+                "ProjDmndSourceOfSupplyText": "Internal Assignment"
+              },
+              {
+                "ProjectDemandSourceOfSupply": "2",
+                "ProjDmndSourceOfSupplyText": "External Assignment"
+              }
+            ]
+          }
+        },
+        "create_projectdemandsourceofsupply_for_sap_self": {
+          "description": "Create a new resource assignment source entry.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "projectdemandsourceofsupply": { "type": "string", "description": "Source of supply key" },
+              "projdmndsourceofsupplytext": { "type": "string", "description": "Description" }
+            },
+            "required": ["projectdemandsourceofsupply"]
+          },
+          "mock_response": {
+            "ProjectDemandSourceOfSupply": "1",
+            "ProjDmndSourceOfSupplyText": "Internal Assignment"
+          }
+        },
+        "batch_for_sap_self": {
+          "description": "Execute multiple OData operations in batch.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "value": [] }
+        }
+      }
+    },
+    "sap-s4-workforce-daily-availability": {
+      "mcp_server_name": "sap.mcp/shcm_api_manage_wf_availability",
+      "description": "MCP server for the SAP S/4HANA Cloud Workforce Daily Availability API — provides employee availability by date range.",
+      "tools": {
+        "get_metadata_shcm_api_manage_wf_availability": {
+          "description": "Get metadata of the OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>shcm_api_manage_wf_availability $metadata</xml>" }
+        },
+        "list_timeoverviewset_for_shcm_api_manage_wf_availability": {
+          "description": "Retrieve daily availability data for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. Calendardate ge datetime'2025-01-01T00:00:00')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "orderby": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "Personworkagreementexternalid": "EMP001",
+                  "Companycode": "1000",
+                  "Personworkagreement": "10000101",
+                  "Calendardate": "/Date(1738368000000)/",
+                  "Plannedworkinghours": "8.00",
+                  "Plannedstarttime": "PT08H00M00S",
+                  "Plannedendtime": "PT17H00M00S",
+                  "Publicholidayclass": "0",
+                  "Isnonworkingday": false,
+                  "Absencehours": "0.00",
+                  "Attendancehours": "0.00",
+                  "Overtimehours": "0.00"
+                },
+                {
+                  "Personworkagreementexternalid": "EMP002",
+                  "Companycode": "1000",
+                  "Personworkagreement": "10000102",
+                  "Calendardate": "/Date(1738368000000)/",
+                  "Plannedworkinghours": "8.00",
+                  "Plannedstarttime": "PT08H00M00S",
+                  "Plannedendtime": "PT17H00M00S",
+                  "Publicholidayclass": "0",
+                  "Isnonworkingday": false,
+                  "Absencehours": "0.00",
+                  "Attendancehours": "0.00",
+                  "Overtimehours": "0.00"
+                },
+                {
+                  "Personworkagreementexternalid": "EMP003",
+                  "Companycode": "1000",
+                  "Personworkagreement": "10000103",
+                  "Calendardate": "/Date(1738368000000)/",
+                  "Plannedworkinghours": "8.00",
+                  "Plannedstarttime": "PT08H00M00S",
+                  "Plannedendtime": "PT17H00M00S",
+                  "Publicholidayclass": "0",
+                  "Isnonworkingday": false,
+                  "Absencehours": "4.00",
+                  "Attendancehours": "4.00",
+                  "Overtimehours": "0.00"
+                }
+              ]
+            }
+          }
+        },
+        "get_timeoverviewset_for_shcm_api_manage_wf_availability": {
+          "description": "Retrieve a single daily availability record by key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "personworkagreementexternalid": { "type": "string", "description": "Work agreement external ID" },
+              "companycode": { "type": "string", "description": "Company code" },
+              "calendardate": { "type": "string", "description": "Calendar date" },
+              "select": { "type": "string" }
+            },
+            "required": ["personworkagreementexternalid", "companycode", "calendardate"]
+          },
+          "mock_response": {
+            "d": {
+              "Personworkagreementexternalid": "EMP001",
+              "Companycode": "1000",
+              "Personworkagreement": "10000101",
+              "Calendardate": "/Date(1738368000000)/",
+              "Plannedworkinghours": "8.00",
+              "Absencehours": "0.00",
+              "Attendancehours": "0.00",
+              "Isnonworkingday": false
+            }
+          }
+        },
+        "count_timeoverviewset_for_shcm_api_manage_wf_availability": {
+          "description": "Get count of availability records.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": { "d": { "__count": "3" } }
+        },
+        "batch_for_shcm_api_manage_wf_availability": {
+          "description": "Execute batch operations.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "d": { "results": [] } }
+        }
+      }
+    },
+    "sap-sf-skills-management": {
+      "mcp_server_name": "sap.mcp/sfodata_skills",
+      "description": "MCP server for the SAP SuccessFactors Skills Management API — provides employee skill profiles, ratings, and competencies.",
+      "tools": {
+        "get_metadata_sfodata": {
+          "description": "Get metadata of the OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>sfodata $metadata</xml>" }
+        },
+        "list_skillprofile_for_sfodata": {
+          "description": "Retrieve skill profiles for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. externalCode eq 'EMP001')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "expand": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "externalCode": "EMP001",
+                  "status": "Active",
+                  "lastModifiedDateTime": "/Date(1744502400000)/"
+                },
+                {
+                  "externalCode": "EMP002",
+                  "status": "Active",
+                  "lastModifiedDateTime": "/Date(1744416000000)/"
+                }
+              ]
+            }
+          }
+        },
+        "get_skillprofile_for_sfodata": {
+          "description": "Retrieve a single skill profile by user ID.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "externalcode": { "type": "string", "description": "User ID / externalCode" },
+              "expand": { "type": "string" },
+              "select": { "type": "string" }
+            },
+            "required": ["externalcode"]
+          },
+          "mock_response": {
+            "d": {
+              "externalCode": "EMP001",
+              "status": "Active",
+              "ratedSkills": {
+                "results": [
+                  { "externalCode": "SK001", "skill": "SAP Basis Administration", "expectedLevel_en_US": "Expert", "selfRatedLevel_en_US": "Expert" },
+                  { "externalCode": "SK002", "skill": "SAP HANA", "expectedLevel_en_US": "Proficient", "selfRatedLevel_en_US": "Advanced" },
+                  { "externalCode": "SK003", "skill": "Cloud Architecture", "expectedLevel_en_US": "Proficient", "selfRatedLevel_en_US": "Proficient" }
+                ]
+              }
+            }
+          }
+        },
+        "list_ratedskillmapping_for_sfodata": {
+          "description": "Retrieve rated skill mappings for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. SkillProfile_externalCode eq 'EMP001')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "SkillProfile_externalCode": "EMP001",
+                  "externalCode": "SK001",
+                  "skill": "SAP Basis Administration",
+                  "expectedLevel_en_US": "Expert",
+                  "selfRatedLevel_en_US": "Expert",
+                  "managerRatedLevel_en_US": "Expert",
+                  "status": "Active"
+                },
+                {
+                  "SkillProfile_externalCode": "EMP001",
+                  "externalCode": "SK002",
+                  "skill": "SAP HANA",
+                  "expectedLevel_en_US": "Proficient",
+                  "selfRatedLevel_en_US": "Advanced",
+                  "managerRatedLevel_en_US": "Advanced",
+                  "status": "Active"
+                },
+                {
+                  "SkillProfile_externalCode": "EMP002",
+                  "externalCode": "SK010",
+                  "skill": "SAP S/4HANA Analytics",
+                  "expectedLevel_en_US": "Advanced",
+                  "selfRatedLevel_en_US": "Advanced",
+                  "managerRatedLevel_en_US": "Proficient",
+                  "status": "Active"
+                }
+              ]
+            }
+          }
+        },
+        "list_skillentity_for_sfodata": {
+          "description": "Retrieve skill entity definitions from the SuccessFactors skill library.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "externalCode": "SAP_BASIS",
+                  "name_en_US": "SAP Basis Administration",
+                  "definition_en_US": "Skills related to SAP system administration and basis work",
+                  "category_en_US": "Technical",
+                  "status": "Active"
+                },
+                {
+                  "externalCode": "SAP_HANA",
+                  "name_en_US": "SAP HANA",
+                  "definition_en_US": "In-memory database platform skills",
+                  "category_en_US": "Technical",
+                  "status": "Active"
+                }
+              ]
+            }
+          }
+        },
+        "list_selfreportskillmapping_for_sfodata": {
+          "description": "Retrieve self-reported skill mappings.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "SkillProfile_externalCode": "EMP001",
+                  "externalCode": "SR001",
+                  "skill": "Cloud Architecture",
+                  "status": "Active"
+                }
+              ]
+            }
+          }
+        },
+        "batch_for_sfodata": {
+          "description": "Execute batch OData operations.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "d": { "results": [] } }
+        }
+      }
+    },
+    "sap-sf-employee-profile": {
+      "mcp_server_name": "sap.mcp/sfodata_profile",
+      "description": "MCP server for the SAP SuccessFactors Employee Profile API — provides employee public profile, education, and work experience.",
+      "tools": {
+        "list_eppublicprofile_for_sfodata": {
+          "description": "Retrieve employee public profiles.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. userId eq 'EMP001')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "userId": "EMP001",
+                  "myNameText": "Alex Johnson",
+                  "introduction": "Senior SAP Basis Consultant with 10+ years of experience in SAP system administration and cloud migrations."
+                },
+                {
+                  "userId": "EMP002",
+                  "myNameText": "Maria Chen",
+                  "introduction": "SAP Analytics Specialist with expertise in S/4HANA embedded analytics and SAP Analytics Cloud."
+                }
+              ]
+            }
+          }
+        },
+        "get_eppublicprofile_for_sfodata": {
+          "description": "Retrieve a single employee public profile by user ID.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "userid": { "type": "string", "description": "User ID" },
+              "select": { "type": "string" }
+            },
+            "required": ["userid"]
+          },
+          "mock_response": {
+            "d": {
+              "userId": "EMP001",
+              "myNameText": "Alex Johnson",
+              "introduction": "Senior SAP Basis Consultant with 10+ years of experience in SAP system administration and cloud migrations."
+            }
+          }
+        },
+        "list_background_education_for_sfodata": {
+          "description": "Retrieve education background for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "backgroundElementId": 1001,
+                  "userId": "EMP001",
+                  "school": "Technical University of Munich",
+                  "degree": "Masters",
+                  "major": "Computer Science",
+                  "startDate": "/Date(978307200000)/",
+                  "endDate": "/Date(1072915200000)/"
+                }
+              ]
+            }
+          }
+        },
+        "list_background_certificates_for_sfodata": {
+          "description": "Retrieve certifications for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "backgroundElementId": 2001,
+                  "userId": "EMP001",
+                  "name": "SAP Certified Technology Associate - SAP HANA 2.0",
+                  "institution": "SAP SE",
+                  "startDate": "/Date(1609459200000)/",
+                  "endDate": "/Date(1735689600000)/"
+                }
+              ]
+            }
+          }
+        },
+        "batch_for_sfodata": {
+          "description": "Execute batch OData operations.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "d": { "results": [] } }
+        }
+      }
+    },
+    "sap-sf-employment-information": {
+      "mcp_server_name": "sap.mcp/sfodata_employment",
+      "description": "MCP server for the SAP SuccessFactors Employment Information API — provides job title, department, location, and employment status.",
+      "tools": {
+        "list_empjob_for_sfodata": {
+          "description": "Retrieve job information (title, department, location, status) for employees.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. userId eq 'EMP001' and emplStatus eq 'A')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "orderby": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "userId": "EMP001",
+                  "startDate": "/Date(1577836800000)/",
+                  "seqNumber": 1,
+                  "jobCode": "SAP_CONSULTANT_SR",
+                  "jobTitle": "Senior SAP Basis Consultant",
+                  "company": "1000",
+                  "department": "IT_INFRASTRUCTURE",
+                  "location": "DE_MUNICH",
+                  "managerId": "MGR001",
+                  "emplStatus": "A",
+                  "fte": 1.0,
+                  "standardHours": 40.0
+                },
+                {
+                  "userId": "EMP002",
+                  "startDate": "/Date(1609459200000)/",
+                  "seqNumber": 1,
+                  "jobCode": "SAP_ANALYTICS_SPEC",
+                  "jobTitle": "SAP Analytics Specialist",
+                  "company": "1000",
+                  "department": "BUSINESS_INTELLIGENCE",
+                  "location": "DE_BERLIN",
+                  "managerId": "MGR002",
+                  "emplStatus": "A",
+                  "fte": 1.0,
+                  "standardHours": 40.0
+                },
+                {
+                  "userId": "EMP003",
+                  "startDate": "/Date(1640995200000)/",
+                  "seqNumber": 1,
+                  "jobCode": "SAP_DEVELOPER",
+                  "jobTitle": "SAP ABAP Developer",
+                  "company": "1000",
+                  "department": "APPLICATION_DEVELOPMENT",
+                  "location": "DE_HAMBURG",
+                  "managerId": "MGR003",
+                  "emplStatus": "A",
+                  "fte": 0.8,
+                  "standardHours": 32.0
+                }
+              ]
+            }
+          }
+        },
+        "get_empjob_for_sfodata": {
+          "description": "Retrieve a single job record by key.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "userid": { "type": "string", "description": "User ID" },
+              "startdate": { "type": "string", "description": "Start date of the job record" },
+              "seqnumber": { "type": "string", "description": "Sequence number" },
+              "select": { "type": "string" }
+            },
+            "required": ["userid", "startdate", "seqnumber"]
+          },
+          "mock_response": {
+            "d": {
+              "userId": "EMP001",
+              "startDate": "/Date(1577836800000)/",
+              "seqNumber": 1,
+              "jobCode": "SAP_CONSULTANT_SR",
+              "jobTitle": "Senior SAP Basis Consultant",
+              "company": "1000",
+              "department": "IT_INFRASTRUCTURE",
+              "location": "DE_MUNICH",
+              "emplStatus": "A",
+              "fte": 1.0,
+              "standardHours": 40.0
+            }
+          }
+        },
+        "list_empemployment_for_sfodata": {
+          "description": "Retrieve employment records (hire date, termination date, employment type).",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string" },
+              "select": { "type": "string" },
+              "top": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "personIdExternal": "P001",
+                  "userId": "EMP001",
+                  "startDate": "/Date(1325376000000)/",
+                  "endDate": "/Date(9999999999000)/",
+                  "isContingentWorker": false,
+                  "isECRecord": true
+                },
+                {
+                  "personIdExternal": "P002",
+                  "userId": "EMP002",
+                  "startDate": "/Date(1357948800000)/",
+                  "endDate": "/Date(9999999999000)/",
+                  "isContingentWorker": false,
+                  "isECRecord": true
+                }
+              ]
+            }
+          }
+        },
+        "batch_for_sfodata": {
+          "description": "Execute batch OData operations.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "d": { "results": [] } }
+        }
+      }
+    },
+    "sap-sf-time-off": {
+      "mcp_server_name": "sap.mcp/sfodata_timeoff",
+      "description": "MCP server for the SAP SuccessFactors Time Off API — provides approved time-off/leave records with dates and durations for conflict detection against project timelines.",
+      "tools": {
+        "list_employeetime_for_sfodata": {
+          "description": "Retrieve employee time-off/leave records including leave type, start/end dates, duration, and approval status.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "filter": { "type": "string", "description": "OData filter (e.g. userId eq 'EMP001' and startDate ge datetime'2025-01-01T00:00:00' and approvalStatus eq 'APPROVED')" },
+              "select": { "type": "string" },
+              "top": { "type": "string" },
+              "orderby": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "d": {
+              "results": [
+                {
+                  "externalCode": "TO-001",
+                  "userId": "EMP001",
+                  "timeType": "VACATION",
+                  "startDate": "/Date(1740787200000)/",
+                  "endDate": "/Date(1741219200000)/",
+                  "quantityInDays": 5.0,
+                  "quantityInHours": 40.0,
+                  "approvalStatus": "APPROVED",
+                  "undeterminedEndDate": false,
+                  "loaStartJobInfoId": null,
+                  "comment": "Annual leave"
+                },
+                {
+                  "externalCode": "TO-002",
+                  "userId": "EMP003",
+                  "timeType": "VACATION",
+                  "startDate": "/Date(1743465600000)/",
+                  "endDate": "/Date(1744156800000)/",
+                  "quantityInDays": 8.0,
+                  "quantityInHours": 64.0,
+                  "approvalStatus": "APPROVED",
+                  "undeterminedEndDate": false,
+                  "loaStartJobInfoId": null,
+                  "comment": "Extended vacation"
+                },
+                {
+                  "externalCode": "TO-003",
+                  "userId": "EMP003",
+                  "timeType": "SICK_LEAVE",
+                  "startDate": "/Date(1746144000000)/",
+                  "endDate": "/Date(1746316800000)/",
+                  "quantityInDays": 2.0,
+                  "quantityInHours": 16.0,
+                  "approvalStatus": "APPROVED",
+                  "undeterminedEndDate": false,
+                  "loaStartJobInfoId": null,
+                  "comment": null
+                }
+              ]
+            }
+          }
+        },
+        "get_employeetime_by_key_for_sfodata": {
+          "description": "Retrieve a single employee time-off record by external code and user ID.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "externalCode": { "type": "string", "description": "Time-off record external code" },
+              "userId": { "type": "string", "description": "Employee user ID" }
+            },
+            "required": ["externalCode"]
+          },
+          "mock_response": {
+            "d": {
+              "externalCode": "TO-001",
+              "userId": "EMP001",
+              "timeType": "VACATION",
+              "startDate": "/Date(1740787200000)/",
+              "endDate": "/Date(1741219200000)/",
+              "quantityInDays": 5.0,
+              "quantityInHours": 40.0,
+              "approvalStatus": "APPROVED"
+            }
+          }
+        },
+        "get_metadata_sfodata_timeoff": {
+          "description": "Get metadata of the Time Off OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>sfodata_timeoff $metadata</xml>" }
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_for_agent": "project-resource-management-agent",
+    "mock_mode": true,
+    "deterministic": true,
+    "total_servers": 7,
+    "total_tools": 36,
+    "generated_from": [
+      "assets/sap-s4-project-demand-mcp-server/mcp-translation/translation.json",
+      "assets/sap-s4-resource-assignment-source-mcp-server/mcp-translation/translation.json",
+      "assets/sap-s4-workforce-daily-availability-mcp-server/mcp-translation/translation.json",
+      "assets/sap-sf-skills-management-mcp-server/mcp-translation/translation.json",
+      "assets/sap-sf-employee-profile-mcp-server/mcp-translation/translation.json",
+      "assets/sap-sf-employment-information-mcp-server/mcp-translation/translation.json",
+      "assets/sap-sf-time-off-mcp-server/mcp-translation/translation.json"
+    ],
+    "generation_date": "2026-09-23"
+  }
+}
