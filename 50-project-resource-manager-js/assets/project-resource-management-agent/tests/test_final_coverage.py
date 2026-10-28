@@ -183,7 +183,7 @@ class TestMCPProviderAgwAdvanced:
         assert _MOCK_FILE.exists()
         with open(_MOCK_FILE) as f:
             data = json.load(f)
-        assert len(data["servers"]) == 7
+        assert len(data["servers"]) == 5
 
     def test_agw_module_has_ibd_testing_support(self):
         """Verify agw module supports IBD_TESTING mode."""

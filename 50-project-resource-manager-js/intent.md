@@ -18,7 +18,7 @@ Project managers and resource managers struggle to fill resource capacity gaps e
     
 2.  **Resource Requirements Identified** — Agent queries and surfaces open resource demands per project and activities.
     
-3.  **Employee Availability, Skills, and Time-Off Queried** — Agent retrieves employee availability from SAP S/4HANA Cloud, skill profiles from SAP SuccessFactors, and time-off/leave records from SAP SuccessFactors. Employees with time-off conflicts during the project timeline are filtered out.
+3.  **Employee Skills, Time-Off, and Profile Queried** — Agent retrieves skill profiles from SAP SuccessFactors, time-off/leave records from SAP SuccessFactors, and employee profile data (job title, department, employment status) from SAP SuccessFactors. Employees with time-off conflicts during the project timeline are filtered out.
     
 4.  **Best-Fit Candidates Proposed** — Agent cross-references demand, supply, skills, and time-off data, then presents ranked candidate recommendations (only fully available employees) with justification.
     
@@ -49,10 +49,9 @@ The challenge maps to the "Initiate Projects" sub-process within the "Order to F
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Manage active projects | SAP S/4HANA Cloud Public Edition — Project Scope and Structure Management (SC1518) | `sap.s4:apiResource:CE_PROJDEMANDSOURCEOFSUPPLY_0001:v1` | — | — | — | — | No | Standard project management available in S/4HANA Cloud |
 | Retrieve open resource requirements | SAP Project and Resource Management (SC1498); S/4HANA Cloud | `sap.s4:apiResource:API_PROJECTDEMAND_0001:v1` | — | — | — | — | No | Project Demand API covers open requirements |
-| Check employee availability | SAP S/4HANA Cloud — Workforce Daily Availability | `sap.s4:apiResource:API_MANAGE_WF_AVAILABILITY:v1` | — | — | — | — | No | Availability API available in S/4HANA Cloud |
 | Check employee time-off / leave data | SAP SuccessFactors — Time Off (ECTimeOff) | `sap.sf:apiResource:ECTimeOff:v1` | — | — | — | — | No | OData API provides approved time-off records (dates, durations) for conflict detection against project timelines |
 | Check employee skills | SAP SuccessFactors — Skills Management (ECSkillsManagement) | `sap.sf:apiResource:ECSkillsManagement:v1` | — | — | — | — | No | Skills data available via SuccessFactors API |
-| Retrieve employee profile / employment info | SAP SuccessFactors — Employee Profile, Employment Information | `sap.sf:apiResource:ECEmployeeProfile:v1`, `sap.sf:apiResource:ECEmploymentInformation:v1` | — | — | — | — | No | Standard SuccessFactors APIs available |
+| Retrieve employee profile (job title, department, employment status) | SAP SuccessFactors — Employee Profile (ECEmployeeProfile) | `sap.sf:apiResource:ECEmployeeProfile:v1` | — | — | — | — | No | EPPublicProfile exposes job title, department, and employment status natively in addition to profile, education, and certifications |
 | Propose best-fit candidates (AI reasoning) | No standard product | — | — | — | — | — | Yes | No pre-built AI candidate matching layer; requires custom AI Agent with cross-system reasoning |
 | Human-in-the-loop confirmation before assignment | No standard product | — | — | — | — | — | Yes | Native products do not support conversational confirmation flows; custom agent required |
 | Execute resource assignment (write-back) | SAP S/4HANA Cloud Resource Assignment Source | `sap.s4:apiResource:CE_PROJDEMANDSOURCEOFSUPPLY_0001:v1` | — | — | — | — | Maybe | Write-back possible via OData; agent must handle confirmation gate before calling API |

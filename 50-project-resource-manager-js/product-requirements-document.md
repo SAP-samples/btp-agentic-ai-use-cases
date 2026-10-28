@@ -220,15 +220,15 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 -   **Priority Rank**: 2
     
 
-**REQ-03: Check Employee Availability**
+**REQ-03: Check Employee Availability via Time-Off Records**
 
--   **Problem to Solve**: Checking whether a specific employee or pool of employees is available for a given time window requires manual lookup in S/4HANA Cloud.
+-   **Problem to Solve**: Checking whether a specific employee or pool of employees is available for a given time window requires cross-referencing their approved time-off records.
     
--   **User Story**: As a project manager, I need the agent to retrieve employee availability for a given time period so that I can identify who is free to take on additional work.
+-   **User Story**: As a project manager, I need the agent to determine employee availability for a given time period by checking their approved time-off records from SuccessFactors so that I can identify who is free to take on additional work.
     
 -   **Acceptance Criteria**:
     
-    -   Given a time window is specified, when the agent queries availability, then it returns employee names, available capacity (hours/days), and location from the Workforce Daily Availability API.
+    -   Given a time window is specified, when the agent queries SuccessFactors Time Off API, then it returns approved time-off records per employee and filters out those with leave conflicts during the required date range.
         
 -   **Maps to Objective**: Objective 1
     
@@ -254,13 +254,13 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 
 **REQ-04: Retrieve Employee Skills and Profiles**
 
--   **Problem to Solve**: Skills data is in SuccessFactors and not visible alongside availability data, forcing manual cross-referencing.
+-   **Problem to Solve**: Skills data is in SuccessFactors and not visible alongside time-off data, forcing manual cross-referencing.
     
 -   **User Story**: As a project manager, I need the agent to retrieve the skills and profile of available employees from SuccessFactors so that I can assess their fit for a resource requirement.
     
 -   **Acceptance Criteria**:
     
-    -   Given a list of available employees, when the agent queries SuccessFactors, then it returns skill tags, proficiency levels, and employment information for each employee.
+    -   Given a list of available employees, when the agent queries SuccessFactors, then it returns skill tags, proficiency levels, job title, department, and employment status for each employee via the Skills Management and Employee Profile APIs.
         
 -   **Maps to Objective**: Objective 1
     
@@ -395,32 +395,30 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 
 -   **Python AI Agent (A2A)**: Core reasoning and orchestration layer; manages conversation, tool invocation, candidate ranking, and confirmation flow
     
--   **MCP Translation Files (x6)**: Generated from EDMX/OpenAPI specs; expose each SAP API as a typed tool the agent can call
+-   **MCP Translation Files (x5)**: Generated from EDMX/OpenAPI specs; expose each SAP API as a typed tool the agent can call
     
+    -   SuccessFactors Skills Management MCP tool (`sap.sf:apiResource:ECSkillsManagement:v1`)
+        
+    -   SuccessFactors Employee Profile MCP tool (`sap.sf:apiResource:ECEmployeeProfile:v1`)
+        
+    -   SuccessFactors Time Off MCP tool (`sap.sf:apiResource:ECTimeOff:v1`)
+        
     -   Project Demand MCP tool (`sap.s4:apiResource:API_PROJECTDEMAND_0001:v1`)
         
     -   Resource Assignment Source MCP tool (`sap.s4:apiResource:CE_PROJDEMANDSOURCEOFSUPPLY_0001:v1`)
         
-    -   Workforce Daily Availability MCP tool (`sap.s4:apiResource:API_MANAGE_WF_AVAILABILITY:v1`)
-        
-    -   SuccessFactors Skills Management MCP tool (`sap.sf:apiResource:ECSkillsManagement:v1`)
-        
-    -   SuccessFactors Employee Profile & Employment Information MCP tools (`sap.sf:apiResource:ECEmployeeProfile:v1`, `sap.sf:apiResource:ECEmploymentInformation:v1`)
-        
-    -   SuccessFactors Time Off MCP tool (`sap.sf:apiResource:ECTimeOff:v1`)
-        
 -   **SAP Generative AI Hub**: LLM backend (GPT-4o or equivalent) for candidate matching reasoning and justification generation
     
--   **SAP S/4HANA Cloud**: Source of project data, workforce availability, and target for assignment write-back
+-   **SAP S/4HANA Cloud**: Source of project data and target for assignment write-back
     
 -   **SAP SuccessFactors**: Source of employee skills and profile data
     
 
 **Integration Points:**
 
--   S/4HANA Cloud OData APIs: read project demands, workforce availability; write resource assignments (bidirectional)
+-   S/4HANA Cloud OData APIs: read project demands; write resource assignments (bidirectional)
     
--   SuccessFactors OData APIs: read employee profiles, skills, employment information, and time-off/leave records (read-only)
+-   SuccessFactors OData APIs: read employee skills, profiles (including job title, department, employment status), and time-off/leave records (read-only)
     
 
 **Deployment Environments:**
@@ -477,15 +475,11 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 
 -   SAP S/4HANA Cloud — Project Demand API: active projects and open resource requirements (read)
     
--   SAP S/4HANA Cloud — Workforce Daily Availability API: employee availability by date range (read)
-    
 -   SAP S/4HANA Cloud — Resource Assignment Source API: resource assignment write-back (write)
     
 -   SAP SuccessFactors — Skills Management API: employee skill tags and proficiency (read)
     
--   SAP SuccessFactors — Employee Profile API: employee profile details (read)
-    
--   SAP SuccessFactors — Employment Information API: employment status and position details (read)
+-   SAP SuccessFactors — Employee Profile API: employee public profile, job title, department, employment status, education, and certifications (read)
     
 -   SAP SuccessFactors — Time Off API: approved time-off/leave records with dates and durations for conflict detection (read)
     
@@ -496,11 +490,9 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
     
 -   `get_resource_demands` (S/4HANA Project Demand MCP tool): retrieves open resource requirements per project — read-only
     
--   `get_workforce_availability` (S/4HANA Workforce Availability MCP tool): retrieves employee availability for a date range — read-only
-    
 -   `get_employee_skills` (SuccessFactors Skills Management MCP tool): retrieves skill tags and proficiency per employee — read-only
     
--   `get_employee_profile` (SuccessFactors Employee Profile MCP tool): retrieves employee profile and employment info — read-only
+-   `get_employee_profile` (SuccessFactors Employee Profile MCP tool): retrieves employee public profile, job title, department, employment status, education, and certifications — read-only
     
 -   `get_employee_timeoff` (SuccessFactors Time Off MCP tool): retrieves approved time-off/leave records (dates, durations, leave types) for conflict detection against project timelines — read-only
     
@@ -589,7 +581,7 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 
 -   **Description**: The agent has retrieved employee availability from S/4HANA Cloud, skills/profile data from SuccessFactors, and time-off/leave records from SuccessFactors for the candidate pool. Employees with time-off conflicts during the project timeline have been filtered out.
     
--   **Achieved when**: The agent has results from the Workforce Daily Availability API, at least one of the SuccessFactors APIs (Skills Management or Employee Profile), and the Time Off API. Employees with leave conflicts are excluded.
+-   **Achieved when**: The agent has results from at least one of the SuccessFactors APIs (Skills Management or Employee Profile), and the Time Off API. Employees with leave conflicts are excluded.
     
 -   **Log on achievement**: `M3.achieved: employee data retrieved — {count} employees with availability; SuccessFactors skills data: {available|partial|unavailable}; time-off data: {available|partial|unavailable}; {filtered_count} employees excluded due to time-off conflicts`
     
@@ -646,11 +638,11 @@ Jordan is a 44-year-old resource manager who owns the workforce pool across mult
 
 -   SAP BTP deployment environment with access to SAP Generative AI Hub (LLM)
     
--   Live or sandbox access to SAP S/4HANA Cloud OData APIs (Project Demand, Workforce Availability, Resource Assignment Source)
+-   Live or sandbox access to SAP S/4HANA Cloud OData APIs (Project Demand, Resource Assignment Source)
     
--   Live or sandbox access to SAP SuccessFactors OData APIs (Employee Profile, Skills Management, Employment Information, Time Off)
+-   Live or sandbox access to SAP SuccessFactors OData APIs (Skills Management, Employee Profile, Time Off)
     
--   MCP translation files generated from EDMX/OpenAPI specifications for all 7 APIs
+-   MCP translation files generated from EDMX/OpenAPI specifications for all 5 APIs
     
 
 * * *

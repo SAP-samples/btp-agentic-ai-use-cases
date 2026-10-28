@@ -1,5 +1,5 @@
 {
-  "mcpTranslationVersion": "0.7",
+  "mcpTranslationVersion": "0.6",
   "target": {
     "ordId": "sap.s4:apiResource:CE_PROJDEMANDSOURCEOFSUPPLY_0001:v1",
     "type": "edmx"

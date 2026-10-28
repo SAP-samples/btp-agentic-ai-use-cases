@@ -51,22 +51,26 @@ class TestEndToEndStaffingFlow:
         self.all_tools = _load_all_mock_tools()
         assert len(self.all_tools) > 0
 
-    def test_mcp_mock_has_all_seven_servers(self):
-        """Verify all 7 MCP servers are present in mcp-mock.json."""
+    def test_mcp_mock_has_all_five_servers(self):
+        """Verify all 5 MCP servers are present in mcp-mock.json."""
         mock_path = Path(__file__).parent.parent / "mcp-mock.json"
         with open(mock_path) as f:
             mock_data = json.load(f)
         expected_servers = [
-            "sap-s4-project-demand",
-            "sap-s4-resource-assignment-source",
-            "sap-s4-workforce-daily-availability",
             "sap-sf-skills-management",
             "sap-sf-employee-profile",
-            "sap-sf-employment-information",
-            "sap-sf-time-off"
+            "sap-sf-time-off",
+            "sap-s4-project-demand",
+            "sap-s4-resource-assignment-source",
         ]
         for server in expected_servers:
             assert server in mock_data["servers"], f"Missing server: {server}"
+        excluded_servers = [
+            "sap-s4-workforce-daily-availability",
+            "sap-sf-employment-information",
+        ]
+        for server in excluded_servers:
+            assert server not in mock_data["servers"], f"Server should not be present: {server}"
 
     def test_total_tool_count_in_mock(self):
         """Verify all expected tool categories are covered in the mock."""
@@ -136,27 +140,28 @@ class TestEndToEndStaffingFlow:
         assert project_uuid in demand_uuids, "Project UUID must be consistent in resource demands"
 
     def test_mock_employee_ids_are_consistent(self):
-        """Verify employee IDs are consistent across availability and skills data."""
+        """Verify employee IDs are consistent across skills and profile data."""
         mock_path = Path(__file__).parent.parent / "mcp-mock.json"
         with open(mock_path) as f:
             mock_data = json.load(f)
 
-        # Get employee IDs from availability data
-        availability = mock_data["servers"]["sap-s4-workforce-daily-availability"]["tools"][
-            "list_timeoverviewset_for_shcm_api_manage_wf_availability"
+        # Get employee IDs from SF skills data
+        skill_profiles = mock_data["servers"]["sap-sf-skills-management"]["tools"][
+            "list_skillprofile_for_sfodata"
         ]["mock_response"]["d"]["results"]
-        avail_emp_ids = {r["Personworkagreementexternalid"] for r in availability}
+        skill_emp_ids = {r["externalCode"] for r in skill_profiles}
 
-        # Get employee IDs from SF employment info
-        emp_jobs = mock_data["servers"]["sap-sf-employment-information"]["tools"][
-            "list_empjob_for_sfodata"
+        # Get employee IDs from SF employee profile data
+        profiles = mock_data["servers"]["sap-sf-employee-profile"]["tools"][
+            "list_eppublicprofile_for_sfodata_profile"
         ]["mock_response"]["d"]["results"]
-        job_user_ids = {r["userId"] for r in emp_jobs}
+        profile_emp_ids = {r["userId"] for r in profiles}
 
-        # Both should have overlapping employee identifiers in a real scenario
-        # In mock, verify both exist and have data
-        assert len(avail_emp_ids) >= 2, "Should have at least 2 employees in availability data"
-        assert len(job_user_ids) >= 2, "Should have at least 2 employees in job data"
+        # Both should have overlapping employee identifiers
+        assert len(skill_emp_ids) >= 2, "Should have at least 2 employees in skills data"
+        assert len(profile_emp_ids) >= 2, "Should have at least 2 employees in profile data"
+        overlap = skill_emp_ids & profile_emp_ids
+        assert len(overlap) >= 1, "At least one employee must appear in both skills and profile data"
 
     @pytest.mark.asyncio
     async def test_milestone_m5_assignment_tool_accepts_required_params(self):
@@ -230,12 +235,12 @@ class TestEndToEndStaffingFlow:
         timeoff_records = mock_data["servers"]["sap-sf-time-off"]["tools"][
             "list_employeetime_for_sfodata"
         ]["mock_response"]["d"]["results"]
-        # Get availability employee IDs
-        avail_records = mock_data["servers"]["sap-s4-workforce-daily-availability"]["tools"][
-            "list_timeoverviewset_for_shcm_api_manage_wf_availability"
+        # Get employee IDs from skills data (as proxy for the candidate pool)
+        skill_profiles = mock_data["servers"]["sap-sf-skills-management"]["tools"][
+            "list_skillprofile_for_sfodata"
         ]["mock_response"]["d"]["results"]
-        avail_emp_ids = {r["Personworkagreementexternalid"] for r in avail_records}
-        # At least one time-off record should be for an employee who also appears in availability
+        skill_emp_ids = {r["externalCode"] for r in skill_profiles}
+        # At least one time-off record should be for an employee who also appears in skills data
         timeoff_emp_ids = {r["userId"] for r in timeoff_records}
-        overlap = avail_emp_ids & timeoff_emp_ids
-        assert len(overlap) >= 1, "At least one employee must appear in both availability and time-off data for conflict testing"
+        overlap = skill_emp_ids & timeoff_emp_ids
+        assert len(overlap) >= 1, "At least one employee must appear in both skills and time-off data for conflict testing"

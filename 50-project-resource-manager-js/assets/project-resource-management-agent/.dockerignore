@@ -1,0 +1,29 @@
+# Test infrastructure — never goes into the production image
+local-packages/
+prebuilt_tests/
+tests/
+conftest.py
+pytest.ini
+.coveragerc
+coverage.json
+test_report.json
+mcp-mock.json
+requirements-test.txt
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+
+# Dev / IDE
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+
+# Git
+.git/
+.gitignore

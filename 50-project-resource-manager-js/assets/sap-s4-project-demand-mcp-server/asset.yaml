@@ -12,7 +12,7 @@ provides:
   apis:
     - name: sap-s4-project-demand-mcp-server
       kind: mcp-server
-      ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-project-demand-mcp-server:v1
+      ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-s4-project-demand-mcp-server:v1
 
 requires:
   - name: API_PROJECTDEMAND_0001

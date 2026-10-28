@@ -102,14 +102,14 @@ class TestGetEmployeeTimeOff:
         ]["mock_response"]["d"]["results"]
         timeoff_ids = {r["userId"] for r in timeoff_records}
 
-        avail_records = mock_data["servers"]["sap-s4-workforce-daily-availability"]["tools"][
-            "list_timeoverviewset_for_shcm_api_manage_wf_availability"
+        skill_records = mock_data["servers"]["sap-sf-skills-management"]["tools"][
+            "list_skillprofile_for_sfodata"
         ]["mock_response"]["d"]["results"]
-        avail_ids = {r["Personworkagreementexternalid"] for r in avail_records}
+        skill_ids = {r["externalCode"] for r in skill_records}
 
-        overlap = timeoff_ids & avail_ids
+        overlap = timeoff_ids & skill_ids
         assert len(overlap) >= 1, (
-            "At least one employee with time-off must appear in availability data "
+            "At least one employee with time-off must appear in skills data "
             "to test conflict detection"
         )
 

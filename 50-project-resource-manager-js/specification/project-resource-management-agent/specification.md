@@ -59,8 +59,8 @@ This agent requires two runtime skills for complex multi-step workflows:
 
 ### REQ-04 — Retrieve Employee Skills and Profiles
 
-- [ ] Implement system prompt instruction directing the agent to use the `SkillProfile` and `RatedSkillMapping` entities from the SF Skills Management MCP tool, and `EmpJob` entity from the SF Employment Information MCP tool, retrieving skill names, proficiency levels, job title, department, location, and employment status per employee
-- [ ] System prompt must instruct agent to use `EPPublicProfile` from the SF Employee Profile MCP tool for additional profile context (introduction, certifications)
+- [ ] Implement system prompt instruction directing the agent to use the `SkillProfile` and `RatedSkillMapping` entities from the SF Skills Management MCP tool, retrieving skill names and proficiency levels per employee
+- [ ] System prompt must instruct agent to use `EPPublicProfile` from the SF Employee Profile MCP tool to retrieve job title, department, employment status, introduction, and certifications
 - [ ] System prompt must explicitly handle the case where SkillProfile does not exist for an employee: flag this in the recommendation with `[Skills data unavailable]` rather than omitting the candidate silently
 
 ### REQ-05 — Propose Best-Fit Candidates with Justification
@@ -112,16 +112,14 @@ This agent requires two runtime skills for complex multi-step workflows:
 
 > Read [guidelines-agent-mcp.md](../guidelines-agent-mcp.md) — Path A applies: API spec files exist, no pre-deployed MCP servers.
 
-- [ ] Verify `specification/project-resource-management-agent/api-specs/` contains all 7 EDMX files:
+- [ ] Verify `specification/project-resource-management-agent/api-specs/` contains all 5 EDMX files:
+  - `sf-skills-management.edmx` (ORD ID: `sap.sf:apiResource:ECSkillsManagement:v1`) — SuccessFactors Skills Management: skill profiles and ratings
+  - `sf-employee-profile.edmx` (ORD ID: `sap.sf:apiResource:ECEmployeeProfile:v1`) — SuccessFactors Employee Profile: public profile, job title, department, employment status, background and education
+  - `sf-time-off.edmx` (ORD ID: `sap.sf:apiResource:ECTimeOff:v1`) — SuccessFactors Time Off: approved time-off/leave records with dates and durations for conflict detection
   - `project-demand.edmx` (ORD ID: `sap.s4:apiResource:API_PROJECTDEMAND_0001:v1`) — Project Demand API: active projects, open resource requirements
   - `resource-assignment-source.edmx` (ORD ID: `sap.s4:apiResource:CE_PROJDEMANDSOURCEOFSUPPLY_0001:v1`) — Resource Assignment Source API: write-back of confirmed assignments
-  - `workforce-daily-availability.edmx` (ORD ID: `sap.s4:apiResource:API_MANAGE_WF_AVAILABILITY:v1`) — Workforce Daily Availability API: employee availability by date
-  - `sf-skills-management.edmx` (ORD ID: `sap.sf:apiResource:ECSkillsManagement:v1`) — SuccessFactors Skills Management: skill profiles and ratings
-  - `sf-employee-profile.edmx` (ORD ID: `sap.sf:apiResource:ECEmployeeProfile:v1`) — SuccessFactors Employee Profile: background and education
-  - `sf-employment-information.edmx` (ORD ID: `sap.sf:apiResource:ECEmploymentInformation:v1`) — SuccessFactors Employment Information: job title, department, location
-  - `sf-time-off.edmx` (ORD ID: `sap.sf:apiResource:ECTimeOff:v1`) — SuccessFactors Time Off: approved time-off/leave records with dates and durations for conflict detection
 
-- [ ] Invoke `mcp-translation-file` skill for each of the 7 API spec files to generate MCP translation cards in `specification/project-resource-management-agent/mcps/<api-spec-stem>/`
+- [ ] Invoke `mcp-translation-file` skill for each of the 5 API spec files to generate MCP translation cards in `specification/project-resource-management-agent/mcps/<api-spec-stem>/`
 
 - [ ] Invoke `setup-solution` skill to create MCP server assets for all generated translation files
 
@@ -141,10 +139,8 @@ This agent requires two runtime skills for complex multi-step workflows:
 - [ ] Write unit tests in `assets/project-resource-management-agent/tests/` — one test per tool/capability area:
   - `test_get_active_projects.py` — mock Project Demand MCP, assert project list returned with expected fields
   - `test_get_resource_demands.py` — mock Project Demand MCP, assert open demands returned per project UUID
-  - `test_get_workforce_availability.py` — mock Workforce Availability MCP, assert daily availability data returned and aggregated
   - `test_get_employee_skills.py` — mock SF Skills Management MCP, assert skill profiles and proficiency levels returned
-  - `test_get_employee_profile.py` — mock SF Employee Profile MCP, assert profile data returned
-  - `test_get_employment_info.py` — mock SF Employment Information MCP, assert job title, department, location returned
+  - `test_get_employee_profile.py` — mock SF Employee Profile MCP, assert profile data (including job title, department, employment status) returned
   - `test_get_employee_timeoff.py` — mock SF Time Off MCP, assert approved time-off records returned with dates and durations; assert employees with time-off overlapping project timeline are excluded from recommendations
   - `test_create_resource_assignment.py` — mock Resource Assignment Source MCP, assert assignment created only when confirmation is recorded; assert it is NOT called without confirmation
 - [ ] Write one integration test `test_end_to_end_staffing_flow.py` — simulate full conversation: list projects → get demands → get availability → get time-off → get skills → propose candidates (verify time-off filtered) → confirm → execute assignment; mock LLM responses and all MCP tool responses; test must run offline

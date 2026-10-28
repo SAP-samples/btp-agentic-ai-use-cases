@@ -1,1 +1,154 @@
-[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[
+  {
+    "name": "get_metadata_sfodata",
+    "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n"
+  },
+  {
+    "name": "batch_for_sfodata",
+    "description": "Execute multiple OData operations in a single batch request using the $batch endpoint. This allows you to combine multiple tool calls into one HTTP request, improving efficiency when performing multiple operations."
+  },
+  {
+    "name": "list_skillentity_for_sfodata",
+    "description": "Retrieve a list of entities from the SkillEntity collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_skillentity_for_sfodata",
+    "description": "Create a new instance of the SkillEntity EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_skillentity_for_sfodata",
+    "description": "Update an entity in SkillEntity EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_skillentity_for_sfodata",
+    "description": "Delete an entity from SkillEntity EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_skillentity_for_sfodata",
+    "description": "Retrieve a single entity by its key from the SkillEntity collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_skillentity_for_sfodata",
+    "description": "Get the total count of entities in the SkillEntity collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_skillprofile_for_sfodata",
+    "description": "Retrieve a list of entities from the SkillProfile collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_skillprofile_for_sfodata",
+    "description": "Create a new instance of the SkillProfile EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_skillprofile_for_sfodata",
+    "description": "Update an entity in SkillProfile EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_skillprofile_for_sfodata",
+    "description": "Delete an entity from SkillProfile EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_skillprofile_for_sfodata",
+    "description": "Retrieve a single entity by its key from the SkillProfile collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_skillprofile_for_sfodata",
+    "description": "Get the total count of entities in the SkillProfile collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_ratedskillmapping_for_sfodata",
+    "description": "Retrieve a list of entities from the RatedSkillMapping collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_ratedskillmapping_for_sfodata",
+    "description": "Create a new instance of the RatedSkillMapping EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_ratedskillmapping_for_sfodata",
+    "description": "Update an entity in RatedSkillMapping EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_ratedskillmapping_for_sfodata",
+    "description": "Delete an entity from RatedSkillMapping EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_ratedskillmapping_for_sfodata",
+    "description": "Retrieve a single entity by its key from the RatedSkillMapping collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_ratedskillmapping_for_sfodata",
+    "description": "Get the total count of entities in the RatedSkillMapping collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_selfreportskillmapping_for_sfodata",
+    "description": "Retrieve a list of entities from the SelfReportSkillMapping collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_selfreportskillmapping_for_sfodata",
+    "description": "Create a new instance of the SelfReportSkillMapping EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_selfreportskillmapping_for_sfodata",
+    "description": "Update an entity in SelfReportSkillMapping EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_selfreportskillmapping_for_sfodata",
+    "description": "Delete an entity from SelfReportSkillMapping EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_selfreportskillmapping_for_sfodata",
+    "description": "Retrieve a single entity by its key from the SelfReportSkillMapping collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_selfreportskillmapping_for_sfodata",
+    "description": "Get the total count of entities in the SelfReportSkillMapping collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_jobprofile_for_sfodata",
+    "description": "Retrieve a list of entities from the JobProfile collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_jobprofile_for_sfodata",
+    "description": "Create a new instance of the JobProfile EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_jobprofile_for_sfodata",
+    "description": "Update an entity in JobProfile EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_jobprofile_for_sfodata",
+    "description": "Delete an entity from JobProfile EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_jobprofile_for_sfodata",
+    "description": "Retrieve a single entity by its key from the JobProfile collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_jobprofile_for_sfodata",
+    "description": "Get the total count of entities in the JobProfile collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_competencyentity_for_sfodata",
+    "description": "Retrieve a list of entities from the CompetencyEntity collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_competencyentity_for_sfodata",
+    "description": "Create a new instance of the CompetencyEntity EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_competencyentity_for_sfodata",
+    "description": "Update an entity in CompetencyEntity EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_competencyentity_for_sfodata",
+    "description": "Delete an entity from CompetencyEntity EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_competencyentity_for_sfodata",
+    "description": "Retrieve a single entity by its key from the CompetencyEntity collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_competencyentity_for_sfodata",
+    "description": "Get the total count of entities in the CompetencyEntity collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "get_metadata_sfodata",
+    "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n"
+  },
+  {
+    "name": "batch_for_sfodata",
+    "description": "Execute multiple OData operations in a single batch request using the $batch endpoint."
+  },
+  {
+    "name": "list_employeetime_for_sfodata",
+    "description": "Retrieve employee time-off/leave records from SuccessFactors. Filter by userId and date range to check for approved leave conflicts with project timelines."
+  },
+  {
+    "name": "get_employeetime_for_sfodata",
+    "description": "Retrieve a single EmployeeTime record by its external code."
+  },
+  {
+    "name": "count_employeetime_for_sfodata",
+    "description": "Get the total count of EmployeeTime records matching a filter."
+  }
+]

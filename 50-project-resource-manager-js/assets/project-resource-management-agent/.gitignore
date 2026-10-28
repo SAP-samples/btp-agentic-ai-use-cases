@@ -7,4 +7,15 @@ __pycache__/
 *.pyo
 .venv/
 venv/
+
+# Test tooling installed at runtime — never commit
+local-packages/
+
+# Generated test/coverage artefacts
+coverage.json
+test_report.json
+.coverage
+.pytest_cache/
+
+# OS
 .DS_Store

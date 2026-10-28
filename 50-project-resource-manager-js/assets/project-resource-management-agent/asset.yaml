@@ -10,30 +10,27 @@ provides:
   apis:
     - name: project-resource-management-agent
       kind: a2a
-      ordId: customer.build:apiResource:project-resource-mgmt-55d21.project-resource-management-agent:v1
+      ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.project-resource-management-agent:v1
 
 requires:
-  - name: sap-s4-project-demand-mcp-server
-    kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-project-demand-mcp-server:v1
-  - name: sap-s4-resource-assignment-source-mcp-server
-    kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-resource-assignment-source-mcp-server:v1
-  - name: sap-s4-workforce-daily-availability-mcp-server
-    kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-s4-workforce-daily-availability-mcp-server:v1
   - name: sap-sf-skills-management-mcp-server
     kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-skills-management-mcp-server:v1
+    ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-sf-skills-management-mcp-server:v1
   - name: sap-sf-employee-profile-mcp-server
     kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-employee-profile-mcp-server:v1
-  - name: sap-sf-employment-information-mcp-server
-    kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-employment-information-mcp-server:v1
+    ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-sf-employee-profile-mcp-server:v1
   - name: sap-sf-time-off-mcp-server
     kind: mcp-server
-    ordId: customer.build:apiResource:project-resource-mgmt-55d21.sap-sf-time-off-mcp-server:v1
+    ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-sf-time-off-mcp-server:v1
+  - name: sap-s4-project-demand-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-s4-project-demand-mcp-server:v1
+  - name: sap-s4-resource-assignment-source-mcp-server
+    kind: mcp-server
+    ordId: customer.build:apiResource:project-resource-mgmt-4d6c5.sap-s4-resource-assignment-source-mcp-server:v1
+
+
+
 
 container:
   buildPath: .

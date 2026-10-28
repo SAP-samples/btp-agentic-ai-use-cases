@@ -248,117 +248,7 @@
         }
       }
     },
-    "sap-s4-workforce-daily-availability": {
-      "mcp_server_name": "sap.mcp/shcm_api_manage_wf_availability",
-      "description": "MCP server for the SAP S/4HANA Cloud Workforce Daily Availability API — provides employee availability by date range.",
-      "tools": {
-        "get_metadata_shcm_api_manage_wf_availability": {
-          "description": "Get metadata of the OData service.",
-          "input_schema": { "type": "object", "properties": {}, "required": [] },
-          "mock_response": { "metadata": "<xml>shcm_api_manage_wf_availability $metadata</xml>" }
-        },
-        "list_timeoverviewset_for_shcm_api_manage_wf_availability": {
-          "description": "Retrieve daily availability data for employees.",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "filter": { "type": "string", "description": "OData filter (e.g. Calendardate ge datetime'2025-01-01T00:00:00')" },
-              "select": { "type": "string" },
-              "top": { "type": "string" },
-              "orderby": { "type": "string" }
-            },
-            "required": []
-          },
-          "mock_response": {
-            "d": {
-              "results": [
-                {
-                  "Personworkagreementexternalid": "EMP001",
-                  "Companycode": "1000",
-                  "Personworkagreement": "10000101",
-                  "Calendardate": "/Date(1738368000000)/",
-                  "Plannedworkinghours": "8.00",
-                  "Plannedstarttime": "PT08H00M00S",
-                  "Plannedendtime": "PT17H00M00S",
-                  "Publicholidayclass": "0",
-                  "Isnonworkingday": false,
-                  "Absencehours": "0.00",
-                  "Attendancehours": "0.00",
-                  "Overtimehours": "0.00"
-                },
-                {
-                  "Personworkagreementexternalid": "EMP002",
-                  "Companycode": "1000",
-                  "Personworkagreement": "10000102",
-                  "Calendardate": "/Date(1738368000000)/",
-                  "Plannedworkinghours": "8.00",
-                  "Plannedstarttime": "PT08H00M00S",
-                  "Plannedendtime": "PT17H00M00S",
-                  "Publicholidayclass": "0",
-                  "Isnonworkingday": false,
-                  "Absencehours": "0.00",
-                  "Attendancehours": "0.00",
-                  "Overtimehours": "0.00"
-                },
-                {
-                  "Personworkagreementexternalid": "EMP003",
-                  "Companycode": "1000",
-                  "Personworkagreement": "10000103",
-                  "Calendardate": "/Date(1738368000000)/",
-                  "Plannedworkinghours": "8.00",
-                  "Plannedstarttime": "PT08H00M00S",
-                  "Plannedendtime": "PT17H00M00S",
-                  "Publicholidayclass": "0",
-                  "Isnonworkingday": false,
-                  "Absencehours": "4.00",
-                  "Attendancehours": "4.00",
-                  "Overtimehours": "0.00"
-                }
-              ]
-            }
-          }
-        },
-        "get_timeoverviewset_for_shcm_api_manage_wf_availability": {
-          "description": "Retrieve a single daily availability record by key.",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "personworkagreementexternalid": { "type": "string", "description": "Work agreement external ID" },
-              "companycode": { "type": "string", "description": "Company code" },
-              "calendardate": { "type": "string", "description": "Calendar date" },
-              "select": { "type": "string" }
-            },
-            "required": ["personworkagreementexternalid", "companycode", "calendardate"]
-          },
-          "mock_response": {
-            "d": {
-              "Personworkagreementexternalid": "EMP001",
-              "Companycode": "1000",
-              "Personworkagreement": "10000101",
-              "Calendardate": "/Date(1738368000000)/",
-              "Plannedworkinghours": "8.00",
-              "Absencehours": "0.00",
-              "Attendancehours": "0.00",
-              "Isnonworkingday": false
-            }
-          }
-        },
-        "count_timeoverviewset_for_shcm_api_manage_wf_availability": {
-          "description": "Get count of availability records.",
-          "input_schema": {
-            "type": "object",
-            "properties": { "filter": { "type": "string" } },
-            "required": []
-          },
-          "mock_response": { "d": { "__count": "3" } }
-        },
-        "batch_for_shcm_api_manage_wf_availability": {
-          "description": "Execute batch operations.",
-          "input_schema": { "type": "object", "properties": {}, "required": [] },
-          "mock_response": { "d": { "results": [] } }
-        }
-      }
-    },
+
     "sap-sf-skills-management": {
       "mcp_server_name": "sap.mcp/sfodata_skills",
       "description": "MCP server for the SAP SuccessFactors Skills Management API — provides employee skill profiles, ratings, and competencies.",
@@ -534,7 +424,12 @@
       "mcp_server_name": "sap.mcp/sfodata_profile",
       "description": "MCP server for the SAP SuccessFactors Employee Profile API — provides employee public profile, education, and work experience.",
       "tools": {
-        "list_eppublicprofile_for_sfodata": {
+        "get_metadata_sfodata_profile": {
+          "description": "Get metadata of the Employee Profile OData service.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "metadata": "<xml>sfodata_profile $metadata</xml>" }
+        },
+        "list_eppublicprofile_for_sfodata_profile": {
           "description": "Retrieve employee public profiles.",
           "input_schema": {
             "type": "object",
@@ -562,7 +457,7 @@
             }
           }
         },
-        "get_eppublicprofile_for_sfodata": {
+        "get_eppublicprofile_for_sfodata_profile": {
           "description": "Retrieve a single employee public profile by user ID.",
           "input_schema": {
             "type": "object",
@@ -580,7 +475,7 @@
             }
           }
         },
-        "list_background_education_for_sfodata": {
+        "list_background_education_for_sfodata_profile": {
           "description": "Retrieve education background for employees.",
           "input_schema": {
             "type": "object",
@@ -607,7 +502,7 @@
             }
           }
         },
-        "list_background_certificates_for_sfodata": {
+        "list_background_certificates_for_sfodata_profile": {
           "description": "Retrieve certifications for employees.",
           "input_schema": {
             "type": "object",
@@ -633,147 +528,14 @@
             }
           }
         },
-        "batch_for_sfodata": {
+        "batch_for_sfodata_profile": {
           "description": "Execute batch OData operations.",
           "input_schema": { "type": "object", "properties": {}, "required": [] },
           "mock_response": { "d": { "results": [] } }
         }
       }
     },
-    "sap-sf-employment-information": {
-      "mcp_server_name": "sap.mcp/sfodata_employment",
-      "description": "MCP server for the SAP SuccessFactors Employment Information API — provides job title, department, location, and employment status.",
-      "tools": {
-        "list_empjob_for_sfodata": {
-          "description": "Retrieve job information (title, department, location, status) for employees.",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "filter": { "type": "string", "description": "OData filter (e.g. userId eq 'EMP001' and emplStatus eq 'A')" },
-              "select": { "type": "string" },
-              "top": { "type": "string" },
-              "orderby": { "type": "string" }
-            },
-            "required": []
-          },
-          "mock_response": {
-            "d": {
-              "results": [
-                {
-                  "userId": "EMP001",
-                  "startDate": "/Date(1577836800000)/",
-                  "seqNumber": 1,
-                  "jobCode": "SAP_CONSULTANT_SR",
-                  "jobTitle": "Senior SAP Basis Consultant",
-                  "company": "1000",
-                  "department": "IT_INFRASTRUCTURE",
-                  "location": "DE_MUNICH",
-                  "managerId": "MGR001",
-                  "emplStatus": "A",
-                  "fte": 1.0,
-                  "standardHours": 40.0
-                },
-                {
-                  "userId": "EMP002",
-                  "startDate": "/Date(1609459200000)/",
-                  "seqNumber": 1,
-                  "jobCode": "SAP_ANALYTICS_SPEC",
-                  "jobTitle": "SAP Analytics Specialist",
-                  "company": "1000",
-                  "department": "BUSINESS_INTELLIGENCE",
-                  "location": "DE_BERLIN",
-                  "managerId": "MGR002",
-                  "emplStatus": "A",
-                  "fte": 1.0,
-                  "standardHours": 40.0
-                },
-                {
-                  "userId": "EMP003",
-                  "startDate": "/Date(1640995200000)/",
-                  "seqNumber": 1,
-                  "jobCode": "SAP_DEVELOPER",
-                  "jobTitle": "SAP ABAP Developer",
-                  "company": "1000",
-                  "department": "APPLICATION_DEVELOPMENT",
-                  "location": "DE_HAMBURG",
-                  "managerId": "MGR003",
-                  "emplStatus": "A",
-                  "fte": 0.8,
-                  "standardHours": 32.0
-                }
-              ]
-            }
-          }
-        },
-        "get_empjob_for_sfodata": {
-          "description": "Retrieve a single job record by key.",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "userid": { "type": "string", "description": "User ID" },
-              "startdate": { "type": "string", "description": "Start date of the job record" },
-              "seqnumber": { "type": "string", "description": "Sequence number" },
-              "select": { "type": "string" }
-            },
-            "required": ["userid", "startdate", "seqnumber"]
-          },
-          "mock_response": {
-            "d": {
-              "userId": "EMP001",
-              "startDate": "/Date(1577836800000)/",
-              "seqNumber": 1,
-              "jobCode": "SAP_CONSULTANT_SR",
-              "jobTitle": "Senior SAP Basis Consultant",
-              "company": "1000",
-              "department": "IT_INFRASTRUCTURE",
-              "location": "DE_MUNICH",
-              "emplStatus": "A",
-              "fte": 1.0,
-              "standardHours": 40.0
-            }
-          }
-        },
-        "list_empemployment_for_sfodata": {
-          "description": "Retrieve employment records (hire date, termination date, employment type).",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "filter": { "type": "string" },
-              "select": { "type": "string" },
-              "top": { "type": "string" }
-            },
-            "required": []
-          },
-          "mock_response": {
-            "d": {
-              "results": [
-                {
-                  "personIdExternal": "P001",
-                  "userId": "EMP001",
-                  "startDate": "/Date(1325376000000)/",
-                  "endDate": "/Date(9999999999000)/",
-                  "isContingentWorker": false,
-                  "isECRecord": true
-                },
-                {
-                  "personIdExternal": "P002",
-                  "userId": "EMP002",
-                  "startDate": "/Date(1357948800000)/",
-                  "endDate": "/Date(9999999999000)/",
-                  "isContingentWorker": false,
-                  "isECRecord": true
-                }
-              ]
-            }
-          }
-        },
-        "batch_for_sfodata": {
-          "description": "Execute batch OData operations.",
-          "input_schema": { "type": "object", "properties": {}, "required": [] },
-          "mock_response": { "d": { "results": [] } }
-        }
-      }
-    },
+
     "sap-sf-time-off": {
       "mcp_server_name": "sap.mcp/sfodata_timeoff",
       "description": "MCP server for the SAP SuccessFactors Time Off API — provides approved time-off/leave records with dates and durations for conflict detection against project timelines.",
@@ -872,17 +634,15 @@
     "created_for_agent": "project-resource-management-agent",
     "mock_mode": true,
     "deterministic": true,
-    "total_servers": 7,
-    "total_tools": 36,
+    "total_servers": 5,
+    "total_tools": 25,
     "generated_from": [
-      "assets/sap-s4-project-demand-mcp-server/mcp-translation/translation.json",
-      "assets/sap-s4-resource-assignment-source-mcp-server/mcp-translation/translation.json",
-      "assets/sap-s4-workforce-daily-availability-mcp-server/mcp-translation/translation.json",
       "assets/sap-sf-skills-management-mcp-server/mcp-translation/translation.json",
       "assets/sap-sf-employee-profile-mcp-server/mcp-translation/translation.json",
-      "assets/sap-sf-employment-information-mcp-server/mcp-translation/translation.json",
-      "assets/sap-sf-time-off-mcp-server/mcp-translation/translation.json"
+      "assets/sap-sf-time-off-mcp-server/mcp-translation/translation.json",
+      "assets/sap-s4-project-demand-mcp-server/mcp-translation/translation.json",
+      "assets/sap-s4-resource-assignment-source-mcp-server/mcp-translation/translation.json"
     ],
-    "generation_date": "2026-09-23"
+    "generation_date": "2026-10-08"
   }
 }

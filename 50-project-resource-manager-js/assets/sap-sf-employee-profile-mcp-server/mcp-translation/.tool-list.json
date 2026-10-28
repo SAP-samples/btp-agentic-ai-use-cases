@@ -1,1 +1,130 @@
-[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[
+  {
+    "name": "get_metadata_sfodata",
+    "description": "Get metadata of the OData service with optional filtering to reduce token consumption.\nReturns the metadata in XML format, which can be used to discover available entities and their properties.\nCall this endpoint every time before you call other tools to ensure understanding of the schema.\nBased on the metadata, you can dynamically create an OData request.\n\nUse filtering parameters to get specific metadata sections. Without parameters, this tool returns the complete XML metadata (which might be huge).\nOnly use the specified enum values for the filtering parameters.\n"
+  },
+  {
+    "name": "batch_for_sfodata",
+    "description": "Execute multiple OData operations in a single batch request using the $batch endpoint. This allows you to combine multiple tool calls into one HTTP request, improving efficiency when performing multiple operations."
+  },
+  {
+    "name": "list_eppublicprofile_for_sfodata",
+    "description": "Retrieve a list of entities from the EPPublicProfile collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_eppublicprofile_for_sfodata",
+    "description": "Create a new instance of the EPPublicProfile EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_eppublicprofile_for_sfodata",
+    "description": "Update an entity in EPPublicProfile EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_eppublicprofile_for_sfodata",
+    "description": "Delete an entity from EPPublicProfile EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_eppublicprofile_for_sfodata",
+    "description": "Retrieve a single entity by its key from the EPPublicProfile collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_eppublicprofile_for_sfodata",
+    "description": "Get the total count of entities in the EPPublicProfile collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_background_education_for_sfodata",
+    "description": "Retrieve a list of entities from the Background_Education collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_background_education_for_sfodata",
+    "description": "Create a new instance of the Background_Education EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_background_education_for_sfodata",
+    "description": "Update an entity in Background_Education EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_background_education_for_sfodata",
+    "description": "Delete an entity from Background_Education EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_background_education_for_sfodata",
+    "description": "Retrieve a single entity by its key from the Background_Education collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_background_education_for_sfodata",
+    "description": "Get the total count of entities in the Background_Education collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_background_outsideworkexperience_for_sfodata",
+    "description": "Retrieve a list of entities from the Background_OutsideWorkExperience collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_background_outsideworkexperience_for_sfodata",
+    "description": "Create a new instance of the Background_OutsideWorkExperience EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_background_outsideworkexperience_for_sfodata",
+    "description": "Update an entity in Background_OutsideWorkExperience EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_background_outsideworkexperience_for_sfodata",
+    "description": "Delete an entity from Background_OutsideWorkExperience EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_background_outsideworkexperience_for_sfodata",
+    "description": "Retrieve a single entity by its key from the Background_OutsideWorkExperience collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_background_outsideworkexperience_for_sfodata",
+    "description": "Get the total count of entities in the Background_OutsideWorkExperience collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_background_certificates_for_sfodata",
+    "description": "Retrieve a list of entities from the Background_Certificates collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_background_certificates_for_sfodata",
+    "description": "Create a new instance of the Background_Certificates EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_background_certificates_for_sfodata",
+    "description": "Update an entity in Background_Certificates EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_background_certificates_for_sfodata",
+    "description": "Delete an entity from Background_Certificates EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_background_certificates_for_sfodata",
+    "description": "Retrieve a single entity by its key from the Background_Certificates collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_background_certificates_for_sfodata",
+    "description": "Get the total count of entities in the Background_Certificates collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "list_background_languages_for_sfodata",
+    "description": "Retrieve a list of entities from the Background_Languages collection in the sfodata service. Supports OData query options for filtering, sorting, ranking ($top), skipping ($skip), expanding related entities, counting, selecting specific properties. Only use attributes in the query options that are specified in the metadata. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "create_background_languages_for_sfodata",
+    "description": "Create a new instance of the Background_Languages EntitySet in the sfodata service. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "update_background_languages_for_sfodata",
+    "description": "Update an entity in Background_Languages EntitySet in the sfodata service. Provide the key properties to identify the entity and the properties to update in the request body. If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "delete_background_languages_for_sfodata",
+    "description": "Delete an entity from Background_Languages EntitySet in the sfodata service."
+  },
+  {
+    "name": "get_background_languages_for_sfodata",
+    "description": "Retrieve a single entity by its key from the Background_Languages collection in the sfodata service. Provide the key property value(s) to identify the specific entity to retrieve. Supports OData query options for selecting specific properties ($select), expanding related entities ($expand). If the structure of the entity is not known, call get_metadata_sfodata tool first to get the metadata."
+  },
+  {
+    "name": "count_background_languages_for_sfodata",
+    "description": "Get the total count of entities in the Background_Languages collection in the sfodata service. Supports OData $filter to count only entities matching specific criteria. Use this when you need to determine the total number of entities without retrieving the actual data. If you need to understand the available filter properties, call get_metadata_sfodata tool first to get the metadata."
+  }
+]

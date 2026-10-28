@@ -200,11 +200,11 @@ class TestAgentMockDataIntegrity:
         ]["mock_response"]["d"]["results"]
         skill_emp_ids = {p["externalCode"] for p in skill_profiles}
 
-        job_records = data["servers"]["sap-sf-employment-information"]["tools"][
-            "list_empjob_for_sfodata"
+        profile_records = data["servers"]["sap-sf-employee-profile"]["tools"][
+            "list_eppublicprofile_for_sfodata_profile"
         ]["mock_response"]["d"]["results"]
-        job_emp_ids = {r["userId"] for r in job_records}
+        profile_emp_ids = {r["userId"] for r in profile_records}
 
-        # Both skill profiles and job records should have EMP-prefixed IDs
+        # Both skill profiles and employee profiles should have EMP-prefixed IDs
         assert all(emp_id.startswith("EMP") for emp_id in skill_emp_ids)
-        assert all(emp_id.startswith("EMP") for emp_id in job_emp_ids)
+        assert all(emp_id.startswith("EMP") for emp_id in profile_emp_ids)

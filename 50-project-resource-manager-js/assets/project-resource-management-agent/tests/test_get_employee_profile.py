@@ -34,14 +34,14 @@ class TestGetEmployeeProfile:
             mock_data = json.load(f)
         assert "sap-sf-employee-profile" in mock_data["servers"]
         server = mock_data["servers"]["sap-sf-employee-profile"]
-        assert "list_eppublicprofile_for_sfodata" in server["tools"]
-        assert "get_eppublicprofile_for_sfodata" in server["tools"]
+        assert "list_eppublicprofile_for_sfodata_profile" in server["tools"]
+        assert "get_eppublicprofile_for_sfodata_profile" in server["tools"]
 
     def test_public_profile_has_user_id_and_intro(self):
         """Verify employee public profile includes user ID and introduction."""
         response = _load_mock_tool_response(
             "sap-sf-employee-profile",
-            "list_eppublicprofile_for_sfodata"
+            "list_eppublicprofile_for_sfodata_profile"
         )
         for profile in response["d"]["results"]:
             assert "userId" in profile
@@ -52,7 +52,7 @@ class TestGetEmployeeProfile:
         """Verify introduction text describes professional background."""
         response = _load_mock_tool_response(
             "sap-sf-employee-profile",
-            "get_eppublicprofile_for_sfodata"
+            "get_eppublicprofile_for_sfodata_profile"
         )
         profile = response["d"]
         assert "introduction" in profile
@@ -63,9 +63,9 @@ class TestGetEmployeeProfile:
         """Test retrieving a single employee profile by user ID."""
         response = _load_mock_tool_response(
             "sap-sf-employee-profile",
-            "get_eppublicprofile_for_sfodata"
+            "get_eppublicprofile_for_sfodata_profile"
         )
-        tool = _make_mock_tool("get_eppublicprofile_for_sfodata", response)
+        tool = _make_mock_tool("get_eppublicprofile_for_sfodata_profile", response)
         result = await tool.ainvoke({"userid": "EMP001"})
         result_data = json.loads(result)
         assert "d" in result_data
@@ -77,8 +77,8 @@ class TestGetEmployeeProfile:
         with open(mock_path) as f:
             mock_data = json.load(f)
         server = mock_data["servers"]["sap-sf-employee-profile"]
-        assert "list_background_certificates_for_sfodata" in server["tools"]
-        certs_response = server["tools"]["list_background_certificates_for_sfodata"]["mock_response"]
+        assert "list_background_certificates_for_sfodata_profile" in server["tools"]
+        certs_response = server["tools"]["list_background_certificates_for_sfodata_profile"]["mock_response"]
         assert len(certs_response["d"]["results"]) > 0
         cert = certs_response["d"]["results"][0]
         assert "name" in cert
@@ -88,7 +88,7 @@ class TestGetEmployeeProfile:
         """Verify education background data is available."""
         response = _load_mock_tool_response(
             "sap-sf-employee-profile",
-            "list_background_education_for_sfodata"
+            "list_background_education_for_sfodata_profile"
         )
         assert len(response["d"]["results"]) > 0
         edu = response["d"]["results"][0]
